@@ -422,7 +422,7 @@ export default function ProductsSection() {
         .tab-icon { font-size: 14px; }
       `}</style>
 
-      <section ref={ref} className=" bg-gradient-to-r from-accent-100/20 to-primary-50/40" style={{  padding: "5rem 0 5.5rem", position: "relative", overflow: "hidden" }}>
+      <section ref={ref} className=" bg-gradient-to-r from-accent-50/20 to-primary-50/40" style={{  padding: "5rem 0 5.5rem", position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.28, backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.22) 1px, transparent 1px)", backgroundSize: "36px 36px" }} />
         <div style={{ position: "absolute", top: -80, right: -60, width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 65%)", filter: "blur(60px)", pointerEvents: "none" }} />
 

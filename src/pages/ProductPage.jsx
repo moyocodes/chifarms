@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import ProductDetail from "@/components/ProductDetail";
 import ProductListing from "@/components/ProductListing";
 import { getProductById } from "@/lib/product";
+import FooterCTA from "@/components/FooterCTA";
 
 export default function ProductPage() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -27,12 +28,12 @@ export default function ProductPage() {
           onBack={handleBack}
         />
       ) : (
-        <main className="min-h-screen bg-secondary p-8">
-        <ProductListing
-          key="listing"
-          onSelect={handleSelect}
-        />
-      </main>
+        <>
+          <main className="pt-20  bg-gradient-to-r from-accent-100/30 to-primary-50/40">
+            <ProductListing key="listing" onSelect={handleSelect} />
+          </main>
+          <FooterCTA />
+        </>
       )}
     </AnimatePresence>
   );
