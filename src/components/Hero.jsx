@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowRight, Phone } from "lucide-react";
 
+
 const slides = [
   {
     title: "Premium Poultry Production",
@@ -46,15 +47,20 @@ const slides = [
   },
 ];
 
+// ── how long each slide stays visible (ms) ──
+const SLIDE_DURATION = 3500; // was 6000 — now ~3.5 s per slide
+
 function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const slide = slides[index];
-  const progressRef = useRef(null);
 
   useEffect(() => {
     if (paused) return;
-    const t = setInterval(() => setIndex((p) => (p + 1) % slides.length), 3500);
+    const t = setInterval(
+      () => setIndex((p) => (p + 1) % slides.length),
+      SLIDE_DURATION
+    );
     return () => clearInterval(t);
   }, [paused]);
 
@@ -75,10 +81,11 @@ function Hero() {
       <AnimatePresence mode="wait">
         <motion.div
           key={slide.image}
-          initial={{ opacity: 0, scale: 1.08 }}
+          initial={{ opacity: 0, scale: 1.06 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          exit={{ opacity: 0, scale: 0.98 }}
+          // was 1.2s — snappier now at 0.6s
+          transition={{ duration: 0.6, ease: "easeInOut" }}
           style={{
             position: "absolute",
             inset: 0,
@@ -134,17 +141,18 @@ function Hero() {
         <AnimatePresence mode="wait">
           <motion.div
             key={slide.title}
-            initial={{ opacity: 0, y: 36 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            exit={{ opacity: 0, y: -16 }}
+            // was 0.7s — snappier at 0.45s
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             style={{ maxWidth: 680 }}
           >
             {/* tag pill */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
+              transition={{ delay: 0.08, duration: 0.35 }}
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -168,7 +176,7 @@ function Hero() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.1 }}
               className="text-secondary-50"
               style={{
                 fontFamily: "'Plus Jakarta Sans',sans-serif",
@@ -176,7 +184,6 @@ function Hero() {
                 fontWeight: 700,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-
                 marginBottom: 16,
               }}
             >
@@ -197,11 +204,12 @@ function Hero() {
               {slide.title.split(" ").map((word, wi) => (
                 <motion.span
                   key={wi}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
-                    delay: 0.25 + wi * 0.07,
-                    duration: 0.5,
+                    // was delay: 0.25 + wi*0.07 — tighter stagger now
+                    delay: 0.12 + wi * 0.045,
+                    duration: 0.38,
                     ease: [0.22, 1, 0.36, 1],
                   }}
                   style={{ display: "inline-block", marginRight: "0.28em" }}
@@ -215,12 +223,11 @@ function Hero() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.28 }}
               className="text-primary-300"
               style={{
                 fontFamily: "'Inter',sans-serif",
                 fontSize: "1.1rem",
-
                 lineHeight: 1.7,
                 marginBottom: "2rem",
                 maxWidth: 500,
@@ -231,9 +238,9 @@ function Hero() {
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55 }}
+              transition={{ delay: 0.32 }}
               style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
             >
               <motion.a
@@ -378,14 +385,14 @@ function Hero() {
           </button>
         ))}
 
-        {/* auto-play progress bar */}
+        {/* auto-play progress bar — duration now matches SLIDE_DURATION */}
         <AnimatePresence mode="wait">
           {!paused && (
             <motion.div
               key={index + "-bar"}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 6, ease: "linear" }}
+              transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
               style={{
                 position: "absolute",
                 bottom: -8,
