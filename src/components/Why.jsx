@@ -2,24 +2,55 @@ import { useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 
 const reasons = [
-  { number: "01", title: "Industry Expertise",     icon: "🏆", desc: "Decades of integrated poultry and aquaculture leadership — we've built Nigeria's protein supply chain from the ground up." },
-  { number: "02", title: "Full Production Cycle",  icon: "🔄", desc: "From egg incubation and parent stock through to processed frozen products — we own and operate every stage." },
-  { number: "03", title: "Customer Training",      icon: "📋", desc: "Hands-on poultry school programs and post-sales technical support that make our clients genuinely self-sufficient." },
-  { number: "04", title: "Proven Biosecurity",     icon: "🧬", desc: "Modern lab-backed veterinary protocols and vaccine supply that protect farms and guarantee product integrity." },
-  { number: "05", title: "Nationwide Reach",       icon: "📍", desc: "Four operational hubs across Lagos, Ibadan and Ogun State keeping supply consistent wherever you are." },
-  { number: "06", title: "Trusted Partnerships",   icon: "🤝", desc: "A curated network of global concentrate feed, hatchery and biosecurity suppliers ensuring highest quality inputs." },
+  {
+    number: "01",
+    title: "Industry Expertise",
+    icon: "🏆",
+    desc: "Decades of integrated poultry and aquaculture leadership — we've built Nigeria's protein supply chain from the ground up.",
+  },
+  {
+    number: "02",
+    title: "Full Production Cycle",
+    icon: "🔄",
+    desc: "From egg incubation and parent stock through to processed frozen products — we own and operate every stage.",
+  },
+  {
+    number: "03",
+    title: "Customer Training",
+    icon: "📋",
+    desc: "Hands-on poultry school programs and post-sales technical support that make our clients genuinely self-sufficient.",
+  },
+  {
+    number: "04",
+    title: "Proven Biosecurity",
+    icon: "🧬",
+    desc: "Modern lab-backed veterinary protocols and vaccine supply that protect farms and guarantee product integrity.",
+  },
+  {
+    number: "05",
+    title: "Nationwide Reach",
+    icon: "📍",
+    desc: "Four operational hubs across Lagos, Ibadan and Ogun State keeping supply consistent wherever you are.",
+  },
+  {
+    number: "06",
+    title: "Trusted Partnerships",
+    icon: "🤝",
+    desc: "A curated network of global concentrate feed, hatchery and biosecurity suppliers ensuring highest quality inputs.",
+  },
 ];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: (i = 0) => ({
-    opacity: 1, y: 0,
+    opacity: 1,
+    y: 0,
     transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 },
   }),
 };
 
-export default function Why() {
-  const ref    = useRef(null);
+export default function WhyChooseUs() {
+  const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const [hovered, setHovered] = useState(null);
 
@@ -32,7 +63,7 @@ export default function Why() {
       className="relative overflow-hidden py-28"
       style={{ background: "linear-gradient(160deg, #FAFAF8 0%, #F2F2EE 60%, #E7E7E1 100%)" }}
     >
-      {/* ── very faint dot grid with parallax ── */}
+      {/* ── parallax dot grid ── */}
       <motion.div
         style={{
           position: "absolute", inset: "-10%", y: patternY,
@@ -42,13 +73,19 @@ export default function Why() {
         }}
       />
 
-      {/* ── soft green wash top-left only ── */}
-      <div className="absolute -top-20 -left-20 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(166,221,200,0.28) 0%, transparent 65%)", filter: "blur(60px)" }} />
+      {/* ── soft green wash top-left ── */}
+      <div
+        className="absolute -top-20 -left-20 w-96 h-96 rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(166,221,200,0.28) 0%, transparent 65%)", filter: "blur(60px)" }}
+      />
 
-      {/* ── very faint watermark ── */}
-      <div className="absolute right-[-1%] top-[8%] pointer-events-none select-none leading-none"
-        style={{ fontSize: 220, opacity: 0.035, transform: "rotate(10deg)" }}>🌾</div>
+      {/* ── watermark ── */}
+      <div
+        className="absolute right-[-1%] top-[8%] pointer-events-none select-none leading-none"
+        style={{ fontSize: 220, opacity: 0.035, transform: "rotate(10deg)" }}
+      >
+        🌾
+      </div>
 
       <div className="relative max-w-[1152px] mx-auto px-6">
 
@@ -59,7 +96,7 @@ export default function Why() {
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5 font-heading text-[11px] font-bold uppercase tracking-[0.12em]"
             style={{ background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.18)", color: "#125C42" }}
           >
-            <span className="w-1.5 h-1.5 rounded-full inline-block bg-primary" />
+            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: "#1F8F63" }} />
             Our Advantage
           </motion.div>
 
@@ -71,7 +108,8 @@ export default function Why() {
             Why the best farms<br />
             <span style={{
               backgroundImage: "linear-gradient(135deg, #1F8F63 0%, #41AA80 100%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
             }}>
               choose Chi Farms.
             </span>
@@ -88,7 +126,7 @@ export default function Why() {
         {/* ── divider line ── */}
         <motion.div
           initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.9, delay: 0.25, ease: [0.22,1,0.36,1] }}
+          transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
           className="mb-0 h-px"
           style={{ transformOrigin: "left", background: "linear-gradient(to right, #A6DDC8, transparent)" }}
         />
@@ -188,7 +226,7 @@ export default function Why() {
             >
               Get Started
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </motion.a>
 

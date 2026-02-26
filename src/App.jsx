@@ -7,6 +7,7 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import SubscribersList from "./components/SubscribersList";
 import ConfirmSubscription from "./components/ConfirmSubscription";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -20,21 +21,21 @@ function App() {
               <>
                 <Header />
                 <Contact />
-                <Footer />
+           
               </>
             }
           />
            <Route
-            path="/subscribers"
+            path="/products"
             element={
               <>
                 <Header />
-                <SubscribersList />
+                <ProductPage />
                 <Footer />
               </>
             }
           />
-           <Route
+           {/* <Route
             path="/confirm"
             element={
               <>
@@ -43,7 +44,7 @@ function App() {
                 <Footer />
               </>
             }
-          />
+          /> */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </ErrorBoundary>

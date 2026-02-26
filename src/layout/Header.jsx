@@ -413,15 +413,15 @@ function Header() {
               ))}
 
               <motion.a
-                href="#contact"
+                href="contact"
                 whileHover={{
                   y: -1,
                   boxShadow: "0 8px 24px rgba(31,143,99,0.38)",
                 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl no-underline font-heading text-[13px] font-bold text-white ml-2"
+                className="inline-flex items-center text-accent gap-1.5 px-5 py-2 rounded-xl no-underline font-heading text-[13px] font-bold  ml-2"
                 style={{
-                  background: "linear-gradient(135deg,#1F8F63,#125C42)",
+                  // background: "linear-gradient(135deg,#1F8F63,#125C42)",
                   boxShadow: "0 4px 14px rgba(31,143,99,0.28)",
                 }}
               >

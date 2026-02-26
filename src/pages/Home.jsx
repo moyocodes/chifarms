@@ -6,6 +6,8 @@ import Products from "@/components/Products";
 import Why from "@/components/Why";
 import Partnerships from "@/components/Partnerships";
 import Contact from "@/components/Contact";
+import Footer from "@/layout/Footer";
+import ProductsSection from "@/components/ProductListing";
 
 export default function Home() {
   return (
@@ -13,12 +15,12 @@ export default function Home() {
       <Header />
 
       <Hero />
-      <Partnerships />
-      <About />
-      {/* <Products /> */}
 
+      <About />
+<ProductsSection/>
       <Why />
       <Contact />
+      <Footer />
     </div>
   );
 }

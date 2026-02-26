@@ -96,7 +96,7 @@ function Hero() {
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(105deg, rgba(8,42,32,0.88) 0%, rgba(8,42,32,0.55) 5%, rgba(0,0,0,0.15) 40%)",
+            "linear-gradient(105deg, rgba(8,42,32,0.88) 0%, rgba(8,42,32,0.55) 15%, rgba(0,0,0,0.15) 60%)",
         }}
       />
       <div
@@ -170,13 +170,14 @@ function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
+              className="text-secondary-50"
               style={{
                 fontFamily: "'Plus Jakarta Sans',sans-serif",
                 fontSize: 13,
                 fontWeight: 700,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-                color: "primary-300",
+     
                 marginBottom: 16,
               }}
             >
@@ -216,10 +217,11 @@ function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
+              className="text-primary-300"
               style={{
                 fontFamily: "'Inter',sans-serif",
                 fontSize: "1.1rem",
-                color: "rgba(166,221,200,0.85)",
+          
                 lineHeight: 1.7,
                 marginBottom: "2rem",
                 maxWidth: 500,
@@ -236,7 +238,7 @@ function Hero() {
               style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
             >
               <motion.a
-                href="#contact"
+                href="contact"
                 whileHover={{
                   y: -2,
                   boxShadow: "0 16px 40px rgba(31,143,99,0.45)",
@@ -262,7 +264,7 @@ function Hero() {
               </motion.a>
 
               <motion.a
-                href="#products"
+                href="products"
                 whileHover={{ background: "rgba(255,255,255,0.18)" }}
                 whileTap={{ scale: 0.97 }}
                 style={{
