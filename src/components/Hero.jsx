@@ -7,7 +7,6 @@ import {
 } from "framer-motion";
 import { Menu, X, ChevronDown, ArrowRight, Phone } from "lucide-react";
 
-
 const slides = [
   {
     title: "Premium Poultry Production",
@@ -55,7 +54,7 @@ function Hero() {
 
   useEffect(() => {
     if (paused) return;
-    const t = setInterval(() => setIndex((p) => (p + 1) % slides.length), 6000);
+    const t = setInterval(() => setIndex((p) => (p + 1) % slides.length), 2000);
     return () => clearInterval(t);
   }, [paused]);
 
@@ -177,7 +176,7 @@ function Hero() {
                 fontWeight: 700,
                 letterSpacing: "0.14em",
                 textTransform: "uppercase",
-     
+
                 marginBottom: 16,
               }}
             >
@@ -221,7 +220,7 @@ function Hero() {
               style={{
                 fontFamily: "'Inter',sans-serif",
                 fontSize: "1.1rem",
-          
+
                 lineHeight: 1.7,
                 marginBottom: "2rem",
                 maxWidth: 500,
@@ -402,8 +401,6 @@ function Hero() {
           )}
         </AnimatePresence>
       </div>
-
- 
     </section>
   );
 }
