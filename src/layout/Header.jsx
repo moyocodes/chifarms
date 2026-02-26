@@ -253,7 +253,7 @@ function Header() {
               whileTap={{ scale: 0.97 }}
               className="flex items-center relative z-10 no-underline"
             >
-              <img src="/chilogo.svg" className="h-9" alt="Chi Farms" />
+              <img src="/chilogo.svg" className="h-12" alt="Chi Farms" />
             </motion.a>
 
             {/* ── DESKTOP NAV ── */}
@@ -422,7 +422,7 @@ function Header() {
                 className="inline-flex items-center text-accent gap-1.5 px-5 py-2 rounded-xl no-underline font-heading text-[13px] font-bold  ml-2"
                 style={{
                   // background: "linear-gradient(135deg,#1F8F63,#125C42)",
-                  boxShadow: "0 4px 14px rgba(31,143,99,0.28)",
+                  // boxShadow: "0 4px 14px rgba(31,143,99,0.28)",
                 }}
               >
                 <Phone size={13} /> Contact Sales

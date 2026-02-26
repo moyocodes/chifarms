@@ -8,6 +8,7 @@ import Partnerships from "@/components/Partnerships";
 import Contact from "@/components/Contact";
 import Footer from "@/layout/Footer";
 import ProductsSection from "@/components/ProductListing";
+import FooterCTA from "@/components/FooterCTA";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
 <ProductsSection/>
       <Why />
       <Contact />
+      <FooterCTA/>
       <Footer />
     </div>
   );
