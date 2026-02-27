@@ -74,7 +74,7 @@ export default function ContactSidebar({ d }) {
           <p
             style={{
               fontFamily: F.sans,
-              fontSize: "0.55rem",
+              fontSize: "0.65rem",
               fontWeight: 800,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
