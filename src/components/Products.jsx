@@ -1,383 +1,375 @@
-import { useRef } from "react";
-import {
-  motion,
-  useInView,
-  useScroll,
-  useTransform,
-  AnimatePresence,
-} from "framer-motion";
-import { useState } from "react";
+"use client";
 
-const products = [
-  {
-    title: "Poultry",
-    tag: "Core Division",
-    icon: "🐓",
-    desc: "Breeding, processing and live bird distribution — integrated from egg to table.",
-    accent: "#1F8F63",
-    tint: "rgba(31,143,99,0.07)",
-    border: "rgba(31,143,99,0.15)",
-  },
-  {
-    title: "Aquaculture",
-    tag: "Aqua Division",
-    icon: "🐟",
-    desc: "Premium catfish breeding with best-practice grow-out and cold-chain distribution.",
-    accent: "#187553",
-    tint: "rgba(24,117,83,0.07)",
-    border: "rgba(24,117,83,0.15)",
-  },
-  {
-    title: "Frozen Food",
-    tag: "Processing",
-    icon: "❄️",
-    desc: "Processed and packaged frozen protein maintaining cold-chain integrity.",
-    accent: "#125C42",
-    tint: "rgba(18,92,66,0.07)",
-    border: "rgba(18,92,66,0.15)",
-  },
-  {
-    title: "Equipment",
-    tag: "Infrastructure",
-    icon: "⚙️",
-    desc: "Farm machinery and poultry housing systems from trusted global manufacturers.",
-    accent: "#0D4331",
-    tint: "rgba(13,67,49,0.07)",
-    border: "rgba(13,67,49,0.15)",
-  },
-  {
-    title: "Training & Support",
-    tag: "Advisory",
-    icon: "📋",
-    desc: "Hands-on farm management training, post-sales support and ongoing advisory.",
-    accent: "#1F8F63",
-    tint: "rgba(31,143,99,0.07)",
-    border: "rgba(31,143,99,0.15)",
-  },
-  {
-    title: "Health & Biosecurity",
-    tag: "Veterinary",
-    icon: "🧬",
-    desc: "Vaccine supply, lab diagnostics and biosecurity protocols by veterinary experts.",
-    accent: "#187553",
-    tint: "rgba(24,117,83,0.07)",
-    border: "rgba(24,117,83,0.15)",
-  },
-];
+/**
+ * Products.jsx — Home page division overview
+ *
+ * Changes:
+ * - Image strip shown on the right side of each card (from first category item)
+ * - "Explore" footer links via react-router-dom <Link to={d.href}>
+ * - All href → to fixes for react-router-dom compatibility
+ */
 
-function Products() {
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
+import { DIVISIONS } from "@/lib/product";
+
+const F = { sans: "'Plus Jakarta Sans', sans-serif", serif: "'Lora', serif" };
+
+function hex2rgb(hex) {
+  return [
+    parseInt(hex.slice(1, 3), 16),
+    parseInt(hex.slice(3, 5), 16),
+    parseInt(hex.slice(5, 7), 16),
+  ].join(",");
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────────
+function DivisionCard({ d, index }) {
+  const [hov, setHov] = useState(false);
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [hovered, setHovered] = useState(null);
-  const fadeUp = {
-    hidden: { opacity: 0, y: 28 },
-    show: (i = 0) => ({
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: i * 0.09 },
-    }),
-  };
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+  const rgb = hex2rgb(d.accent);
 
-  const stagger = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.09 } },
-  };
+  // Pull a preview image from the first item of the first category
+  const previewImage = d.categories?.[0]?.items?.[0]?.image ?? null;
 
   return (
-    <section
+    <motion.div
       ref={ref}
-      style={{
-        backgroundColor: "#fff",
-        position: "relative",
-        overflow: "hidden",
-        padding: "7rem 0",
-      }}
+      initial={{ opacity: 0, y: 36 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.09 }}
+      style={{ height: "100%" }}
     >
-      {/* ── subtle stripe pattern ── */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          opacity: 0.018,
-          backgroundImage:
-            "repeating-linear-gradient(0deg, #1F8F63, #1F8F63 1px, transparent 1px, transparent 48px), repeating-linear-gradient(90deg, #1F8F63, #1F8F63 1px, transparent 1px, transparent 48px)",
-        }}
-      />
-
-      <div
-        style={{
-          maxWidth: 1152,
-          margin: "0 auto",
-          padding: "0 1.5rem",
-          position: "relative",
-        }}
-      >
-        {/* ── header row ── */}
-        <div
+      <Link to={d.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+        <motion.div
+          onHoverStart={() => setHov(true)}
+          onHoverEnd={() => setHov(false)}
+          whileHover={{ y: -7 }}
+          whileTap={{ scale: 0.984 }}
+          transition={{ type: "spring", stiffness: 250, damping: 20 }}
           style={{
             display: "flex",
-            flexDirection: "column",
-            marginBottom: "4rem",
+            flexDirection: "row",
+            height: "100%",
+            borderRadius: 20,
+            overflow: "hidden",
+            background: "#fff",
+            border: `1.5px solid ${hov ? d.accent + "55" : "rgba(0,0,0,0.07)"}`,
+            boxShadow: hov
+              ? `0 24px 60px rgba(${rgb},0.14), 0 4px 16px rgba(0,0,0,0.06)`
+              : "0 2px 14px rgba(0,0,0,0.05)",
+            transition: "border-color 0.28s, box-shadow 0.32s",
+            cursor: "pointer",
           }}
         >
-          <motion.div
-            initial="hidden"
-            animate={inView ? "show" : "hidden"}
-            variants={fadeUp}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "6px 16px",
-              borderRadius: 99,
-              marginBottom: 20,
-              background: "rgba(31,143,99,0.07)",
-              border: "1px solid rgba(31,143,99,0.18)",
-              fontFamily: "'Plus Jakarta Sans',sans-serif",
-              fontSize: 11,
-              fontWeight: 700,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              color: "#125C42",
-              alignSelf: "flex-start",
-            }}
-          >
-            <span
-              style={{
-                width: 7,
-                height: 7,
-                borderRadius: "50%",
-                background: "#1F8F63",
-                display: "inline-block",
-              }}
-            />
-            What We Offer
-          </motion.div>
+         
 
+          {/* ── MAIN CONTENT ── */}
           <div
             style={{
               display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "2rem",
+              flexDirection: "column",
+              flex: 1,
+              minWidth: 0,
+              padding: "1.35rem 1.35rem 1.25rem",
+              gap: 11,
+              background: hov ? `rgba(${rgb},0.025)` : "#fff",
+              transition: "background 0.32s",
             }}
           >
-            <motion.h2
-              initial="hidden"
-              animate={inView ? "show" : "hidden"}
-              variants={fadeUp}
-              custom={1}
+            {/* Group pill */}
+            <div
               style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: "clamp(2.2rem,3.5vw,3.2rem)",
-                fontWeight: 800,
-                lineHeight: 1.1,
-                color: "#1A1A1A",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 5,
+                padding: "2px 9px",
+                borderRadius: 99,
+                background: d.accentLight,
+                border: `1px solid ${d.accentBorder}`,
+                fontFamily: F.sans,
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: "0.11em",
+                textTransform: "uppercase",
+                color: d.accent,
+                alignSelf: "flex-start",
               }}
             >
-              Products &<br />
-              <span
-                style={{
-                  backgroundImage:
-                    "linear-gradient(135deg, #1F8F63 0%, #41AA80 100%)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                }}
-              >
-                Services
-              </span>
-            </motion.h2>
+              <span style={{ width: 4, height: 4, borderRadius: "50%", background: d.accent, display: "inline-block" }} />
+              {d.group}
+            </div>
 
-            <motion.p
-              initial="hidden"
-              animate={inView ? "show" : "hidden"}
-              variants={fadeUp}
-              custom={2}
-              style={{
-                fontFamily: "'Inter',sans-serif",
-                fontSize: "0.95rem",
-                color: "#888888",
-                lineHeight: 1.75,
-                maxWidth: 320,
-                paddingBottom: 4,
-              }}
-            >
-              End-to-end solutions across the protein value chain — from live
-              inputs to processing, equipment and expert support.
-            </motion.p>
-          </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{
-              duration: 0.8,
-              delay: 0.35,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            style={{
-              marginTop: 28,
-              height: 1,
-              transformOrigin: "left",
-              background:
-                "linear-gradient(to right, #A6DDC8, rgba(166,221,200,0))",
-            }}
-          />
-        </div>
-
-        {/* ── cards ── */}
-        <motion.div
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          variants={stagger}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "1.25rem",
-          }}
-        >
-          {products.map((p, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp}
-              custom={i}
-              onHoverStart={() => setHovered(i)}
-              onHoverEnd={() => setHovered(null)}
-              whileHover={{ y: -8 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              style={{
-                padding: "2rem",
-                borderRadius: 20,
-                cursor: "default",
-                position: "relative",
-                overflow: "hidden",
-                background:
-                  hovered === i
-                    ? `linear-gradient(145deg, #fff 0%, ${p.tint.replace("0.07", "0.14")} 100%)`
-                    : `linear-gradient(145deg, #FAFAF8 60%, ${p.tint} 100%)`,
-                border: `1px solid ${hovered === i ? p.border.replace("0.15", "0.35") : p.border}`,
-                boxShadow:
-                  hovered === i
-                    ? `0 20px 52px ${p.accent}20`
-                    : "0 2px 10px rgba(0,0,0,0.04)",
-                transition:
-                  "background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease",
-              }}
-            >
-              {/* large watermark icon */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: -12,
-                  right: 0,
-                  fontSize: 96,
-                  opacity: hovered === i ? 0.09 : 0.05,
-                  pointerEvents: "none",
-                  lineHeight: 1,
-                  transition: "opacity 0.4s ease",
-                  userSelect: "none",
-                }}
-              >
-                {p.icon}
-              </div>
-
-              {/* tag */}
-              <div
-                style={{
-                  display: "inline-block",
-                  marginBottom: 16,
-                  padding: "3px 10px",
-                  borderRadius: 99,
-                  background: p.tint,
-                  border: `1px solid ${p.border}`,
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontSize: 10,
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: p.accent,
-                }}
-              >
-                {p.tag}
-              </div>
-
-              {/* icon badge */}
-              <div
-                style={{
-                  width: 50,
-                  height: 50,
-                  borderRadius: 14,
-                  fontSize: 24,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  background: p.tint,
-                  border: `1px solid ${p.border}`,
-                  marginBottom: "1rem",
-                }}
-              >
-                {p.icon}
-              </div>
-
+            {/* Title */}
+            <div>
               <h3
                 style={{
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontFamily: F.sans,
                   fontSize: "1.05rem",
-                  fontWeight: 700,
-                  color: "#1A1A1A",
-                  marginBottom: 8,
+                  fontWeight: 800,
+                  color: "#161616",
+                  margin: "0 0 4px",
+                  lineHeight: 1.15,
                 }}
               >
-                {p.title}
+                {d.title}
               </h3>
               <p
                 style={{
-                  fontFamily: "'Inter',sans-serif",
-                  fontSize: "0.85rem",
-                  color: "#888888",
-                  lineHeight: 1.7,
+                  fontFamily: F.sans,
+                  fontSize: "0.59rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: d.accent,
+                  margin: 0,
                 }}
               >
-                {p.desc}
+                {d.sub}
               </p>
+            </div>
 
-              {/* animated arrow */}
+            {/* Description */}
+            <p
+              style={{
+                fontFamily: F.serif,
+                fontSize: "0.76rem",
+                color: "#606060",
+                lineHeight: 1.8,
+                margin: 0,
+                flex: 1,
+              }}
+            >
+              {d.desc}
+            </p>
+
+            {/* Pills */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+              {d.pills.map((p, i) => (
+                <span
+                  key={i}
+                  style={{
+                    padding: "2px 8px",
+                    borderRadius: 99,
+                    background: hov ? `rgba(${rgb},0.09)` : "rgba(0,0,0,0.04)",
+                    border: `1px solid ${hov ? d.accent + "30" : "rgba(0,0,0,0.07)"}`,
+                    fontFamily: F.sans,
+                    fontSize: "0.55rem",
+                    fontWeight: 600,
+                    color: hov ? d.accent : "#888",
+                    whiteSpace: "nowrap",
+                    transition: "all 0.22s",
+                  }}
+                >
+                  {p}
+                </span>
+              ))}
+            </div>
+
+            {/* Footer: stat + Explore CTA */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                padding: "8px 12px",
+                borderRadius: 12,
+                background: hov ? `rgba(${rgb},0.07)` : "rgba(0,0,0,0.03)",
+                border: `1px solid ${hov ? d.accent + "28" : "rgba(0,0,0,0.06)"}`,
+                transition: "all 0.28s",
+              }}
+            >
+              <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                <span style={{ fontFamily: F.sans, fontSize: "0.92rem", fontWeight: 800, color: d.accent, lineHeight: 1 }}>
+                  {d.stat.value}
+                </span>
+                <span style={{ fontFamily: F.sans, fontSize: "0.49rem", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.09em" }}>
+                  {d.stat.label}
+                </span>
+              </div>
+
+              {/* Explore Products — routes to /poultry, /frozen, etc. */}
               <motion.div
-                animate={{ x: hovered === i ? 4 : 0 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                animate={{ x: hov ? 4 : 0 }}
+                transition={{ type: "spring", stiffness: 420, damping: 28 }}
                 style={{
-                  marginTop: 18,
                   display: "flex",
                   alignItems: "center",
-                  gap: 6,
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontSize: 12,
+                  gap: 4,
+                  fontFamily: F.sans,
+                  fontSize: "0.66rem",
                   fontWeight: 700,
-                  color: p.accent,
+                  color: hov ? d.accent : "#c0c0c0",
+                  transition: "color 0.22s",
                 }}
               >
-                Learn more
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                Explore Products
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </motion.div>
-            </motion.div>
-          ))}
+            </div>
+          </div>
+
+          {/* ── IMAGE STRIP — right side preview ── */}
+          {previewImage && (
+            <div
+              style={{
+                width: 110,
+                flexShrink: 0,
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <motion.img
+                src={previewImage}
+                alt={d.title}
+                animate={{ scale: hov ? 1.08 : 1 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+              {/* Gradient overlay blending into card */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: `linear-gradient(to right, ${hov ? `rgba(${rgb},0.18)` : "rgba(255,255,255,0.10)"} 0%, transparent 40%, ${d.dark}66 100%)`,
+                  transition: "background 0.32s",
+                }}
+              />
+              {/* Category count badge */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 10,
+                  right: 10,
+                  padding: "3px 8px",
+                  borderRadius: 99,
+                  background: "rgba(0,0,0,0.52)",
+                  backdropFilter: "blur(6px)",
+                  WebkitBackdropFilter: "blur(6px)",
+                  border: "1px solid rgba(255,255,255,0.14)",
+                  fontFamily: F.sans,
+                  fontSize: "0.5rem",
+                  fontWeight: 700,
+                  color: "#fff",
+                  letterSpacing: "0.05em",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {d.categories?.[0]?.items?.length ?? 0} products
+              </div>
+            </div>
+          )}
         </motion.div>
-      </div>
-    </section>
+      </Link>
+    </motion.div>
   );
 }
-export default Products;
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+export default function Products() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap');
+        .div-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.2rem;
+          align-items: stretch;
+        }
+        @media (max-width: 980px)  { .div-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 560px)  { .div-grid { grid-template-columns: 1fr; } }
+      `}</style>
+
+      <section
+        ref={ref}
+        style={{
+          backgroundColor: "#F5F7F5",
+          position: "relative",
+          overflow: "hidden",
+          padding: "7rem 0 6.5rem",
+        }}
+      >
+        {/* Dot texture */}
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.25, backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.22) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+        <div style={{ position: "absolute", top: -140, left: -100, width: 520, height: 520, borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 68%)", filter: "blur(72px)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: -80, right: -60, width: 440, height: 440, borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.07) 0%, transparent 68%)", filter: "blur(72px)", pointerEvents: "none" }} />
+
+        <div style={{ maxWidth: 1152, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}>
+
+          {/* ── Header ── */}
+          <div style={{ marginBottom: "3.5rem" }}>
+            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem", flexWrap: "wrap" }}>
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.55 }}
+                  style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", borderRadius: 99, marginBottom: 18, background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.2)", fontFamily: F.sans, fontSize: 10, fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "#125C42" }}
+                >
+                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
+                  What We Offer
+                </motion.div>
+
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.65, delay: 0.1 }}
+                  style={{ fontFamily: F.sans, fontSize: "clamp(2.2rem,3.6vw,3.2rem)", fontWeight: 800, lineHeight: 1.08, color: "#1A1A1A", margin: 0 }}
+                >
+                  Products &amp;<br />
+                  <span style={{ backgroundImage: "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    Services
+                  </span>
+                </motion.h2>
+              </div>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                style={{ fontFamily: F.serif, fontSize: "0.9rem", color: "#888", lineHeight: 1.85, maxWidth: 300, paddingBottom: 4, margin: 0 }}
+              >
+                End-to-end solutions across the protein value chain.{" "}
+                <span style={{ fontFamily: F.sans, fontSize: "0.74rem", fontWeight: 700, color: "#1F8F63" }}>
+                  Select a division →
+                </span>
+              </motion.p>
+            </div>
+
+            <motion.div
+              initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
+              transition={{ duration: 0.85, delay: 0.3 }}
+              style={{ marginTop: 28, height: 1, transformOrigin: "left", background: "linear-gradient(to right,#A6DDC8,transparent)" }}
+            />
+          </div>
+
+          {/* ── Cards ── */}
+          <div className="div-grid">
+            {DIVISIONS.map((d, i) => (
+              <DivisionCard key={d.slug} d={d} index={i} />
+            ))}
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            style={{ marginTop: "2.5rem", textAlign: "center", fontFamily: F.sans, fontSize: "0.73rem", fontWeight: 600, color: "#c8c8c8", letterSpacing: "0.05em" }}
+          >
+            6 divisions · end-to-end protein value chain · nationwide distribution
+          </motion.p>
+
+        </div>
+      </section>
+    </>
+  );
+}

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: 9, suffix: "", label: "Strategic Partnerships", icon: "🤝" },
-  { value: 28, suffix: "+", label: "Products", icon: "🐣" },
-  { value: 36, suffix: "", label: "States Across Nigeria", icon: "📍" },
+  { value: 9,  suffix: "",  label: "Strategic Partnerships", icon: "🤝" },
+  { value: 28, suffix: "+", label: "Products",                icon: "🐣" },
+  { value: 36, suffix: "",  label: "States Across Nigeria",   icon: "📍" },
 ];
 
 const pillars = [
@@ -63,7 +63,6 @@ function AnimatedCounter({ target, suffix = "", duration = 1800, inView }) {
     const step = (now) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * target));
       if (progress < 1) requestAnimationFrame(step);
@@ -71,11 +70,7 @@ function AnimatedCounter({ target, suffix = "", duration = 1800, inView }) {
     requestAnimationFrame(step);
   }, [inView, target, duration]);
 
-  return (
-    <span>
-      {count}{suffix}
-    </span>
-  );
+  return <span>{count}{suffix}</span>;
 }
 
 export default function About() {
@@ -99,12 +94,14 @@ export default function About() {
       />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+
         {/* Top label */}
         <div
           className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full text-sm font-semibold tracking-widest uppercase"
           style={{
             backgroundColor: "#D2EEE3",
             color: "#125C42",
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
             opacity: inView ? 1 : 0,
             transform: inView ? "translateY(0)" : "translateY(16px)",
             transition: "opacity 0.6s ease, transform 0.6s ease",
@@ -114,10 +111,16 @@ export default function About() {
           Who We Are
         </div>
 
-        {/* Headline + image grid */}
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center mb-16 md:mb-24">
-          {/* Left: text */}
-          <div>
+        {/* ── Headline + image grid ── */}
+        {/*
+          KEY FIX: removed `items-center` → use `items-start` so the left column
+          stacks naturally and the badge (now in-flow) doesn't force misalignment.
+          The right image stretches to match the left column height via `self-stretch`.
+        */}
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-start mb-16 md:mb-24">
+
+          {/* ── Left: text + badge ── */}
+          <div className="flex flex-col">
             <h2
               className="text-4xl sm:text-5xl font-bold leading-tight mb-6"
               style={{
@@ -143,7 +146,10 @@ export default function About() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              Chi Farms Ltd. is an integrated poultry farm with breeding operations and processing of commercial broilers. We provide parent stock to hatcheries, distribute commercial chicks, and support customers with post-sales technical services.
+              Chi Farms Ltd. is an integrated poultry farm with breeding operations and
+              processing of commercial broilers. We provide parent stock to hatcheries,
+              distribute commercial chicks, and support customers with post-sales
+              technical services.
             </p>
 
             <p
@@ -156,23 +162,30 @@ export default function About() {
                 transition: "opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s",
               }}
             >
-              Our aquaculture division breeds and raises premium catfish, while our veterinary division supplies vaccines backed by modern laboratory infrastructure.
+              Our aquaculture division breeds and raises premium catfish, while our
+              veterinary division supplies vaccines backed by modern laboratory
+              infrastructure.
             </p>
 
+            {/* CTA + badge sit side-by-side, both flush left, perfectly aligned */}
             <div
+              className="flex flex-wrap items-center gap-4"
               style={{
                 opacity: inView ? 1 : 0,
                 transform: inView ? "translateY(0)" : "translateY(24px)",
                 transition: "opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s",
               }}
             >
+              {/* Primary CTA */}
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm transition-all duration-200"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-white text-sm"
                 style={{
                   backgroundColor: "#1F8F63",
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   boxShadow: "0 6px 20px rgba(31,143,99,0.35)",
+                  transition: "background-color 0.2s ease, transform 0.2s ease",
+                  textDecoration: "none",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = "#125C42";
@@ -188,10 +201,43 @@ export default function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
+
+              {/* ── Badge: now in normal flow, vertically centred with CTA ── */}
+              <div
+                className="inline-flex items-center gap-3 px-4 py-3 rounded-xl"
+                style={{
+                  backgroundColor: "#fff",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
+                  border: "1px solid #E8F5EF",
+                }}
+              >
+                <div
+                  className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: "#EAF7F2" }}
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#1F8F63" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p
+                    className="text-xs font-bold leading-tight"
+                    style={{ color: "#1A1A1A", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+                  >
+                    Certified Operations
+                  </p>
+                  <p
+                    className="text-xs leading-tight mt-0.5"
+                    style={{ color: "#888", fontFamily: "'Inter', sans-serif" }}
+                  >
+                    NAFDAC & SON Compliant
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right: image with overlaid badge */}
+          {/* ── Right: image only, no floating badge ── */}
           <div
             className="relative mt-4 md:mt-0"
             style={{
@@ -203,22 +249,54 @@ export default function About() {
             <img
               src="https://chi-farms.com/wp-content/uploads/2021/07/cropped-IMG_4965-1536x708.jpg"
               alt="Chi Farms team"
-              className="w-full object-cover rounded-2xl"
-              style={{ height: "360px", objectFit: "cover", boxShadow: "0 20px 60px rgba(0,0,0,0.12)" }}
+              className="w-full rounded-2xl"
+              style={{
+                height: "380px",
+                objectFit: "cover",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
+                display: "block",
+              }}
             />
+
+            {/* Subtle top-right identity pill — keeps the image branded */}
             <div
-              className="absolute -bottom-5 -left-4 sm:-bottom-6 sm:-left-6 px-4 sm:px-5 py-3 sm:py-4 rounded-xl flex items-center gap-3"
-              style={{ backgroundColor: "#fff", boxShadow: "0 10px 30px rgba(0,0,0,0.10)" }}
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "5px 12px",
+                borderRadius: 99,
+                background: "rgba(255,255,255,0.88)",
+                backdropFilter: "blur(8px)",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.10)",
+              }}
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: "#EAF7F2" }}>
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="#1F8F63" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs font-bold" style={{ color: "#1A1A1A", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Certified Operations</p>
-                <p className="text-xs" style={{ color: "#888", fontFamily: "'Inter', sans-serif" }}>NAFDAC & SON Compliant</p>
-              </div>
+              <span
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: "50%",
+                  backgroundColor: "#1F8F63",
+                  display: "inline-block",
+                  boxShadow: "0 0 0 3px rgba(31,143,99,0.18)",
+                  flexShrink: 0,
+                }}
+              />
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "#1A1A1A",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  letterSpacing: "0.04em",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Chi Farms Limited
+              </span>
             </div>
           </div>
         </div>
@@ -236,7 +314,10 @@ export default function About() {
           {/* Divider label */}
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, #D2EEE3, transparent)" }} />
-            <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: "#1F8F63", fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <span
+              className="text-xs font-semibold tracking-widest uppercase"
+              style={{ color: "#1F8F63", fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            >
               Our Reach
             </span>
             <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, #D2EEE3, transparent)" }} />
@@ -246,7 +327,7 @@ export default function About() {
             {stats.map((s, i) => (
               <div
                 key={i}
-                className="group relative rounded-2xl p-6 sm:p-8 overflow-hidden text-center transition-all duration-300"
+                className="group relative rounded-2xl p-6 sm:p-8 overflow-hidden text-center"
                 style={{
                   backgroundColor: "#fff",
                   boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
@@ -266,7 +347,7 @@ export default function About() {
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                {/* Subtle green wash on hover */}
+                {/* Hover wash */}
                 <div
                   className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: "radial-gradient(circle at 50% 0%, #EAF7F2 0%, transparent 70%)" }}
@@ -289,7 +370,12 @@ export default function About() {
                     lineHeight: 1.1,
                   }}
                 >
-                  <AnimatedCounter target={s.value} suffix={s.suffix} inView={statsInView} duration={1600 + i * 200} />
+                  <AnimatedCounter
+                    target={s.value}
+                    suffix={s.suffix}
+                    inView={statsInView}
+                    duration={1600 + i * 200}
+                  />
                 </p>
 
                 {/* Label */}
@@ -302,13 +388,11 @@ export default function About() {
 
                 {/* Bottom accent bar */}
                 <div
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-full transition-all duration-300"
-                  style={{
-                    width: "0%",
-                    backgroundColor: "#1F8F63",
-                  }}
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-full"
+                  style={{ backgroundColor: "#1F8F63", transition: "width 0.6s ease" }}
                   ref={(el) => {
                     if (el) {
+                      el.style.width = "0%";
                       setTimeout(() => { el.style.width = statsInView ? "40%" : "0%"; }, i * 150 + 400);
                     }
                   }}
@@ -317,6 +401,7 @@ export default function About() {
             ))}
           </div>
         </div>
+
       </div>
     </section>
   );

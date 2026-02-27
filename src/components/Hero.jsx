@@ -1,11 +1,16 @@
 import { useEffect, useState, useRef } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { Menu, X, ChevronDown, ArrowRight, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
+// ─── Design tokens (replace Tailwind class strings with real values) ───────────
+const colors = {
+  primary:       "#1F8F63",   // Chi Farms brand green
+  primaryDark:   "#166B4A",
+  primaryLight:  "#79CCAC",
+  overlayDeep:   "rgba(6, 28, 20, 0.92)",   // near-black dark-green (left anchor)
+  overlayMid:    "rgba(6, 28, 20, 0.50)",   // softer mid-zone
+  overlayBottom: "rgba(6, 28, 20, 0.65)",   // vignette at bottom
+};
 
 const slides = [
   {
@@ -13,7 +18,6 @@ const slides = [
     sub: "Day-old chicks, parent stock and broilers",
     text: "Breeder chicks, parent stock and commercial day-old chicks raised for tropical excellence.",
     image: "/images/poultry.jpg",
-    accent: "primary-400",
     cta: "Book Day-Old Chicks",
     tag: "🐓 Poultry Division",
   },
@@ -21,8 +25,7 @@ const slides = [
     title: "Frozen Meat Products",
     sub: "From our processing plant to your shelf",
     text: "High-quality chicken, sausages and beef supplied to restaurants and supermarkets nationwide.",
-    image: "/images/frozen.jpg",
-    accent: "#4A9ECC",
+    image: "/images/froze.jpg",
     cta: "Order Frozen Products",
     tag: "❄️ Frozen Foods",
   },
@@ -31,7 +34,6 @@ const slides = [
     sub: "Catfish, fingerlings & table fish",
     text: "Sustainably farmed catfish bred with best-practice biosecurity from water to market.",
     image: "/images/aquaculture.jpg",
-    accent: "primary",
     cta: "Explore Aquaculture",
     tag: "🐟 Aqua Division",
   },
@@ -40,17 +42,15 @@ const slides = [
     sub: "Vaccines, labs & veterinary expertise",
     text: "Modern diagnostics and veterinary protocols supporting Nigerian farmers at scale.",
     image: "/images/equipment.jpg",
-    accent: "#A0845C",
     cta: "Learn More",
     tag: "🧬 Veterinary",
   },
 ];
 
-function Hero() {
+export default function Hero() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const slide = slides[index];
-  const progressRef = useRef(null);
 
   useEffect(() => {
     if (paused) return;
@@ -71,14 +71,14 @@ function Hero() {
         alignItems: "center",
       }}
     >
-      {/* ── background image ── */}
+      {/* ── Background image ─────────────────────────────────────────────────── */}
       <AnimatePresence mode="wait">
         <motion.div
           key={slide.image}
-          initial={{ opacity: 0, scale: 1.08 }}
+          initial={{ opacity: 0, scale: 1.07 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
+          transition={{ duration: 1.3, ease: "easeInOut" }}
           style={{
             position: "absolute",
             inset: 0,
@@ -89,45 +89,63 @@ function Hero() {
         />
       </AnimatePresence>
 
-      {/* ── layered overlays ── */}
+      {/* ── FIX: Overlays use near-BLACK (not green) on the left so white text pops */}
+      {/* Left anchor: very dark, almost black */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(105deg, rgba(8,42,32,0.88) 0%, rgba(8,42,32,0.55) 15%, rgba(0,0,0,0.15) 60%)",
+          background: `linear-gradient(
+            108deg,
+            ${colors.overlayDeep}  0%,
+            ${colors.overlayMid}   38%,
+            rgba(0,0,0,0.05)       70%
+          )`,
         }}
       />
+      {/* Bottom vignette */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "linear-gradient(to top, rgba(8,42,32,0.7) 0%, transparent 50%)",
+          background: `linear-gradient(to top, ${colors.overlayBottom} 0%, transparent 45%)`,
         }}
       />
 
-      {/* ── dot grid ── */}
+      {/* ── Subtle dot grid texture ───────────────────────────────────────────── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           pointerEvents: "none",
-          opacity: 0.06,
-          backgroundImage:
-            "radial-gradient(circle, #A6DDC8 1px, transparent 1px)",
+          opacity: 0.05,
+          backgroundImage: "radial-gradient(circle, #A6DDC8 1px, transparent 1px)",
           backgroundSize: "36px 36px",
         }}
       />
 
-      {/* ── content ── */}
+      {/* ── Thin accent bar (left edge) ──────────────────────────────────────── */}
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: "20%",
+          bottom: "20%",
+          width: 3,
+          borderRadius: 99,
+          background: `linear-gradient(to bottom, transparent, ${colors.primaryLight}, transparent)`,
+          opacity: 0.6,
+        }}
+      />
+
+      {/* ── Content ──────────────────────────────────────────────────────────── */}
       <div
         style={{
           position: "relative",
           zIndex: 10,
           maxWidth: 1152,
           margin: "0 auto",
-          padding: "0 1.5rem",
+          padding: "0 2rem",
           width: "100%",
         }}
       >
@@ -138,9 +156,9 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{ maxWidth: 680 }}
+            style={{ maxWidth: 660 }}
           >
-            {/* tag pill */}
+            {/* Tag pill */}
             <motion.div
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
@@ -153,45 +171,44 @@ function Hero() {
                 padding: "6px 16px",
                 borderRadius: 99,
                 background: "rgba(255,255,255,0.1)",
-                border: "1px solid rgba(255,255,255,0.2)",
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                border: "1px solid rgba(255,255,255,0.22)",
+                backdropFilter: "blur(8px)",
                 fontSize: 12,
                 fontWeight: 600,
                 color: "rgba(255,255,255,0.9)",
-                backdropFilter: "blur(8px)",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
               }}
             >
               {slide.tag}
             </motion.div>
 
-            {/* eyebrow */}
+            {/* Eyebrow — now uses bright mint so it stands out on the dark BG */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-secondary-50"
               style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: 13,
-                fontWeight: 700,
-                letterSpacing: "0.14em",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: 11,
+                fontWeight: 800,
+                letterSpacing: "0.18em",
                 textTransform: "uppercase",
-
+                color: colors.primaryLight,   // ✅ bright mint on dark — readable
                 marginBottom: 16,
               }}
             >
               Chi Farms Limited
             </motion.p>
 
-            {/* headline */}
+            {/* Headline — pure white, high contrast */}
             <h1
               style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: "clamp(2.6rem,5.5vw,4.2rem)",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: "clamp(2.5rem, 5.2vw, 4rem)",
                 fontWeight: 800,
-                lineHeight: 1.07,
-                color: "#fff",
-                marginBottom: "1.25rem",
+                lineHeight: 1.08,
+                color: "#FFFFFF",
+                marginBottom: "1.2rem",
               }}
             >
               {slide.title.split(" ").map((word, wi) => (
@@ -211,17 +228,16 @@ function Hero() {
               ))}
             </h1>
 
-            {/* sub */}
+            {/* Body — off-white (not the same green as brand) */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-primary-300"
               style={{
-                fontFamily: "'Inter',sans-serif",
-                fontSize: "1.1rem",
-
-                lineHeight: 1.7,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "1.05rem",
+                color: "rgba(255,255,255,0.75)",   // ✅ off-white, clearly legible
+                lineHeight: 1.75,
                 marginBottom: "2rem",
                 maxWidth: 500,
               }}
@@ -236,11 +252,12 @@ function Hero() {
               transition={{ delay: 0.55 }}
               style={{ display: "flex", gap: 12, flexWrap: "wrap" }}
             >
+              {/* Primary CTA — solid brand green (works on dark bg) */}
               <motion.a
                 href="contact"
                 whileHover={{
                   y: -2,
-                  boxShadow: "0 16px 40px rgba(31,143,99,0.45)",
+                  boxShadow: `0 16px 40px rgba(31,143,99,0.55)`,
                 }}
                 whileTap={{ scale: 0.97 }}
                 style={{
@@ -250,18 +267,22 @@ function Hero() {
                   padding: "14px 28px",
                   borderRadius: 14,
                   textDecoration: "none",
-                  background: `linear-gradient(135deg,primary 0%,primary-700} 100%)`,
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  // ✅ Real gradient — no broken template literals
+                  background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`,
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontWeight: 700,
                   fontSize: 14,
                   color: "#fff",
-                  boxShadow: "0 8px 28px rgba(31,143,99,0.4)",
+                  boxShadow: `0 8px 28px rgba(31,143,99,0.4)`,
+                  border: "none",
+                  cursor: "pointer",
                 }}
               >
                 {slide.cta}
                 <ArrowRight size={16} />
               </motion.a>
 
+              {/* Secondary CTA — frosted glass */}
               <motion.a
                 href="products"
                 whileHover={{ background: "rgba(255,255,255,0.18)" }}
@@ -274,13 +295,14 @@ function Hero() {
                   borderRadius: 14,
                   textDecoration: "none",
                   background: "rgba(255,255,255,0.10)",
-                  border: "1px solid rgba(255,255,255,0.22)",
+                  border: "1px solid rgba(255,255,255,0.25)",
                   backdropFilter: "blur(8px)",
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontWeight: 600,
                   fontSize: 14,
                   color: "#fff",
                   transition: "background 0.2s ease",
+                  cursor: "pointer",
                 }}
               >
                 See All Products
@@ -290,7 +312,7 @@ function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* ── slide thumbnails (right side) ── */}
+      {/* ── Slide thumbnails (right side) ────────────────────────────────────── */}
       <div
         style={{
           position: "absolute",
@@ -314,15 +336,13 @@ function Hero() {
               height: 40,
               borderRadius: 8,
               overflow: "hidden",
-              border:
-                i === index
-                  ? `2px solid ${"primary-300"}`
-                  : "2px solid rgba(255,255,255,0.2)",
+              border: i === index
+                ? `2px solid ${colors.primaryLight}`   // ✅ real color value
+                : "2px solid rgba(255,255,255,0.2)",
               cursor: "pointer",
               padding: 0,
               background: "none",
-              boxShadow:
-                i === index ? "0 0 0 3px rgba(121,204,172,0.25)" : "none",
+              boxShadow: i === index ? `0 0 0 3px rgba(121,204,172,0.25)` : "none",
               transition: "border-color 0.25s ease, box-shadow 0.25s ease",
             }}
           >
@@ -333,14 +353,15 @@ function Hero() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                filter: i === index ? "none" : "brightness(0.5)",
+                filter: i === index ? "none" : "brightness(0.45)",
+                transition: "filter 0.25s ease",
               }}
             />
           </motion.button>
         ))}
       </div>
 
-      {/* ── progress indicators ── */}
+      {/* ── Progress indicators ───────────────────────────────────────────────── */}
       <div
         style={{
           position: "absolute",
@@ -357,20 +378,12 @@ function Hero() {
           <button
             key={i}
             onClick={() => setIndex(i)}
-            style={{
-              border: "none",
-              background: "none",
-              cursor: "pointer",
-              padding: 0,
-              display: "flex",
-              alignItems: "center",
-            }}
+            style={{ border: "none", background: "none", cursor: "pointer", padding: 0 }}
           >
             <motion.div
               animate={{
                 width: i === index ? 36 : 8,
-                background:
-                  i === index ? "primary-300" : "rgba(255,255,255,0.35)",
+                background: i === index ? colors.primaryLight : "rgba(255,255,255,0.35)",
               }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               style={{ height: 6, borderRadius: 99 }}
@@ -378,24 +391,24 @@ function Hero() {
           </button>
         ))}
 
-        {/* auto-play progress bar */}
+        {/* Auto-play progress bar */}
         <AnimatePresence mode="wait">
           {!paused && (
             <motion.div
               key={index + "-bar"}
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 6, ease: "linear" }}
+              transition={{ duration: 5, ease: "linear" }}
               style={{
                 position: "absolute",
                 bottom: -8,
                 left: 0,
                 right: 0,
                 height: 2,
-                background: "primary-300",
+                background: colors.primaryLight,
                 transformOrigin: "left",
                 borderRadius: 99,
-                opacity: 0.5,
+                opacity: 0.55,
               }}
             />
           )}
@@ -404,5 +417,3 @@ function Hero() {
     </section>
   );
 }
-
-export default Hero;
