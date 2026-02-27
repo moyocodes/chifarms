@@ -152,6 +152,27 @@ export default function ProductListing() {
                   </Link>
                 </div>
 
+                <div style={{ marginBottom: "1.75rem" }}>
+                  {/* <p
+                    style={{
+                      fontFamily: F.sans,
+                      fontSize: "0.78rem",
+                      fontWeight: 800,
+                      letterSpacing: "0.14em",
+                      textTransform: "uppercase",
+                      color: "#c8c8c8",
+                      margin: "0 0 8px",
+                    }}
+                  >
+                    Browse by Category
+                  </p> */}
+                  <div
+                    style={{
+                      height: 1,
+                      background: `linear-gradient(to right, ${d.accent}, transparent)`,
+                    }}
+                  />
+                </div>
                 <div className="landing-layout">
                   <div>
                     <div className="cat-grid">
