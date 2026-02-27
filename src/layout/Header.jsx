@@ -24,7 +24,7 @@ const NAV = [
   { label: "Home", id: "home", to: "/" },
   { label: "About", id: "about", to: "/about", drop: "about" },
   { label: "Products", id: "products", to: "/products", drop: "products" },
-  { label: "Why Chi", id: "why", to: "/why" },
+  { label: "Why Chi Farms", id: "why", to: "/why" },
   { label: "Poultry School", id: "school", to: "/school" },
   { label: "Careers", id: "careers", to: "/careers" },
 ];
