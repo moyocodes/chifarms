@@ -547,18 +547,20 @@ function About() {
             <motion.h2
               variants={fadeUp}
               custom={1}
+            
               style={{
                 fontFamily: "'Plus Jakarta Sans',sans-serif",
                 fontWeight: 900,
                 lineHeight: 1.05,
                 margin: 0,
                 color: "#0f1f16",
-                fontSize: "clamp(2.2rem, 4.5vw, 4rem)",
+                fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
               }}
             >
               Rooted in nature,
               <br />
               <span
+              className="pb-2"
                 style={{
                   backgroundImage:
                     "linear-gradient(130deg,#1F8F63 0%,#41AA80 60%,#68C89F 100%)",
@@ -694,7 +696,7 @@ function About() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={stagger}
-             className="pt-5"
+            className="pt-5"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -705,7 +707,6 @@ function About() {
             <motion.div
               variants={fadeUp}
               custom={1}
-                
               style={{
                 borderRadius: 16,
                 padding: "1.5rem",
@@ -717,7 +718,6 @@ function About() {
               }}
             >
               <div
-              
                 style={{
                   position: "absolute",
                   top: -32,
@@ -742,7 +742,6 @@ function About() {
                 }}
               />
               <p
-           
                 style={{
                   fontFamily: "'Plus Jakarta Sans',sans-serif",
                   fontWeight: 700,
@@ -924,7 +923,11 @@ function About() {
         </div>
 
         {/* ── Partners marquee ── */}
-        <div className="partners-outer" style={{ marginBottom: "2.5rem" }}>
+        <div
+          className="partners-outer"
+          className="pt-10"
+          style={{ marginBottom: "2.5rem" }}
+        >
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 24, ease: "linear", repeat: Infinity }}

@@ -355,7 +355,7 @@ export default function Products() {
 
       <section
         ref={ref}
-        className="pt-28"
+        className="py-28"
         style={{
           backgroundColor: "#F5F7F5",
           position: "relative",

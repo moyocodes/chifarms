@@ -146,7 +146,7 @@ export default function About() {
                 transition: "opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s",
               }}
             >
-              Chi Farms Ltd. is an integrated poultry farm with breeding operations and
+              Chi Farms Lsdd. is an integrated poultry farm with breeding operations and
               processing of commercial broilers. We provide parent stock to hatcheries,
               distribute commercial chicks, and support customers with post-sales
               technical services.
