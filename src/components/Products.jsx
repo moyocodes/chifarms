@@ -4,9 +4,9 @@
  * Products.jsx — Home page division overview
  *
  * Changes:
- * - Image strip shown on the right side of each card (from first category item)
+ * - All cards are the same size: fixed min-height, image strip always rendered
+ *   (falls back to a tinted placeholder if no image is available)
  * - "Explore" footer links via react-router-dom <Link to={d.href}>
- * - All href → to fixes for react-router-dom compatibility
  */
 
 import { useRef, useState } from "react";
@@ -15,6 +15,10 @@ import { Link } from "react-router-dom";
 import { DIVISIONS } from "@/lib/product";
 
 const F = { sans: "'Plus Jakarta Sans', sans-serif", serif: "'Lora', serif" };
+
+// Fixed card dimensions — every card is identical in size
+const CARD_MIN_HEIGHT = 320;
+const IMAGE_STRIP_WIDTH = 110;
 
 function hex2rgb(hex) {
   return [
@@ -33,6 +37,7 @@ function DivisionCard({ d, index }) {
 
   // Pull a preview image from the first item of the first category
   const previewImage = d.categories?.[0]?.items?.[0]?.image ?? null;
+  const productCount = d.categories?.[0]?.items?.length ?? 0;
 
   return (
     <motion.div
@@ -60,6 +65,7 @@ function DivisionCard({ d, index }) {
             display: "flex",
             flexDirection: "row",
             height: "100%",
+            minHeight: CARD_MIN_HEIGHT,
             borderRadius: 20,
             overflow: "hidden",
             background: "#fff",
@@ -153,6 +159,11 @@ function DivisionCard({ d, index }) {
                 lineHeight: 1.8,
                 margin: 0,
                 flex: 1,
+                // Clamp to 4 lines so all descriptions take equal space
+                display: "-webkit-box",
+                WebkitLineClamp: 4,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
               }}
             >
               {d.desc}
@@ -181,12 +192,12 @@ function DivisionCard({ d, index }) {
               ))}
             </div>
 
-            {/* Footer: stat + Explore CTA */}
+            {/* Footer: Explore CTA */}
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "flex-end",
                 padding: "8px 12px",
                 borderRadius: 12,
                 background: !hov ? `rgba(${rgb},0.07)` : "rgba(0,0,0,0.03)",
@@ -194,9 +205,6 @@ function DivisionCard({ d, index }) {
                 transition: "all 0.28s",
               }}
             >
-            
-
-              {/* Explore Products — routes to /poultry, /frozen, etc. */}
               <motion.div
                 animate={{ x: !hov ? 4 : 0 }}
                 transition={{ type: "spring", stiffness: 420, damping: 28 }}
@@ -230,16 +238,20 @@ function DivisionCard({ d, index }) {
             </div>
           </div>
 
-          {/* ── IMAGE STRIP — right side preview ── */}
-          {previewImage && (
-            <div
-              style={{
-                width: 110,
-                flexShrink: 0,
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
+          {/* ── IMAGE STRIP — always rendered, same width ── */}
+          <div
+            style={{
+              width: IMAGE_STRIP_WIDTH,
+              flexShrink: 0,
+              position: "relative",
+              overflow: "hidden",
+              // Fallback background when there's no image
+              background: previewImage
+                ? "transparent"
+                : `linear-gradient(160deg, rgba(${rgb},0.18) 0%, rgba(${rgb},0.06) 100%)`,
+            }}
+          >
+            {previewImage ? (
               <motion.img
                 src={previewImage}
                 alt={d.title}
@@ -252,39 +264,70 @@ function DivisionCard({ d, index }) {
                   display: "block",
                 }}
               />
-              {/* Gradient overlay blending into card */}
+            ) : (
+              // Decorative placeholder when no image exists
               <div
                 style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: `linear-gradient(to right, ${!hov ? `rgba(${rgb},0.18)` : "rgba(255,255,255,0.10)"} 0%, transparent 40%, ${d.dark}66 100%)`,
-                  transition: "background 0.32s",
-                }}
-              />
-              {/* Category count badge */}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 10,
-                  right: 10,
-                  padding: "3px 8px",
-                  borderRadius: 99,
-                  background: "rgba(0,0,0,0.52)",
-                  backdropFilter: "blur(6px)",
-                  WebkitBackdropFilter: "blur(6px)",
-                  border: "1px solid rgba(255,255,255,0.14)",
-                  fontFamily: F.sans,
-                  fontSize: "0.5rem",
-                  fontWeight: 700,
-                  color: "#fff",
-                  letterSpacing: "0.05em",
-                  whiteSpace: "nowrap",
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {d.categories?.[0]?.items?.length ?? 0} products
+                <svg
+                  width="36"
+                  height="36"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke={d.accent}
+                  strokeWidth="1.2"
+                  opacity="0.35"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="3" />
+                  <circle cx="8.5" cy="8.5" r="1.5" />
+                  <path d="M21 15l-5-5L5 21" />
+                </svg>
               </div>
+            )}
+
+            {/* Gradient overlay blending into card */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: `linear-gradient(to right, ${
+                  !hov
+                    ? `rgba(${rgb},0.18)`
+                    : "rgba(255,255,255,0.10)"
+                } 0%, transparent 40%, ${d.dark ?? d.accent}66 100%)`,
+                transition: "background 0.32s",
+              }}
+            />
+
+            {/* Category count badge */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 10,
+                right: 10,
+                padding: "3px 8px",
+                borderRadius: 99,
+                background: "rgba(0,0,0,0.52)",
+                backdropFilter: "blur(6px)",
+                WebkitBackdropFilter: "blur(6px)",
+                border: "1px solid rgba(255,255,255,0.14)",
+                fontFamily: F.sans,
+                fontSize: "0.5rem",
+                fontWeight: 700,
+                color: "#fff",
+                letterSpacing: "0.05em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {productCount} products
             </div>
-          )}
+          </div>
         </motion.div>
       </Link>
     </motion.div>
@@ -299,10 +342,11 @@ export default function Products() {
   return (
     <>
       <style>{`
-         .div-grid {
+        .div-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.2rem;
+          /* stretch makes every cell fill the row height */
           align-items: stretch;
         }
         @media (max-width: 980px)  { .div-grid { grid-template-columns: repeat(2,1fr); } }
