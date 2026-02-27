@@ -52,7 +52,7 @@ export default function ProductListing() {
           backgroundColor: "#F5F7F5",
           position: "relative",
           overflow: "hidden",
-          padding: "3.5rem 0 5rem",
+          padding: "1.5rem 0 5rem",
         }}
       >
         {/* Dot grid bg */}
@@ -146,14 +146,7 @@ export default function ProductListing() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
               >
-                <div style={{ marginBottom: "1.75rem" }}>
-                  <div
-                    style={{
-                      height: 1,
-                      background: `linear-gradient(to right, ${d.accent}, transparent)`,
-                    }}
-                  />
-                </div>
+                
 
                 <div className="landing-layout">
                   <div>
@@ -262,7 +255,7 @@ export default function ProductListing() {
                   )}
                 </div>
 
-                {/* Category header */}
+           
                 <div
                   style={{
                     display: "flex",
@@ -313,14 +306,7 @@ export default function ProductListing() {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    height: 1,
-                    marginBottom: "1.35rem",
-                    background: `linear-gradient(to right, ${d.accent}, transparent)`,
-                  }}
-                />
-
+               
                 <div className="landing-layout">
                   <div>
                     <div className="cat-grid">

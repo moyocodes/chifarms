@@ -143,7 +143,7 @@ export default function HeroBanner({ d, activeCat, logoSrc }) {
         {/* Breadcrumb */}
         <motion.nav
           {...fadeIn(0.05)}
-          style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: "1.75rem", flexWrap: "wrap" }}
+          style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: "0.75rem", flexWrap: "wrap" }}
         >
           {[
             { to: "/", label: "Home", icon: true },
