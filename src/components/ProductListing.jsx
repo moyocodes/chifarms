@@ -18,7 +18,6 @@
  *   ├── HeroBanner
  *   ├── CategoryCard   (division landing)
  *   ├── ProductCard    (category detail)
- *   ├── CtaBar
  *   └── DetailPanel    (slide-in overlay)
  */
 
@@ -30,8 +29,9 @@ import { getDivision } from "@/lib/product";
 import HeroBanner from "./HeroBanner";
 import CategoryCard from "./CategoryCard";
 import ProductCard from "./ProductCard";
-import CtaBar from "./CtaBar";
+
 import DetailPanel from "./DetailPanel";
+import ContactSidebar from "./ContactSidebar";
 import { F } from "@/lib/constants";
 
 export default function ProductListing() {
@@ -56,15 +56,17 @@ export default function ProductListing() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap');
         .pl-grid  { display: grid; gap: 1rem;   grid-template-columns: repeat(4,1fr); align-items: stretch; }
-        .cat-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(3,1fr); align-items: start; }
-        @media (max-width:1100px) { .pl-grid { grid-template-columns: repeat(3,1fr); } .cat-grid { grid-template-columns: repeat(2,1fr); } }
+        .cat-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(2,1fr); align-items: start; }
+        .landing-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+        @media (max-width:1100px) { .pl-grid { grid-template-columns: repeat(3,1fr); } }
+        @media (max-width:900px)  { .landing-layout { grid-template-columns: 1fr; } }
         @media (max-width:760px)  { .pl-grid { grid-template-columns: repeat(2,1fr); } .cat-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width:480px)  { .pl-grid { grid-template-columns: 1fr; }          .cat-grid { grid-template-columns: 1fr; } }
         .sib-link:hover { background: rgba(0,0,0,0.08) !important; color: #444 !important; }
       `}</style>
 
       {/* Pass logoSrc="/your-logo.svg" (or .png) once you have the asset */}
-      <HeroBanner d={d} activeCat={activeCat} logoSrc="/chilogo.svg" />
+      <HeroBanner d={d} activeCat={activeCat} logoSrc={undefined} />
 
       <section
         style={{
@@ -172,18 +174,24 @@ export default function ProductListing() {
                     }}
                   />
                 </div>
-                <div className="cat-grid">
-                  {d.categories.map((cat, i) => (
-                    <CategoryCard
-                      key={cat.id}
-                      cat={cat}
-                      d={d}
-                      index={i}
-                      slug={slug}
-                    />
-                  ))}
+                <div className="landing-layout">
+                  <div>
+                    <div className="cat-grid">
+                      {d.categories.map((cat, i) => (
+                        <CategoryCard
+                          key={cat.id}
+                          cat={cat}
+                          d={d}
+                          index={i}
+                          slug={slug}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: sticky contact sidebar */}
+                  <ContactSidebar d={d} />
                 </div>
-                <CtaBar d={d} />
               </motion.div>
             )}
 
@@ -333,24 +341,26 @@ export default function ProductListing() {
                     background: `linear-gradient(to right, ${d.accent}, transparent)`,
                   }}
                 />
-
-                <div className="pl-grid">
-                  {activeCat.items.map((item, i) => (
-                    <ProductCard
-                      key={item.name}
-                      item={item}
-                      cat={activeCat}
-                      d={d}
-                      index={i}
-                      onSelect={(itm) => {
-                        setSelected(itm);
-                        setSelectedCat(activeCat);
-                      }}
-                    />
-                  ))}
+                <div className="landing-layout">
+                  <div>
+                    <div className="pl-grid">
+                      {activeCat.items.map((item, i) => (
+                        <ProductCard
+                          key={item.name}
+                          item={item}
+                          cat={activeCat}
+                          d={d}
+                          index={i}
+                          onSelect={(itm) => {
+                            setSelected(itm);
+                            setSelectedCat(activeCat);
+                          }}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <ContactSidebar d={d} />
                 </div>
-
-                <CtaBar d={d} />
               </motion.div>
             )}
           </AnimatePresence>

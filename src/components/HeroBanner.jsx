@@ -34,10 +34,11 @@ export default function HeroBanner({ d, activeCat, logoSrc }) {
 
   return (
     <section
+    className="pt-32"
       style={{
         position: "relative",
         overflow: "hidden",
-        padding: "4rem 0 3.5rem",
+       
         // Light warm-white base — single, subtle gradient
         background: `linear-gradient(160deg, #ffffff 0%, #f4f9f6 55%, #eef5f1 100%)`,
       }}

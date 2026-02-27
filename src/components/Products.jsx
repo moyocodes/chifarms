@@ -39,10 +39,17 @@ function DivisionCard({ d, index }) {
       ref={ref}
       initial={{ opacity: 0, y: 36 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.09 }}
+      transition={{
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1],
+        delay: index * 0.09,
+      }}
       style={{ height: "100%" }}
     >
-      <Link to={d.href} style={{ textDecoration: "none", display: "block", height: "100%" }}>
+      <Link
+        to={d.href}
+        style={{ textDecoration: "none", display: "block", height: "100%" }}
+      >
         <motion.div
           onHoverStart={() => setHov(true)}
           onHoverEnd={() => setHov(false)}
@@ -64,8 +71,6 @@ function DivisionCard({ d, index }) {
             cursor: "pointer",
           }}
         >
-         
-
           {/* ── MAIN CONTENT ── */}
           <div
             style={{
@@ -98,7 +103,15 @@ function DivisionCard({ d, index }) {
                 alignSelf: "flex-start",
               }}
             >
-              <span style={{ width: 4, height: 4, borderRadius: "50%", background: d.accent, display: "inline-block" }} />
+              <span
+                style={{
+                  width: 4,
+                  height: 4,
+                  borderRadius: "50%",
+                  background: d.accent,
+                  display: "inline-block",
+                }}
+              />
               {d.group}
             </div>
 
@@ -182,8 +195,16 @@ function DivisionCard({ d, index }) {
               }}
             >
               <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            
-                <span style={{ fontFamily: F.sans, fontSize: "0.49rem", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.09em" }}>
+                <span
+                  style={{
+                    fontFamily: F.sans,
+                    fontSize: "0.49rem",
+                    fontWeight: 600,
+                    color: "#bbb",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.09em",
+                  }}
+                >
                   {d.stat.label}
                 </span>
               </div>
@@ -204,8 +225,19 @@ function DivisionCard({ d, index }) {
                 }}
               >
                 Explore Products
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </motion.div>
             </div>
@@ -280,8 +312,7 @@ export default function Products() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap');
-        .div-grid {
+         .div-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.2rem;
@@ -293,61 +324,173 @@ export default function Products() {
 
       <section
         ref={ref}
+        className="pt-32"
         style={{
           backgroundColor: "#F5F7F5",
           position: "relative",
           overflow: "hidden",
-          padding: "7rem 0 6.5rem",
         }}
       >
         {/* Dot texture */}
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.25, backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.22) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
-        <div style={{ position: "absolute", top: -140, left: -100, width: 520, height: 520, borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 68%)", filter: "blur(72px)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: -80, right: -60, width: 440, height: 440, borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.07) 0%, transparent 68%)", filter: "blur(72px)", pointerEvents: "none" }} />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            opacity: 0.25,
+            backgroundImage:
+              "radial-gradient(circle, rgba(31,143,99,0.22) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: -140,
+            left: -100,
+            width: 520,
+            height: 520,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 68%)",
+            filter: "blur(72px)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: -80,
+            right: -60,
+            width: 440,
+            height: 440,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle, rgba(31,143,99,0.07) 0%, transparent 68%)",
+            filter: "blur(72px)",
+            pointerEvents: "none",
+          }}
+        />
 
-        <div style={{ maxWidth: 1152, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}>
-
+        <div
+          style={{
+            maxWidth: 1152,
+            margin: "0 auto",
+            padding: "0 1.5rem",
+            position: "relative",
+          }}
+        >
           {/* ── Header ── */}
           <div style={{ marginBottom: "3.5rem" }}>
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "2rem", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                gap: "2rem",
+                flexWrap: "wrap",
+              }}
+            >
               <div>
                 <motion.div
-                  initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.55 }}
-                  style={{ display: "inline-flex", alignItems: "center", gap: 7, padding: "5px 14px", borderRadius: 99, marginBottom: 18, background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.2)", fontFamily: F.sans, fontSize: 10, fontWeight: 700, letterSpacing: "0.13em", textTransform: "uppercase", color: "#125C42" }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 7,
+                    padding: "5px 14px",
+                    borderRadius: 99,
+                    marginBottom: 18,
+                    background: "rgba(31,143,99,0.08)",
+                    border: "1px solid rgba(31,143,99,0.2)",
+                    fontFamily: F.sans,
+                    fontSize: 10,
+                    fontWeight: 700,
+                    letterSpacing: "0.13em",
+                    textTransform: "uppercase",
+                    color: "#125C42",
+                  }}
                 >
-                  <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      background: "#1F8F63",
+                      display: "inline-block",
+                    }}
+                  />
                   What We Offer
                 </motion.div>
 
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.65, delay: 0.1 }}
-                  style={{ fontFamily: F.sans, fontSize: "clamp(2.2rem,3.6vw,3.2rem)", fontWeight: 800, lineHeight: 1.08, color: "#1A1A1A", margin: 0 }}
+                  style={{
+                    fontFamily: F.sans,
+                    fontSize: "clamp(2.2rem,3.6vw,3.2rem)",
+                    fontWeight: 800,
+                    lineHeight: 1.08,
+                    color: "#1A1A1A",
+                    margin: 0,
+                  }}
                 >
-                  Products &amp;<br />
-                  <span style={{ backgroundImage: "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  Products &amp;
+                  <br />
+                  <span
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
                     Services
                   </span>
                 </motion.h2>
               </div>
 
               <motion.p
-                initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                style={{ fontFamily: F.serif, fontSize: "0.9rem", color: "#888", lineHeight: 1.85, maxWidth: 300, paddingBottom: 4, margin: 0 }}
+                style={{
+                  fontFamily: F.serif,
+                  fontSize: "0.9rem",
+                  color: "#888",
+                  lineHeight: 1.85,
+                  maxWidth: 300,
+                  paddingBottom: 4,
+                  margin: 0,
+                }}
               >
                 End-to-end solutions across the protein value chain.{" "}
-                <span style={{ fontFamily: F.sans, fontSize: "0.74rem", fontWeight: 700, color: "#1F8F63" }}>
+                <span
+                  style={{
+                    fontFamily: F.sans,
+                    fontSize: "0.74rem",
+                    fontWeight: 700,
+                    color: "#1F8F63",
+                  }}
+                >
                   Select a division →
                 </span>
               </motion.p>
             </div>
 
             <motion.div
-              initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
+              initial={{ scaleX: 0 }}
+              animate={inView ? { scaleX: 1 } : {}}
               transition={{ duration: 0.85, delay: 0.3 }}
-              style={{ marginTop: 28, height: 1, transformOrigin: "left", background: "linear-gradient(to right,#A6DDC8,transparent)" }}
+              style={{
+                marginTop: 28,
+                height: 1,
+                transformOrigin: "left",
+                background: "linear-gradient(to right,#A6DDC8,transparent)",
+              }}
             />
           </div>
 
@@ -357,15 +500,6 @@ export default function Products() {
               <DivisionCard key={d.slug} d={d} index={i} />
             ))}
           </div>
-
-          <motion.p
-            initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            style={{ marginTop: "2.5rem", textAlign: "center", fontFamily: F.sans, fontSize: "0.73rem", fontWeight: 600, color: "#c8c8c8", letterSpacing: "0.05em" }}
-          >
-            6 divisions · end-to-end protein value chain · nationwide distribution
-          </motion.p>
-
         </div>
       </section>
     </>
