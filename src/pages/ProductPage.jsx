@@ -10,7 +10,7 @@ export default function ProductsPage() {
   const [division, setDivision] = useState(null);
 
   return (
-    <div>
+       <div className="pt-5">
       <Products onSelectDivision={setDivision} />
       <div className="pt-10">
   <FooterCTA />
