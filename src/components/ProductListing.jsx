@@ -1,35 +1,13 @@
 "use client";
 
-/**
- * ProductListing.jsx
- *
- * Route structure:
- *   /products/poultry           → Division landing: shows all categories as cards
- *   /products/poultry/breeder   → Category detail: products within Breeder Chicks
- *   /products/poultry/doc       → Category detail: products within Day Old Chicks
- *   /products/frozen/chicken    → etc.
- *
- * Router setup (routes.jsx):
- *   <Route path="/products/:slug"             element={<ProductListing />} />
- *   <Route path="/products/:slug/:categoryId" element={<ProductListing />} />
- *
- * Component tree:
- *   ProductListing
- *   ├── HeroBanner
- *   ├── CategoryCard   (division landing)
- *   ├── ProductCard    (category detail)
- *   └── DetailPanel    (slide-in overlay)
- */
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useParams } from "react-router-dom";
-import { getDivision } from "@/lib/product";
+import { getDivision, DIVISIONS } from "@/lib/product";
 
 import HeroBanner from "./HeroBanner";
 import CategoryCard from "./CategoryCard";
 import ProductCard from "./ProductCard";
-
 import DetailPanel from "./DetailPanel";
 import ContactSidebar from "./ContactSidebar";
 import { F } from "@/lib/constants";
@@ -62,9 +40,11 @@ export default function ProductListing() {
         @media (max-width:760px)  { .pl-grid { grid-template-columns: repeat(2,1fr); } .cat-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width:480px)  { .pl-grid { grid-template-columns: 1fr; }          .cat-grid { grid-template-columns: 1fr; } }
         .sib-link:hover { background: rgba(0,0,0,0.08) !important; color: #444 !important; }
+        .div-tab:hover { color: #444 !important; }
+        .div-tabs::-webkit-scrollbar { display: none; }
+        .div-tabs { scrollbar-width: none; }
       `}</style>
 
-      {/* Pass logoSrc="/your-logo.svg" (or .png) once you have the asset */}
       <HeroBanner d={d} activeCat={activeCat} logoSrc="/chilogo.svg" />
 
       <section
@@ -96,6 +76,66 @@ export default function ProductListing() {
             position: "relative",
           }}
         >
+          {/* ── Division Tab Bar ── */}
+          <div
+            className="div-tabs"
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              overflowX: "auto",
+              borderBottom: "1.5px solid rgba(0,0,0,0.08)",
+              marginBottom: "2rem",
+            }}
+          >
+            {DIVISIONS.map((div) => {
+              const isActive = div.slug === slug;
+              return (
+                <Link
+                  key={div.slug}
+                  to={`/products/${div.slug}`}
+                  style={{ textDecoration: "none", position: "relative", flexShrink: 0 }}
+                >
+                  <div
+                    className="div-tab"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 7,
+                      padding: "10px 20px 13px",
+                      fontFamily: F.sans,
+                      fontSize: "0.82rem",
+                      fontWeight: isActive ? 800 : 500,
+                      color: isActive ? div.accent : "#bbb",
+                      whiteSpace: "nowrap",
+                      cursor: "pointer",
+                      transition: "color 0.18s",
+                    }}
+                  >
+                    <span style={{ fontSize: 16 }}>{div.icon}</span>
+                    {div.title}
+                  </div>
+
+                  {/* Active underline */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="divisionUnderline"
+                      style={{
+                        position: "absolute",
+                        bottom: -1,
+                        left: 0,
+                        right: 0,
+                        height: 2.5,
+                        borderRadius: 99,
+                        background: div.accent,
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
           <AnimatePresence mode="wait">
             {/* ── DIVISION LANDING: all categories ── */}
             {!categoryId && (
@@ -106,66 +146,7 @@ export default function ProductListing() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.25 }}
               >
-                {/* ── Back to all products ── */}
-                <div style={{ marginBottom: "1.5rem" }}>
-                  <Link
-                    to="/products"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: 5,
-                      fontFamily: F.sans,
-                      fontSize: "0.78rem",
-                      fontWeight: 700,
-                      color: "#888",
-                      textDecoration: "none",
-                      padding: "5px 13px",
-                      borderRadius: 99,
-                      background: "rgba(0,0,0,0.04)",
-                      border: "1px solid rgba(0,0,0,0.08)",
-                      transition: "all 0.2s",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = "rgba(0,0,0,0.08)";
-                      e.currentTarget.style.color = "#444";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = "rgba(0,0,0,0.04)";
-                      e.currentTarget.style.color = "#888";
-                    }}
-                  >
-                    <svg
-                      width="10"
-                      height="10"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 12H5M12 5l-7 7 7 7"
-                      />
-                    </svg>
-                    All Products
-                  </Link>
-                </div>
-
                 <div style={{ marginBottom: "1.75rem" }}>
-                  {/* <p
-                    style={{
-                      fontFamily: F.sans,
-                      fontSize: "0.78rem",
-                      fontWeight: 800,
-                      letterSpacing: "0.14em",
-                      textTransform: "uppercase",
-                      color: "#c8c8c8",
-                      margin: "0 0 8px",
-                    }}
-                  >
-                    Browse by Category
-                  </p> */}
                   <div
                     style={{
                       height: 1,
@@ -173,6 +154,7 @@ export default function ProductListing() {
                     }}
                   />
                 </div>
+
                 <div className="landing-layout">
                   <div>
                     <div className="cat-grid">
@@ -187,8 +169,6 @@ export default function ProductListing() {
                       ))}
                     </div>
                   </div>
-
-                  {/* Right: sticky contact sidebar */}
                   <ContactSidebar d={d} />
                 </div>
               </motion.div>
@@ -340,6 +320,7 @@ export default function ProductListing() {
                     background: `linear-gradient(to right, ${d.accent}, transparent)`,
                   }}
                 />
+
                 <div className="landing-layout">
                   <div>
                     <div className="cat-grid">
