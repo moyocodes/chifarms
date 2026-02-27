@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
         @media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
       `}</style>
 
-      <section className="bg-primary-50/30" ref={ref} style={{  padding: "4.5rem 0", position: "relative", overflow: "hidden" }}>
+      <section className="bg-primary-50/30 pt-10" ref={ref} style={{  padding: "4.5rem 0", position: "relative", overflow: "hidden" }}>
 
         {/* Faint dot grid */}
         <div style={{
