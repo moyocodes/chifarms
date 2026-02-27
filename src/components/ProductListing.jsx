@@ -54,9 +54,8 @@ export default function ProductListing() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital,wght@0,400;1,400&display=swap');
         .pl-grid  { display: grid; gap: 1rem;   grid-template-columns: repeat(4,1fr); align-items: stretch; }
-        .cat-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(2,1fr); align-items: start; }
+        .cat-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(3,1fr); align-items: start; }
         .landing-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
         @media (max-width:1100px) { .pl-grid { grid-template-columns: repeat(3,1fr); } }
         @media (max-width:900px)  { .landing-layout { grid-template-columns: 1fr; } }
@@ -66,7 +65,7 @@ export default function ProductListing() {
       `}</style>
 
       {/* Pass logoSrc="/your-logo.svg" (or .png) once you have the asset */}
-      <HeroBanner d={d} activeCat={activeCat} logoSrc={undefined} />
+      <HeroBanner d={d} activeCat={activeCat} logoSrc="/chilogo.svg" />
 
       <section
         style={{
@@ -116,7 +115,7 @@ export default function ProductListing() {
                       alignItems: "center",
                       gap: 5,
                       fontFamily: F.sans,
-                      fontSize: "0.68rem",
+                      fontSize: "0.78rem",
                       fontWeight: 700,
                       color: "#888",
                       textDecoration: "none",
@@ -157,7 +156,7 @@ export default function ProductListing() {
                   <p
                     style={{
                       fontFamily: F.sans,
-                      fontSize: "0.58rem",
+                      fontSize: "0.78rem",
                       fontWeight: 800,
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
@@ -268,14 +267,14 @@ export default function ProductListing() {
                               background: "rgba(0,0,0,0.04)",
                               border: "1px solid rgba(0,0,0,0.08)",
                               fontFamily: F.sans,
-                              fontSize: "0.6rem",
+                              fontSize: "0.78rem",
                               fontWeight: 600,
                               color: "#888",
                               textDecoration: "none",
                               transition: "all 0.2s",
                             }}
                           >
-                            <span style={{ fontSize: 11 }}>{cat.icon}</span>
+                            <span style={{ fontSize: 13 }}>{cat.icon}</span>
                             {cat.label}
                           </Link>
                         ))}
@@ -343,7 +342,7 @@ export default function ProductListing() {
                 />
                 <div className="landing-layout">
                   <div>
-                    <div className="pl-grid">
+                    <div className="cat-grid">
                       {activeCat.items.map((item, i) => (
                         <ProductCard
                           key={item.name}

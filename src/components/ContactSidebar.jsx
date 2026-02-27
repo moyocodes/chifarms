@@ -224,7 +224,7 @@ export default function ContactSidebar({ d }) {
           <p
             style={{
               fontFamily: F.sans,
-              fontSize: "0.5rem",
+              fontSize: "0.65rem",
               fontWeight: 700,
               color: "#bbb",
               letterSpacing: "0.08em",
@@ -268,7 +268,7 @@ export default function ContactSidebar({ d }) {
           <p
             style={{
               fontFamily: F.sans,
-              fontSize: "0.55rem",
+              fontSize: "0.65rem",
               fontWeight: 800,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
@@ -301,7 +301,7 @@ export default function ContactSidebar({ d }) {
                 <p
                   style={{
                     fontFamily: F.sans,
-                    fontSize: "0.52rem",
+                    fontSize: "0.70rem",
                     fontWeight: 800,
                     color: d.accent,
                     letterSpacing: "0.06em",
@@ -314,7 +314,7 @@ export default function ContactSidebar({ d }) {
                 <p
                   style={{
                     fontFamily: F.sans,
-                    fontSize: "0.65rem",
+                    fontSize: "0.75rem",
                     fontWeight: 500,
                     color: "#666",
                     lineHeight: 1.55,
