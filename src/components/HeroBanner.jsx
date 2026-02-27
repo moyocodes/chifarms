@@ -55,9 +55,9 @@ export default function HeroBanner({ d, activeCat, logoSrc }) {
       >
         {/* We place several copies at different sizes/positions for a natural feel */}
         {[
-          { size: 340, top: "-60px",  right: "-60px",  opacity: 0.35 },
-          { size: 200, bottom: "-30px", left: "-40px",  opacity: 0.24  },
-          { size: 130, top: "30%",    right: "28%",    opacity: 0.18 },
+          { size: 340, top: "-60px",  right: "-60px",  opacity: 0.22 },
+          { size: 200, bottom: "-30px", left: "-40px",  opacity: 0.18  },
+          { size: 130, top: "30%",    right: "28%",    opacity: 0.13 },
         ].map((pos, i) => (
           <div
             key={i}

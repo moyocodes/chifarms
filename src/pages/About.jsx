@@ -52,7 +52,6 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
     hasRun.current = true;
     const duration = 2000;
     const start = performance.now();
-
     const tick = (now) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
@@ -60,7 +59,6 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
       setCount(Math.round(eased * target));
       if (progress < 1) rafRef.current = requestAnimationFrame(tick);
     };
-
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
   }, [inView, target]);
@@ -79,7 +77,7 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
 }
 
 /* ══════════════════════════════════════════════
-   IMAGE CAROUSEL — filmstrip thumbnails
+   IMAGE CAROUSEL
 ══════════════════════════════════════════════ */
 const carouselImages = [
   {
@@ -122,13 +120,11 @@ const slideVariants = {
 
 function ImageCarousel() {
   const [[idx, dir], setSlide] = useState([0, 0]);
-
   const paginate = (newDir) =>
     setSlide(([prev]) => [
       (prev + newDir + carouselImages.length) % carouselImages.length,
       newDir,
     ]);
-
   const goTo = (i) => setSlide([i, i > idx ? 1 : -1]);
 
   useEffect(() => {
@@ -139,13 +135,16 @@ function ImageCarousel() {
   const img = carouselImages[idx];
 
   return (
-    <div className="flex flex-col gap-3">
-      {/* ── Main slide ── */}
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {/* Main slide */}
       <div
-        className="relative rounded-2xl overflow-hidden select-none"
         style={{
+          position: "relative",
+          borderRadius: 16,
+          overflow: "hidden",
           aspectRatio: "16/11",
           boxShadow: "0 32px 80px rgba(0,0,0,0.18)",
+          userSelect: "none",
         }}
       >
         <AnimatePresence initial={false} custom={dir}>
@@ -170,26 +169,48 @@ function ImageCarousel() {
 
         {/* Vignette */}
         <div
-          className="absolute inset-0 pointer-events-none"
           style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
             background:
               "linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 35%, rgba(0,0,0,0.52) 100%)",
           }}
         />
 
         {/* Progress bar */}
-        <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/10">
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 3,
+            background: "rgba(255,255,255,0.1)",
+          }}
+        >
           <motion.div
             key={idx + "-bar"}
-            className="h-full bg-accent"
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 5, ease: "linear" }}
+            style={{ height: "100%", background: "#1F8F63" }}
           />
         </div>
 
         {/* Bottom bar */}
-        <div className="absolute bottom-0 left-0 right-0 px-5 pb-4 pt-10 flex items-end justify-between">
+        <div
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: "2.5rem 1.25rem 1rem",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+          }}
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={idx + "-label"}
@@ -201,28 +222,59 @@ function ImageCarousel() {
               }}
               exit={{ opacity: 0, x: 8 }}
             >
-              <p className="font-body text-[10px] uppercase tracking-[0.14em] text-white/50 m-0">
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: 10,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.14em",
+                  color: "rgba(255,255,255,0.5)",
+                  margin: 0,
+                }}
+              >
                 {idx + 1} / {carouselImages.length}
               </p>
-              <p className="font-heading font-semibold text-[14px] text-white m-0 mt-0.5">
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontWeight: 600,
+                  fontSize: 14,
+                  color: "#fff",
+                  margin: "2px 0 0",
+                }}
+              >
                 {img.label}
               </p>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex gap-2">
+          <div style={{ display: "flex", gap: 8 }}>
             {[-1, 1].map((d) => (
               <button
                 key={d}
                 onClick={() => paginate(d)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-white transition-transform hover:scale-110"
                 style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "50%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "#fff",
                   background: "rgba(255,255,255,0.15)",
                   backdropFilter: "blur(8px)",
                   border: "1px solid rgba(255,255,255,0.25)",
-                  fontSize: "18px",
+                  fontSize: 18,
                   lineHeight: 1,
+                  cursor: "pointer",
+                  transition: "transform 0.2s",
                 }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.1)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
               >
                 {d < 0 ? "‹" : "›"}
               </button>
@@ -231,23 +283,26 @@ function ImageCarousel() {
         </div>
       </div>
 
-      {/* ── Thumbnail strip ── */}
-      <div className="flex gap-2">
+      {/* Thumbnail strip */}
+      <div style={{ display: "flex", gap: 8 }}>
         {carouselImages.map((im, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            className="relative flex-1 rounded-lg overflow-hidden"
             style={{
+              flex: 1,
+              borderRadius: 8,
+              overflow: "hidden",
               aspectRatio: "4/3",
               outline:
-                i === idx
-                  ? "2px solid var(--color-primary,#1F8F63)"
-                  : "2px solid transparent",
-              outlineOffset: "2px",
+                i === idx ? "2px solid #1F8F63" : "2px solid transparent",
+              outlineOffset: 2,
               opacity: i === idx ? 1 : 0.5,
               transform: i === idx ? "scale(1)" : "scale(0.96)",
               transition: "all 0.35s ease",
+              cursor: "pointer",
+              padding: 0,
+              background: "none",
             }}
           >
             <img
@@ -282,27 +337,92 @@ function About() {
     <section
       id="about"
       ref={ref}
-      className="relative overflow-hidden py-24 bg-secondary-50"
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        padding: "clamp(3rem, 8vw, 6rem) 0",
+        background: "#f8faf9",
+      }}
     >
-      {/* ── BG blobs ── */}
+      {/* Responsive styles injected */}
+      <style>{`
+        .about-grid {
+          display: grid;
+          grid-template-columns: 1.05fr 1fr;
+          column-gap: clamp(2rem, 4vw, 5rem);
+          row-gap: 0;
+      
+     
+        }
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+        }
+        .partners-outer {
+          overflow: hidden;
+          /* mask fade edges */
+          -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+        }
+
+        @media (max-width: 900px) {
+          .about-grid {
+            grid-template-columns: 1fr;
+            column-gap: 0;
+            row-gap: 0;
+          }
+          /* On mobile, header-right (sub-copy) sits right after header-left */
+        }
+
+        @media (max-width: 560px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .stats-grid > div:nth-child(2) {
+            border-right: none !important;
+          }
+          .stats-grid > div:nth-child(1),
+          .stats-grid > div:nth-child(2) {
+            border-bottom: 1px solid rgba(31,143,99,0.09);
+          }
+        }
+      `}</style>
+
+      {/* BG blobs */}
       <motion.div
-        style={{ y: blobY }}
-        className="absolute -top-32 -left-24 w-[600px] h-[600px] rounded-full pointer-events-none"
+        style={{
+          y: blobY,
+          position: "absolute",
+          top: -128,
+          left: -96,
+          width: 600,
+          height: 600,
+          borderRadius: "50%",
+          pointerEvents: "none",
+        }}
         aria-hidden
       >
         <div
-          className="w-full h-full rounded-full"
           style={{
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
             background:
               "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 65%)",
             filter: "blur(64px)",
           }}
         />
       </motion.div>
-
       <div
-        className="absolute top-1/2 -translate-y-1/2 right-0 w-[480px] h-[480px] rounded-full pointer-events-none"
         style={{
+          position: "absolute",
+          top: "50%",
+          transform: "translateY(-50%)",
+          right: 0,
+          width: 480,
+          height: 480,
+          borderRadius: "50%",
+          pointerEvents: "none",
           background:
             "radial-gradient(circle, rgba(65,170,128,0.07) 0%, transparent 65%)",
           filter: "blur(80px)",
@@ -312,12 +432,17 @@ function About() {
 
       {/* Dot grid */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-25"
         style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          opacity: 0.25,
           backgroundImage:
             "radial-gradient(circle, rgba(31,143,99,0.35) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
           maskImage:
+            "radial-gradient(ellipse 85% 80% at 50% 50%, black 30%, transparent 100%)",
+          WebkitMaskImage:
             "radial-gradient(ellipse 85% 80% at 50% 50%, black 30%, transparent 100%)",
         }}
         aria-hidden
@@ -325,14 +450,20 @@ function About() {
 
       {/* Decorative SVG arc */}
       <div
-        className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.07]"
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          overflow: "hidden",
+          opacity: 0.07,
+        }}
         aria-hidden
       >
         <svg
           viewBox="0 0 1440 700"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute top-0 left-0 w-full"
+          style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
           preserveAspectRatio="none"
         >
           <path
@@ -350,34 +481,84 @@ function About() {
         </svg>
       </div>
 
-      <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10">
-        {/* ── Section header ── */}
-        <motion.div
-          initial="hidden"
-          animate={inView ? "show" : "hidden"}
-          variants={stagger}
-          className="mb-14"
-        >
+      {/* ── Main container — same maxWidth + padding as navbar/ProductListing ── */}
+      <div
+        style={{
+          position: "relative",
+          maxWidth: 1152,
+          margin: "0 auto",
+          padding: "0 1.5rem",
+        }}
+      >
+        {/*
+          ── Unified grid: header row + body row share the same column track,
+             so "OUR STORY"/headline left-edge = carousel left-edge,
+             and sub-copy/right-col left-edge = "From hatchery" card left-edge.
+        ── */}
+        <div className="about-grid">
+          {/* ── HEADER LEFT: pill + headline ── */}
           <motion.div
-            variants={fadeUp}
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full font-heading text-[10px] font-extrabold uppercase tracking-[0.18em] mb-5 bg-primary-100/50 border border-primary/20 text-primary"
+            initial="hidden"
+            animate={inView ? "show" : "hidden"}
+            variants={stagger}
+            style={{ marginBottom: "2rem" }}
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
-            Our Story
-            <span className="w-1.5 h-1.5 rounded-full bg-accent inline-block" />
-          </motion.div>
+            {/* "Our Story" pill */}
+            <motion.div
+              variants={fadeUp}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "6px 16px",
+                borderRadius: 99,
+                marginBottom: 20,
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: 10,
+                fontWeight: 800,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                background: "rgba(31,143,99,0.08)",
+                border: "1px solid rgba(31,143,99,0.2)",
+                color: "#1F8F63",
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "#1F8F63",
+                  display: "inline-block",
+                }}
+              />
+              Our Story
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "#1F8F63",
+                  display: "inline-block",
+                }}
+              />
+            </motion.div>
 
-          <div className="grid md:grid-cols-[1fr_auto] gap-6 items-end">
             <motion.h2
               variants={fadeUp}
               custom={1}
-              className="font-heading font-black leading-[1.05] m-0 text-dark"
-              style={{ fontSize: "clamp(2.6rem,4.5vw,4rem)" }}
+              style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontWeight: 900,
+                lineHeight: 1.05,
+                margin: 0,
+                color: "#0f1f16",
+                fontSize: "clamp(2.2rem, 4.5vw, 4rem)",
+              }}
             >
               Rooted in nature,
               <br />
               <span
-                className="text-primary"
                 style={{
                   backgroundImage:
                     "linear-gradient(130deg,#1F8F63 0%,#41AA80 60%,#68C89F 100%)",
@@ -389,25 +570,37 @@ function About() {
                 driven by science.
               </span>
             </motion.h2>
+          </motion.div>
 
-            <motion.p
-              variants={fadeUp}
-              custom={2}
-              className="font-body leading-relaxed m-0 text-dark-400"
-              style={{ fontSize: "1.0rem", maxWidth: "420px" }}
+          {/* ── HEADER RIGHT: sub-copy — left edge = "From hatchery" card left edge ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              marginBottom: "40px",
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: "1rem",
+                lineHeight: 1.7,
+                margin: 0,
+                color: "#5a7065",
+              }}
             >
               Chi Farms Ltd. is an integrated poultry operation with breeding,
               commercial broiler processing, aquaculture, and veterinary
               services — all under one roof.
-            </motion.p>
-          </div>
-        </motion.div>
+            </p>
+          </motion.div>
 
-        {/* ── Main 2-col layout ── */}
-        <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 xl:gap-20 items-start mb-16">
-          {/* LEFT — Carousel */}
+          {/* ── BODY LEFT: Carousel (starts on new row, same left column) ── */}
           <motion.div
-            className="relative"
+            style={{ position: "relative" }}
             initial={{ opacity: 0, x: -36 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{
@@ -427,25 +620,71 @@ function About() {
                 duration: 0.55,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="absolute -bottom-2 -right-4 rounded-xl p-3 flex items-center gap-2.5 bg-secondary"
-              style={{ boxShadow: "0 12px 36px rgba(31,143,99,0.35)" }}
+              style={{
+                position: "absolute",
+                bottom: -8,
+                right: -16,
+                borderRadius: 12,
+                padding: "10px 14px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                background: "#fff",
+                boxShadow: "0 12px 36px rgba(31,143,99,0.25)",
+              }}
             >
-              <div className="w-9 h-9 rounded-lg bg-primary/15 flex items-center justify-center text-lg">
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: 9,
+                  background: "rgba(31,143,99,0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: 18,
+                }}
+              >
                 🏅
               </div>
               <div>
-                <p className="font-heading font-bold text-[12px] text-primary m-0 leading-tight">
+                <p
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans',sans-serif",
+                    fontWeight: 700,
+                    fontSize: 12,
+                    color: "#1F8F63",
+                    margin: 0,
+                    lineHeight: 1.2,
+                  }}
+                >
                   NAFDAC & SON
                 </p>
-                <p className="font-body text-[10px] text-primary/65 m-0 mt-0.5">
+                <p
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans',sans-serif",
+                    fontSize: 10,
+                    color: "rgba(31,143,99,0.65)",
+                    margin: "2px 0 0",
+                  }}
+                >
                   Certified Operations
                 </p>
               </div>
             </motion.div>
 
-            {/* Decorative dashed ring */}
+            {/* Dashed ring */}
             <div
-              className="absolute -top-5 -left-5 -z-10 w-52 h-52 rounded-full border-2 border-dashed border-primary/20"
+              style={{
+                position: "absolute",
+                top: -20,
+                left: -20,
+                zIndex: -1,
+                width: 208,
+                height: 208,
+                borderRadius: "50%",
+                border: "2px dashed rgba(31,143,99,0.2)",
+              }}
               aria-hidden
             />
           </motion.div>
@@ -455,37 +694,90 @@ function About() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={stagger}
-            className="flex flex-col justify-center"
+             className="pt-5"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
           >
             {/* Pull-quote card */}
             <motion.div
               variants={fadeUp}
               custom={1}
-              className="rounded-2xl p-6 mb-7 relative overflow-hidden bg-primary-400"
-              style={{ boxShadow: "0 8px 40px rgba(31,143,99,0.28)" }}
+                
+              style={{
+                borderRadius: 16,
+                padding: "1.5rem",
+                marginBottom: "1.75rem",
+                position: "relative",
+                overflow: "hidden",
+                background: "linear-gradient(135deg, #1F8F63 0%, #166B4A 100%)",
+                boxShadow: "0 8px 40px rgba(31,143,99,0.28)",
+              }}
             >
               <div
-                className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20"
+              
                 style={{
+                  position: "absolute",
+                  top: -32,
+                  right: -32,
+                  width: 128,
+                  height: 128,
+                  borderRadius: "50%",
+                  opacity: 0.2,
                   background: "radial-gradient(circle,#fff 0%,transparent 70%)",
                 }}
               />
               <div
-                className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-10"
                 style={{
+                  position: "absolute",
+                  bottom: -24,
+                  left: -24,
+                  width: 96,
+                  height: 96,
+                  borderRadius: "50%",
+                  opacity: 0.1,
                   background: "radial-gradient(circle,#fff 0%,transparent 70%)",
                 }}
               />
               <p
-                className="font-heading font-bold text-white leading-snug m-0"
-                style={{ fontSize: "clamp(1.05rem,1.8vw,1.25rem)" }}
+           
+                style={{
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontWeight: 700,
+                  color: "#fff",
+                  lineHeight: 1.45,
+                  margin: 0,
+                  fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
+                }}
               >
                 "From hatchery to harvest — we power every link in Nigeria's
                 poultry value chain."
               </p>
-              <div className="flex items-center gap-2 mt-4">
-                <div className="w-8 h-[2px] rounded-full bg-white/35" />
-                <span className="font-body text-[12px] text-white/55">
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  marginTop: 16,
+                }}
+              >
+                <div
+                  style={{
+                    width: 32,
+                    height: 2,
+                    borderRadius: 99,
+                    background: "rgba(255,255,255,0.35)",
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans',sans-serif",
+                    fontSize: 12,
+                    color: "rgba(255,255,255,0.55)",
+                  }}
+                >
                   Chi Farms, Est. 2004
                 </span>
               </div>
@@ -494,8 +786,13 @@ function About() {
             <motion.p
               variants={fadeUp}
               custom={2}
-              className="font-body leading-relaxed mb-6 text-dark-400"
-              style={{ fontSize: "0.97rem" }}
+              style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: "0.97rem",
+                lineHeight: 1.75,
+                marginBottom: "1.5rem",
+                color: "#5a7065",
+              }}
             >
               We provide parent stock to hatcheries, distribute commercial
               chicks, and support customers with post-sales technical services.
@@ -508,26 +805,56 @@ function About() {
             <motion.div
               variants={fadeUp}
               custom={3}
-              className="flex items-center mb-6"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "1.5rem",
+              }}
             >
               <a
                 href="products"
-                className="inline-flex items-center gap-2 font-heading font-bold text-[13px] uppercase tracking-[0.1em] text-primary transition-all duration-300 group"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: "#1F8F63",
+                  textDecoration: "none",
+                }}
               >
                 Explore our products
-                <span className="w-7 h-7 rounded-full flex items-center justify-center bg-primary-100/60 border border-primary/20 transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:border-primary">
+                <span
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: "50%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "rgba(31,143,99,0.1)",
+                    border: "1px solid rgba(31,143,99,0.2)",
+                    fontSize: 16,
+                    transition: "all 0.25s",
+                  }}
+                >
                   →
                 </span>
               </a>
             </motion.div>
 
-            {/* ── Inline stats ── */}
+            {/* Stats grid */}
             <motion.div
               ref={statsRef}
               variants={fadeUp}
               custom={4}
-              className="grid grid-cols-4 gap-0 rounded-xl overflow-hidden"
+              className="stats-grid"
               style={{
+                borderRadius: 12,
+                overflow: "hidden",
                 border: "1px solid rgba(31,143,99,0.13)",
                 background:
                   "linear-gradient(135deg,#fff 0%,rgba(210,238,227,0.3) 100%)",
@@ -536,8 +863,10 @@ function About() {
               {stats.map((s, i) => (
                 <div
                   key={i}
-                  className="text-center py-4 px-2 relative"
                   style={{
+                    textAlign: "center",
+                    padding: "1rem 0.5rem",
+                    position: "relative",
                     borderRight:
                       i < stats.length - 1
                         ? "1px solid rgba(31,143,99,0.09)"
@@ -545,16 +874,25 @@ function About() {
                   }}
                 >
                   <div
-                    className="absolute top-0 left-1/2 -translate-x-1/2 h-[2px] rounded-b-full w-8"
                     style={{
+                      position: "absolute",
+                      top: 0,
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      height: 2,
+                      width: 32,
+                      borderRadius: "0 0 4px 4px",
                       background: "linear-gradient(90deg,#1F8F63,#41AA80)",
                       opacity: 0.55,
                     }}
                   />
                   <p
-                    className="font-heading font-black m-0 leading-none"
                     style={{
-                      fontSize: "1.45rem",
+                      fontFamily: "'Plus Jakarta Sans',sans-serif",
+                      fontWeight: 900,
+                      fontSize: "1.4rem",
+                      margin: 0,
+                      lineHeight: 1,
                       backgroundImage:
                         "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)",
                       WebkitBackgroundClip: "text",
@@ -568,7 +906,15 @@ function About() {
                       inView={statsInView}
                     />
                   </p>
-                  <p className="font-body text-[10px] mt-1 m-0 text-dark-400 leading-tight">
+                  <p
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans',sans-serif",
+                      fontSize: 10,
+                      marginTop: 4,
+                      color: "#7a9a8a",
+                      lineHeight: 1.3,
+                    }}
+                  >
                     {s.label}
                   </p>
                 </div>
@@ -577,47 +923,106 @@ function About() {
           </motion.div>
         </div>
 
-        {/* ── Partnerships strip ── */}
-        <motion.div
-          className="flex items-center gap-10"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 24, ease: "linear", repeat: Infinity }}
-          style={{ width: "max-content" }}
-        >
-          {[...Array(2)]
-            .flatMap(() => [
-              { name: "NAFDAC", logo: "https://chi-farms.com/wp-content/uploads/2021/04/download-1-150x150.png" },
-              { name: "SON Nigeria", logo: "https://chi-farms.com/wp-content/uploads/2021/04/zoetis-150x150.png" },
-              { name: "ABZ Pharma", logo: "https://chi-farms.com/wp-content/uploads/2021/04/aviagen-1-150x150.png" },
-              { name: "AgroFeed Co.", logo: "https://chi-farms.com/wp-content/uploads/2021/04/hendrix-genetics-1-150x150.jpg" },
-              { name: "PoultryCare", logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg" },
-              { name: "VetLine NG", logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912419023-150x150.jpg" },
-              { name: "FarmTech Ltd", logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg" },
-              { name: "NigerAgro", logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg" },
-              { name: "AgroTech Solutions", logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912776218-150x150.jpg" }
-
-            ])
-            .map((p, i) => (
-              <div key={i} className="flex items-center gap-10 flex-shrink-0">
-                <img
-                  src={p.logo}
-                  alt={p.name}
-                  className="h-32 w-32 object-contain opacity-70 hover:opacity-100 transition duration-300"
-                />
-
-                {/* divider */}
-                <span className="w-1 h-1 rounded-full bg-green-700 opacity-30" />
-              </div>
-            ))}
-        </motion.div>
+        {/* ── Partners marquee ── */}
+        <div className="partners-outer" style={{ marginBottom: "2.5rem" }}>
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 24, ease: "linear", repeat: Infinity }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 40,
+              width: "max-content",
+            }}
+          >
+            {[...Array(2)]
+              .flatMap(() => [
+                {
+                  name: "NAFDAC",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/download-1-150x150.png",
+                },
+                {
+                  name: "SON Nigeria",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/zoetis-150x150.png",
+                },
+                {
+                  name: "ABZ Pharma",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/aviagen-1-150x150.png",
+                },
+                {
+                  name: "AgroFeed Co.",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/hendrix-genetics-1-150x150.jpg",
+                },
+                {
+                  name: "PoultryCare",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
+                },
+                {
+                  name: "VetLine NG",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912419023-150x150.jpg",
+                },
+                {
+                  name: "FarmTech Ltd",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
+                },
+                {
+                  name: "NigerAgro",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
+                },
+                {
+                  name: "AgroTech Solutions",
+                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912776218-150x150.jpg",
+                },
+              ])
+              .map((p, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 40,
+                    flexShrink: 0,
+                  }}
+                >
+                  <img
+                    src={p.logo}
+                    alt={p.name}
+                    style={{
+                      height: 80,
+                      width: 80,
+                      objectFit: "contain",
+                      opacity: 0.65,
+                      transition: "opacity 0.3s",
+                      flexShrink: 0,
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.opacity = "0.65")
+                    }
+                  />
+                  <span
+                    style={{
+                      width: 4,
+                      height: 4,
+                      borderRadius: "50%",
+                      background: "#1F8F63",
+                      opacity: 0.3,
+                      flexShrink: 0,
+                    }}
+                  />
+                </div>
+              ))}
+          </motion.div>
+        </div>
 
         {/* Bottom accent line */}
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={inView ? { scaleX: 1, opacity: 1 } : {}}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
-          className="mt-10 h-px origin-left"
           style={{
+            height: 1,
+            transformOrigin: "left",
             background: "linear-gradient(90deg,#1F8F63,#41AA80,transparent)",
           }}
         />
