@@ -33,16 +33,24 @@ const footerLinks = {
 const locations = [
   {
     icon: "🏢",
-    title: "Head Office & Frozen Food",
-    short: "Ilupeju Industrial Estate, Lagos",
+    title: "HQ & Frozen Food Sales",
+    address: "Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa–Oworonshoki Expressway, Lagos",
   },
-  { icon: "🌾", title: "Main Farm", short: "Km 20, Ibadan–Lagos Expressway" },
   {
-    icon: "⚙️",
+    icon: "🏭",
     title: "Processing Plant",
-    short: "Km 51, Lagos–Ibadan Expressway",
+    address: "KM 51, off Lagos–Ibadan Expressway, Ogun State",
   },
-  { icon: "🧬", title: "Diagnostic Centre", short: "Oluyole Estate, Ibadan" },
+  {
+    icon: "🔬",
+    title: "Booking / Diagnostic Centre",
+    address: "16, Alaafin Avenue, Oluyole Estate, Ibadan",
+  },
+  {
+    icon: "🌾",
+    title: "Main Farm Office",
+    address: "Ajanla Village, KM 20 off Ibadan–Lagos Expressway, Ibadan",
+  },
 ];
 
 const socials = [
@@ -67,21 +75,20 @@ function Logo({ size = "lg" }) {
   const isLg = size === "lg";
   return (
     <div style={{ display: "flex", alignItems: "center", gap: isLg ? 12 : 8 }}>
-     <img
-          src="/chilogo.svg"
-          alt="Chi Farms"
-          onError={(e) => {
-            e.target.style.display = "none";
-            e.target.nextSibling.style.display = "flex";
-          }}
-          style={{
-            width: "20%",
-            height: "30%",
-            objectFit: "contain",
-            filter: "brightness(0) invert(1)",
-          }}
-        />
-     
+      <img
+        src="/chilogo.svg"
+        alt="Chi Farms"
+        onError={(e) => {
+          e.target.style.display = "none";
+          e.target.nextSibling.style.display = "flex";
+        }}
+        style={{
+          width: "20%",
+          height: "30%",
+          objectFit: "contain",
+          filter: "brightness(0) invert(1)",
+        }}
+      />
     </div>
   );
 }
@@ -97,11 +104,13 @@ export default function Footer() {
         .fg  { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; }
         .fl  { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
         .fb  { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
-        @media(max-width:900px){ .fg{ grid-template-columns:1fr 1fr; gap:2.5rem 2rem; } }
+        .floc { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        @media(max-width:900px){ .fg{ grid-template-columns:1fr 1fr; gap:2.5rem 2rem; } .floc{ grid-template-columns:1fr 1fr; } }
         @media(max-width:560px){
           .fg{ grid-template-columns:1fr; gap:2rem; }
           .fl{ grid-template-columns:1fr; }
           .fb{ flex-direction:column; align-items:flex-start; }
+          .floc{ grid-template-columns:1fr; }
         }
       `}</style>
 
@@ -111,7 +120,7 @@ export default function Footer() {
           position: "relative",
           overflow: "hidden",
           background:
-            "linear-gradient(160deg, #0D4331 0%, #082A20 55%, #051a15 100%)",
+            "linear-gradient(160deg, #0D4331 0%, #082A20 75%, #051a15 100%)",
         }}
       >
         {/* Atmosphere */}
@@ -178,6 +187,84 @@ export default function Footer() {
             position: "relative",
           }}
         >
+          {/* ── Locations Section ── */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={{ padding: "2.5rem 0 0" }}
+          >
+            <p
+              style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontSize: "0.72rem",
+                fontWeight: 800,
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
+                color: "rgba(121,204,172,0.5)",
+                margin: "0 0 1rem",
+              }}
+            >
+              📍 Our Locations
+            </p>
+            <div className="floc">
+              {locations.map((loc, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.28 + i * 0.07, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    display: "flex",
+                    gap: 10,
+                    padding: "12px 14px",
+                    borderRadius: 10,
+                    background: "rgba(121,204,172,0.04)",
+                    border: "1px solid rgba(121,204,172,0.08)",
+                  }}
+                >
+                  <span style={{ fontSize: 15, flexShrink: 0, marginTop: 1 }}>{loc.icon}</span>
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: "0.7rem",
+                        fontWeight: 800,
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        color: "#79CCAC",
+                        margin: "0 0 3px",
+                      }}
+                    >
+                      {loc.title}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: "0.72rem",
+                        fontWeight: 400,
+                        color: "rgba(121,204,172,0.45)",
+                        lineHeight: 1.55,
+                        margin: 0,
+                      }}
+                    >
+                      {loc.address}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* ── Divider ── */}
+          <div
+            style={{
+              height: 1,
+              background: "rgba(121,204,172,0.08)",
+              margin: "2rem 0 0",
+            }}
+          />
+
           {/* ── Bottom bar ── */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -223,7 +310,7 @@ export default function Footer() {
                     whileHover={{ color: "#79CCAC" }}
                     style={{
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
-                      fontSize: "0.68rem",
+                      fontSize: "0.78rem",
                       fontWeight: 500,
                       color: "rgba(121,204,172,0.28)",
                       textDecoration: "none",

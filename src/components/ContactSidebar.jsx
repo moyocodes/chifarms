@@ -249,7 +249,7 @@ export default function ContactSidebar({ d }) {
       </a>
 
       {/* ── Offices ── */}
-      <div
+      {/* <div
         style={{
           borderRadius: 16,
           background: "#fff",
@@ -327,7 +327,7 @@ export default function ContactSidebar({ d }) {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </motion.aside>
   );
 }
