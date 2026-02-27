@@ -182,9 +182,7 @@ function DivisionCard({ d, index }) {
               }}
             >
               <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                <span style={{ fontFamily: F.sans, fontSize: "0.92rem", fontWeight: 800, color: d.accent, lineHeight: 1 }}>
-                  {d.stat.value}
-                </span>
+            
                 <span style={{ fontFamily: F.sans, fontSize: "0.49rem", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.09em" }}>
                   {d.stat.label}
                 </span>

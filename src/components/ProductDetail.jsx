@@ -224,22 +224,7 @@ export default function ProductDetail({ product, onBack }) {
                   {product.summary.split("—")[0].trim()}
                 </p>
               </div>
-              <div
-                style={{
-                  padding: "7px 18px",
-                  borderRadius: 99,
-                  background: "rgba(255,255,255,0.16)",
-                  border: "1px solid rgba(255,255,255,0.26)",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "0.76rem",
-                  fontWeight: 700,
-                  color: "#fff",
-                  whiteSpace: "nowrap",
-                  flexShrink: 0,
-                }}
-              >
-                ★ {d.badge}
-              </div>
+             
             </div>
           </div>
         </div>

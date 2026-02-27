@@ -55,9 +55,9 @@ export default function HeroBanner({ d, activeCat, logoSrc }) {
       >
         {/* We place several copies at different sizes/positions for a natural feel */}
         {[
-          { size: 340, top: "-60px",  right: "-60px",  opacity: 0.22 },
-          { size: 200, bottom: "-30px", left: "-40px",  opacity: 0.18  },
-          { size: 130, top: "30%",    right: "28%",    opacity: 0.13 },
+          { size: 340, top: "-60px",  right: "-60px",  opacity: 0.03 },
+          { size: 200, bottom: "-30px", left: "-40px",  opacity: 0.03  },
+          { size: 130, top: "30%",    right: "28%",    opacity: 0.10 },
         ].map((pos, i) => (
           <div
             key={i}
@@ -257,35 +257,7 @@ export default function HeroBanner({ d, activeCat, logoSrc }) {
             </motion.div>
           </div>
 
-          {/* Stats chips — light glass look */}
-          {stats.length > 0 && (
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease, delay: 0.35 + i * 0.08 }}
-                  style={{
-                    padding: "10px 16px",
-                    borderRadius: 14,
-                    background: "#fff",
-                    border: `1px solid rgba(${rgb}, 0.18)`,
-                    boxShadow: `0 2px 12px rgba(${rgb}, 0.08)`,
-                    textAlign: "center",
-                    minWidth: 72,
-                  }}
-                >
-                  <p style={{ fontFamily: F.sans, fontSize: "1rem", fontWeight: 800, color: d.accent, margin: "0 0 2px", lineHeight: 1 }}>
-                    {s.value}
-                  </p>
-                  <p style={{ fontFamily: F.sans, fontSize: "0.5rem", fontWeight: 600, color: "#bbb", textTransform: "uppercase", letterSpacing: "0.08em", margin: 0 }}>
-                    {s.label}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          )}
+        
         </div>
       </div>
     </section>

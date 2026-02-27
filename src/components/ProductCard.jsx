@@ -70,24 +70,7 @@ export default function ProductCard({ item, cat, d, index, onSelect }) {
               background: `linear-gradient(to top, ${d.dark}CC 0%, transparent 55%)`,
             }}
           />
-          <div
-            style={{
-              position: "absolute",
-              top: 9,
-              right: 9,
-              padding: "2px 8px",
-              borderRadius: 99,
-              background: d.accent,
-              fontFamily: F.sans,
-              fontSize: "0.5rem",
-              fontWeight: 700,
-              letterSpacing: "0.09em",
-              textTransform: "uppercase",
-              color: "#fff",
-            }}
-          >
-            {item.badge}
-          </div>
+         
           <p
             style={{
               position: "absolute",

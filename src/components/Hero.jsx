@@ -8,7 +8,7 @@ const DIVISION_IMAGES = {
   poultry:     "/images/poultry.jpg",
   frozen:      "/images/froze.jpg",
   aquaculture: "/images/aquaculture.jpg",
-  veterinary:  "/images/vet.jpg",
+  veterinary:  "/images/vett.jpg",
   support:     "/images/suppo.jpg",
   equipment:   "/images/equipment.jpg",
 };

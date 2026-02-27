@@ -170,50 +170,7 @@ export default function CategoryCard({ cat, d, index, slug }) {
               {cat.summary}
             </p>
 
-            {/* Stats */}
-            <div style={{ display: "flex", gap: 6 }}>
-              {cat.stats.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flex: 1,
-                    padding: "7px 10px",
-                    borderRadius: 10,
-                    background: hov ? d.accentLight : "rgba(0,0,0,0.03)",
-                    border: `1px solid ${hov ? d.accentBorder : "rgba(0,0,0,0.06)"}`,
-                    textAlign: "center",
-                    transition: "all 0.24s",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: F.sans,
-                      fontSize: "0.8rem",
-                      fontWeight: 800,
-                      color: hov ? d.accent : "#555",
-                      margin: "0 0 2px",
-                      lineHeight: 1,
-                      transition: "color 0.24s",
-                    }}
-                  >
-                    {s.value}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: F.sans,
-                      fontSize: "0.47rem",
-                      fontWeight: 600,
-                      color: "#bbb",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.07em",
-                      margin: 0,
-                    }}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          
 
             {/* Product name preview pills */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>

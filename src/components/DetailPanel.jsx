@@ -29,7 +29,7 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
             style={{
               position: "fixed",
               inset: 0,
-              zIndex: 80,
+              zIndex: 110,
               background: "rgba(4,14,8,0.7)",
               backdropFilter: "blur(8px)",
               WebkitBackdropFilter: "blur(8px)",
@@ -44,16 +44,17 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
             transition={{ type: "spring", stiffness: 260, damping: 28 }}
             style={{
               position: "fixed",
-              top: 0,
+              top: "var(--nav-h, 88px)",
               right: 0,
               bottom: 0,
               width: "min(480px,100vw)",
-              zIndex: 90,
+              zIndex: 120,
               display: "flex",
               flexDirection: "column",
               overflowY: "auto",
               background: "#fff",
               boxShadow: `-24px 0 80px rgba(${rgb},0.2)`,
+              borderRadius: "16px 0 0 0",
             }}
           >
             {/* Hero image */}
@@ -148,23 +149,11 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
             >
               {[
                 { to: "/products", label: "Products", color: "#aaa" },
-                {
-                  to: `/products/${d.slug}`,
-                  label: `${d.icon} ${d.title}`,
-                  color: d.accent,
-                  uppercase: true,
-                },
-                {
-                  to: `/products/${d.slug}/${cat.id}`,
-                  label: cat.label,
-                  color: "#999",
-                },
+                { to: `/products/${d.slug}`, label: `${d.icon} ${d.title}`, color: d.accent, uppercase: true },
+                { to: `/products/${d.slug}/${cat.id}`, label: cat.label, color: "#999" },
                 { label: item.name, color: "#555" },
               ].map((crumb, i, arr) => (
-                <span
-                  key={i}
-                  style={{ display: "flex", alignItems: "center", gap: 6 }}
-                >
+                <span key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                   {crumb.to ? (
                     <Link
                       to={crumb.to}
@@ -181,14 +170,7 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
                       {crumb.label}
                     </Link>
                   ) : (
-                    <span
-                      style={{
-                        fontFamily: F.sans,
-                        fontSize: "0.6rem",
-                        fontWeight: 600,
-                        color: crumb.color,
-                      }}
-                    >
+                    <span style={{ fontFamily: F.sans, fontSize: "0.6rem", fontWeight: 600, color: crumb.color }}>
                       {crumb.label}
                     </span>
                   )}
@@ -199,67 +181,11 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
               ))}
             </div>
 
-            {/* Stats */}
-            <div
-              style={{
-                display: "flex",
-                flexShrink: 0,
-                borderBottom: `1px solid ${d.accentBorder}`,
-              }}
-            >
-              {cat.stats.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flex: 1,
-                    padding: "12px 0",
-                    textAlign: "center",
-                    borderRight:
-                      i < cat.stats.length - 1
-                        ? `1px solid ${d.accentBorder}`
-                        : "none",
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: F.sans,
-                      fontSize: "0.9rem",
-                      fontWeight: 800,
-                      color: d.accent,
-                      margin: "0 0 2px",
-                      lineHeight: 1,
-                    }}
-                  >
-                    {s.value}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: F.sans,
-                      fontSize: "0.5rem",
-                      fontWeight: 600,
-                      color: "#c0c0c0",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.07em",
-                      margin: 0,
-                    }}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          
 
             {/* Description */}
             <div style={{ padding: "1.2rem 1.5rem 0.8rem" }}>
-              <p
-                style={{
-                  fontFamily: F.serif,
-                  fontSize: "0.84rem",
-                  color: "#555",
-                  lineHeight: 1.85,
-                  margin: 0,
-                }}
-              >
+              <p style={{ fontFamily: F.serif, fontSize: "0.84rem", color: "#555", lineHeight: 1.85, margin: 0 }}>
                 {item.desc}
               </p>
             </div>
@@ -267,26 +193,10 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
             {/* Specs */}
             {item.specs?.length > 0 && (
               <div style={{ padding: "0 1.5rem 1.2rem" }}>
-                <p
-                  style={{
-                    fontFamily: F.sans,
-                    fontSize: "0.54rem",
-                    fontWeight: 800,
-                    letterSpacing: "0.13em",
-                    textTransform: "uppercase",
-                    color: "#c8c8c8",
-                    margin: "0 0 9px",
-                  }}
-                >
+                <p style={{ fontFamily: F.sans, fontSize: "0.54rem", fontWeight: 800, letterSpacing: "0.13em", textTransform: "uppercase", color: "#c8c8c8", margin: "0 0 9px" }}>
                   Specifications
                 </p>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: 6,
-                  }}
-                >
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
                   {item.specs.map((s, i) => (
                     <div
                       key={i}
@@ -300,25 +210,8 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
                         border: `1px solid ${d.accentBorder}`,
                       }}
                     >
-                      <span
-                        style={{
-                          width: 5,
-                          height: 5,
-                          borderRadius: "50%",
-                          background: d.accent,
-                          flexShrink: 0,
-                        }}
-                      />
-                      <span
-                        style={{
-                          fontFamily: F.sans,
-                          fontSize: "0.64rem",
-                          fontWeight: 600,
-                          color: "#444",
-                        }}
-                      >
-                        {s}
-                      </span>
+                      <span style={{ width: 5, height: 5, borderRadius: "50%", background: d.accent, flexShrink: 0 }} />
+                      <span style={{ fontFamily: F.sans, fontSize: "0.64rem", fontWeight: 600, color: "#444" }}>{s}</span>
                     </div>
                   ))}
                 </div>
@@ -326,16 +219,7 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
             )}
 
             {/* Actions */}
-            <div
-              style={{
-                padding: "0 1.5rem 2rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: 8,
-                marginTop: "auto",
-                flexShrink: 0,
-              }}
-            >
+            <div style={{ padding: "0 1.5rem 2rem", display: "flex", flexDirection: "column", gap: 8, marginTop: "auto", flexShrink: 0 }}>
               <a
                 href="#contact"
                 onClick={onClose}
@@ -356,19 +240,8 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
                 }}
               >
                 Enquire about {item.name.split(" ").slice(0, 3).join(" ")}
-                <svg
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
               <div style={{ display: "flex", gap: 8 }}>
@@ -386,30 +259,8 @@ export default function DetailPanel({ item, cat, div: d, onClose }) {
                       background: d.accentLight,
                     }}
                   >
-                    <p
-                      style={{
-                        fontFamily: F.sans,
-                        fontSize: "0.5rem",
-                        fontWeight: 700,
-                        color: "#bbb",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        margin: "0 0 2px",
-                      }}
-                    >
-                      {c.label}
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: F.sans,
-                        fontSize: "0.8rem",
-                        fontWeight: 800,
-                        color: d.accent,
-                        margin: 0,
-                      }}
-                    >
-                      {c.num}
-                    </p>
+                    <p style={{ fontFamily: F.sans, fontSize: "0.5rem", fontWeight: 700, color: "#bbb", letterSpacing: "0.1em", textTransform: "uppercase", margin: "0 0 2px" }}>{c.label}</p>
+                    <p style={{ fontFamily: F.sans, fontSize: "0.8rem", fontWeight: 800, color: d.accent, margin: 0 }}>{c.num}</p>
                   </a>
                 ))}
               </div>
