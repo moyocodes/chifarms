@@ -63,8 +63,8 @@ function DivisionCard({ d, index }) {
             borderRadius: 20,
             overflow: "hidden",
             background: "#fff",
-            border: `1.5px solid ${hov ? d.accent + "55" : "rgba(0,0,0,0.07)"}`,
-            boxShadow: hov
+            border: `1.5px solid ${!hov ? d.accent + "55" : "rgba(0,0,0,0.07)"}`,
+            boxShadow: !hov
               ? `0 24px 60px rgba(${rgb},0.14), 0 4px 16px rgba(0,0,0,0.06)`
               : "0 2px 14px rgba(0,0,0,0.05)",
             transition: "border-color 0.28s, box-shadow 0.32s",
@@ -80,7 +80,7 @@ function DivisionCard({ d, index }) {
               minWidth: 0,
               padding: "1.35rem 1.35rem 1.25rem",
               gap: 11,
-              background: hov ? `rgba(${rgb},0.025)` : "#fff",
+              background: !hov ? `rgba(${rgb},0.025)` : "#fff",
               transition: "background 0.32s",
             }}
           >
@@ -166,12 +166,12 @@ function DivisionCard({ d, index }) {
                   style={{
                     padding: "2px 8px",
                     borderRadius: 99,
-                    background: hov ? `rgba(${rgb},0.09)` : "rgba(0,0,0,0.04)",
-                    border: `1px solid ${hov ? d.accent + "30" : "rgba(0,0,0,0.07)"}`,
+                    background: !hov ? `rgba(${rgb},0.09)` : "rgba(0,0,0,0.04)",
+                    border: `1px solid ${!hov ? d.accent + "30" : "rgba(0,0,0,0.07)"}`,
                     fontFamily: F.sans,
                     fontSize: "0.55rem",
                     fontWeight: 600,
-                    color: hov ? d.accent : "#888",
+                    color: !hov ? d.accent : "#888",
                     whiteSpace: "nowrap",
                     transition: "all 0.22s",
                   }}
@@ -189,29 +189,16 @@ function DivisionCard({ d, index }) {
                 justifyContent: "space-between",
                 padding: "8px 12px",
                 borderRadius: 12,
-                background: hov ? `rgba(${rgb},0.07)` : "rgba(0,0,0,0.03)",
-                border: `1px solid ${hov ? d.accent + "28" : "rgba(0,0,0,0.06)"}`,
+                background: !hov ? `rgba(${rgb},0.07)` : "rgba(0,0,0,0.03)",
+                border: `1px solid ${!hov ? d.accent + "28" : "rgba(0,0,0,0.06)"}`,
                 transition: "all 0.28s",
               }}
             >
-              <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                <span
-                  style={{
-                    fontFamily: F.sans,
-                    fontSize: "0.49rem",
-                    fontWeight: 600,
-                    color: "#bbb",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.09em",
-                  }}
-                >
-                  {d.stat.label}
-                </span>
-              </div>
+            
 
               {/* Explore Products — routes to /poultry, /frozen, etc. */}
               <motion.div
-                animate={{ x: hov ? 4 : 0 }}
+                animate={{ x: !hov ? 4 : 0 }}
                 transition={{ type: "spring", stiffness: 420, damping: 28 }}
                 style={{
                   display: "flex",
@@ -220,7 +207,7 @@ function DivisionCard({ d, index }) {
                   fontFamily: F.sans,
                   fontSize: "0.66rem",
                   fontWeight: 700,
-                  color: hov ? d.accent : "#c0c0c0",
+                  color: !hov ? d.accent : "#c0c0c0",
                   transition: "color 0.22s",
                 }}
               >
@@ -256,7 +243,7 @@ function DivisionCard({ d, index }) {
               <motion.img
                 src={previewImage}
                 alt={d.title}
-                animate={{ scale: hov ? 1.08 : 1 }}
+                animate={{ scale: !hov ? 1.08 : 1 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 style={{
                   width: "100%",
@@ -270,7 +257,7 @@ function DivisionCard({ d, index }) {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: `linear-gradient(to right, ${hov ? `rgba(${rgb},0.18)` : "rgba(255,255,255,0.10)"} 0%, transparent 40%, ${d.dark}66 100%)`,
+                  background: `linear-gradient(to right, ${!hov ? `rgba(${rgb},0.18)` : "rgba(255,255,255,0.10)"} 0%, transparent 40%, ${d.dark}66 100%)`,
                   transition: "background 0.32s",
                 }}
               />
