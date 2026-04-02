@@ -30,10 +30,10 @@ const NAV = [
 ];
 
 const aboutLinks = [
-  { label: "Company Profile", icon: "🏢", to: "/about/company-profile" },
-  { label: "Vision & Mission", icon: "🎯", to: "/about/vision" },
-  { label: "Culture & Values", icon: "🌱", to: "/about/culture" },
-  { label: "CSR", icon: "🤝", to: "/about/csr" },
+  { label: "Company Profile", icon: "🏢", to: "/about/#company-profile" },
+  { label: "Vision & Mission", icon: "🎯", to: "/about/#vision" },
+  { label: "Culture & Values", icon: "🌱", to: "/about/#culture" },
+  { label: "CSR", icon: "🤝", to: "/about/#csr" },
 ];
 
 /* Product dropdown — columns map to /products/:slug/:categoryId */

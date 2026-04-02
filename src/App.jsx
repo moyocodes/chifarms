@@ -16,6 +16,9 @@ import VeterinaryPage from "./pages/VeterinaryPage";
 import EquipmentPage from "./pages/EquipmentPage";
 import DivisionPage from "./pages/DivisionPage";
 import ProductListing from "./components/ProductListing";
+import AboutUs from "./pages/AboutUs";
+import Careers from "./pages/Careers";
+import PoultrySchool from "./pages/PoultrySchool";
 
 function App() {
   return (
@@ -23,6 +26,27 @@ function App() {
       <ErrorBoundary>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={
+            <>
+            <Header />
+            <AboutUs />
+            <Footer />
+            </>
+          } />
+          <Route path="/school" element={
+            <>
+            <Header />
+            <PoultrySchool />
+            <Footer />
+            </>
+          } />
+          <Route path="/careers" element={
+            <>
+            <Header />
+            <Careers />
+            <Footer />
+            </>
+          } />
           <Route
             path="/contact"
             element={

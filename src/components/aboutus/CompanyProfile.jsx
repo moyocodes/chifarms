@@ -80,10 +80,10 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
    IMAGE CAROUSEL
 ══════════════════════════════════════════════ */
 const carouselImages = [
-  {
-    src: "https://chi-farms.com/wp-content/uploads/2021/07/cropped-IMG_4965-1536x708.jpg",
-    label: "Our Team",
-  },
+//   {
+//     src: "https://chi-farms.com/wp-content/uploads/2021/07/cropped-IMG_4965-1536x708.jpg",
+//     label: "Our Team",
+//   },
   {
     src: "https://chi-farms.com/wp-content/uploads/2021/04/Owode-closed-houses-external-768x576.jpg",
     label: "Pen House",
@@ -318,9 +318,9 @@ function ImageCarousel() {
 }
 
 /* ══════════════════════════════════════════════
-   ABOUT SECTION
+   COMPANY SECTION
 ══════════════════════════════════════════════ */
-function About() {
+function CompanyProfile() {
   const ref = useRef(null);
   const statsRef = useRef(null);
 
@@ -335,7 +335,7 @@ function About() {
 
   return (
     <section
-      id="about"
+      id="company-profile"
       ref={ref}
       style={{
         position: "relative",
@@ -503,7 +503,7 @@ function About() {
             variants={stagger}
             style={{ marginBottom: "2rem" }}
           >
-            {/* "Our Story" pill */}
+            {/* "Company Profile" pill */}
             <motion.div
               variants={fadeUp}
               style={{
@@ -532,7 +532,7 @@ function About() {
                   display: "inline-block",
                 }}
               />
-              Our Story
+              Company Profile
               <span
                 style={{
                   width: 6,
@@ -557,7 +557,7 @@ function About() {
                 fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
               }}
             >
-              Rooted in nature,
+              Established since 
               <br />
               <span
               className="pb-2"
@@ -569,7 +569,7 @@ function About() {
                   display: "inline-block",
                 }}
               >
-                driven by science.
+               1986.
               </span>
             </motion.h2>
           </motion.div>
@@ -594,9 +594,7 @@ function About() {
                 color: "#5a7065",
               }}
             >
-              Chi Farms Ltd. is an integrated poultry operation with breeding,
-              commercial broiler processing, aquaculture, and veterinary
-              services — all under one roof.
+                With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.  
             </p>
           </motion.div>
 
@@ -751,8 +749,13 @@ function About() {
                   fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
                 }}
               >
-                "From hatchery to harvest — we power every link in Nigeria's
-                poultry value chain."
+                {/* "From hatchery to harvest — we power every link in Nigeria's
+                poultry value chain." */}
+
+                {/* Established since 1986,  */}
+                Chi Farms has progressed strategically in the Agro-livestock and Food industries to becoming a top Nigerian brand for quality products and services. 
+
+                {/* The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria. */}
               </p>
               <div
                 style={{
@@ -770,7 +773,7 @@ function About() {
                     background: "rgba(255,255,255,0.35)",
                   }}
                 />
-                <span
+                {/* <span
                   style={{
                     fontFamily: "'Plus Jakarta Sans',sans-serif",
                     fontSize: 12,
@@ -778,7 +781,7 @@ function About() {
                   }}
                 >
                   Chi Farms, Est. 2004
-                </span>
+                </span> */}
               </div>
             </motion.div>
 
@@ -793,11 +796,8 @@ function About() {
                 color: "#5a7065",
               }}
             >
-              We provide parent stock to hatcheries, distribute commercial
-              chicks, and support customers with post-sales technical services.
-              Our aquaculture division breeds premium catfish while our
-              veterinary division supplies vaccines backed by modern lab
-              infrastructure.
+                The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria. 
+              {/* With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.  */}
             </motion.p>
 
             {/* CTA */}
@@ -846,7 +846,7 @@ function About() {
             </motion.div>
 
             {/* Stats grid */}
-            <motion.div
+            {/* <motion.div
               ref={statsRef}
               variants={fadeUp}
               custom={4}
@@ -918,12 +918,12 @@ function About() {
                   </p>
                 </div>
               ))}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
 
         {/* ── Partners marquee ── */}
-        <div
+        {/* <div
           className="partners-outer pt-10"
           // className="pt-10"
           style={{ marginBottom: "2.5rem" }}
@@ -1016,7 +1016,7 @@ function About() {
                 </div>
               ))}
           </motion.div>
-        </div>
+        </div> */}
 
         {/* Bottom accent line */}
         <motion.div
@@ -1034,4 +1034,4 @@ function About() {
   );
 }
 
-export default About;
+export default CompanyProfile;
