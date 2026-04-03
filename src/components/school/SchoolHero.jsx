@@ -31,9 +31,9 @@ export default function SchoolHero() {
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-6 text-[10px] font-extrabold tracking-[0.14em] uppercase border border-[#1F8F63]/20 bg-[#1F8F63]/10 text-[#1F8F63]"
+            className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-6 text-[10px] font-extrabold tracking-[0.14em] uppercase border border-primary-500/20 bg-primary-500/10 text-primary-500"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#1F8F63]" />
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
             Poultry School
           </motion.div>
 
@@ -47,7 +47,7 @@ export default function SchoolHero() {
             }}
           >
             Training excellence for <br />
-            <span className="bg-gradient-to-br from-[#1F8F63] to-[#41AA80] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-br from-primary-500 to-primary-600 bg-clip-text text-transparent">
               modern poultry growth.
             </span>
           </motion.h2>
@@ -93,12 +93,12 @@ As a resource centre, we collaborate with other institution initiatives and enga
       <button
         key={tab.id}
         onClick={() => setActiveTab(tab.id)}
-        className="relative pb-3 text-sm font-semibold text-[#1F8F63]/70 hover:text-[#1F8F63] transition"
+        className="relative pb-3 text-sm font-semibold text-primary-500/70 hover:text-primary-500 transition"
       >
         {/* Label */}
         <span
           className={`transition ${
-            isActive ? "text-[#1F8F63]" : ""
+            isActive ? "text-primary-500" : ""
           }`}
         >
           {tab.label}
@@ -108,7 +108,7 @@ As a resource centre, we collaborate with other institution initiatives and enga
         {isActive && (
           <motion.div
             layoutId="tabUnderline"
-            className="absolute left-0 bottom-0 h-[2px] w-full bg-[#1F8F63]"
+            className="absolute left-0 bottom-0 h-[2px] w-full bg-primary-500"
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
           />
         )}

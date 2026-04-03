@@ -21,7 +21,7 @@ export default function VisionMission({ cards = defaultCards}) {
         @media (max-width: 640px) { .vm-grid { grid-template-columns: 1fr; } }
       `}</style>
 
-      <section id="vision" ref={ref} style={{ padding: "5rem 0", position: "relative", overflow: "hidden", background: "#f5f9f7" }}>
+      <section id="vision" ref={ref} style={{ padding: "1rem 0", position: "relative", overflow: "hidden", background: "#f5f9f7" }}>
 
         {/* Dot grid */}
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.22,
@@ -39,14 +39,14 @@ export default function VisionMission({ cards = defaultCards}) {
            {/* Header */}
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
             <div>
-              <motion.div initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
+              {/* <motion.div initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 99, marginBottom: 12,
                   background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.16)",
                   fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.6rem", fontWeight: 700,
                   letterSpacing: "0.14em", textTransform: "uppercase", color: "#14664A" }}>
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
                 Vision & Mission
-              </motion.div>
+              </motion.div> */}
 
               <motion.h2 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.55, delay: 0.07 }}
                 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "clamp(1.7rem, 2.8vw, 2.35rem)",

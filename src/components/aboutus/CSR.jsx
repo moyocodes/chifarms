@@ -66,7 +66,7 @@ export default function CSR() {
     <section
       id="csr"
       ref={ref}
-      className="relative py-20 bg-primary-50/30 overflow-hidden"
+      className="relative pt-6 pb-20 bg-primary-50/30 overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(circle,rgba(31,143,99,0.25)_1px,transparent_1px)] bg-[length:32px_32px]" />
@@ -74,11 +74,11 @@ export default function CSR() {
       <div className="max-w-6xl mx-auto px-6 relative">
         {/* HEADER */}
         <div className="mb-12">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-5 text-[10px] font-extrabold tracking-[0.18em] uppercase border border-[#1F8F63]/20 bg-[#1F8F63]/10 text-[#1F8F63]">
+          {/* <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-5 text-[10px] font-extrabold tracking-[0.18em] uppercase border border-[#1F8F63]/20 bg-[#1F8F63]/10 text-[#1F8F63]">
             <span className="w-[6px] h-[6px] rounded-full bg-[#1F8F63]" />
             Corporate social responsibility
             <span className="w-[6px] h-[6px] rounded-full bg-[#1F8F63]" />
-          </motion.div>
+          </motion.div> */}
 
           <motion.h2
             initial={{ opacity: 0, y: 16 }}

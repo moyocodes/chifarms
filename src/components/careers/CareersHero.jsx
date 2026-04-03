@@ -26,200 +26,124 @@ export default function CareersHero() {
   const [hov, setHov] = useState(null);
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital,wght@1,400&display=swap');
-        .careers-highlights {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 1rem;
-        }
-        .careers-body {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 3rem;
-          align-items: start;
-        }
-        @media (max-width: 860px) {
-          .careers-highlights { grid-template-columns: repeat(2, 1fr); }
-          .careers-body { grid-template-columns: 1fr; gap: 2rem; }
-        }
-        @media (max-width: 480px) {
-          .careers-highlights { grid-template-columns: 1fr 1fr; }
-        }
-      `}</style>
+    <section
+      ref={ref}
+      className="relative overflow-hidden bg-primary-50/30 pt-[9rem] md:pt-[10rem] pb-20"
+    >
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 
+        [background-image:radial-gradient(circle,rgba(31,143,99,0.25)_1px,transparent_1px)]
+        [background-size:32px_32px]" 
+      />
 
-      <section
-        className="relative overflow-hidden bg-primary-50/30 pb-[5rem] pt-[9rem] md:pt-[10rem]"
-        ref={ref}
-      >
-        {/* Dot grid */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.22,
-          backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.25) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }} />
+      {/* Ambient blobs */}
+      <div className="absolute -top-24 -right-20 w-[400px] h-[400px] rounded-full blur-[80px] pointer-events-none
+        bg-[radial-gradient(circle,rgba(31,143,99,0.1),transparent_70%)]" 
+      />
 
-        {/* Ambient orbs */}
-        <div style={{
-          position: "absolute", top: -100, right: -80, width: 400, height: 400,
-          borderRadius: "50%", background: "radial-gradient(circle, rgba(31,143,99,0.1), transparent 70%)",
-          filter: "blur(80px)", pointerEvents: "none",
-        }} />
-        <div style={{
-          position: "absolute", bottom: 0, left: "10%", width: 300, height: 300,
-          borderRadius: "50%", background: "radial-gradient(circle, rgba(65,170,128,0.08), transparent 70%)",
-          filter: "blur(70px)", pointerEvents: "none",
-        }} />
+      <div className="absolute bottom-0 left-[10%] w-[300px] h-[300px] rounded-full blur-[70px] pointer-events-none
+        bg-[radial-gradient(circle,rgba(65,170,128,0.08),transparent_70%)]" 
+      />
 
-        <div style={{ position: "relative", maxWidth: 1152, margin: "0 auto", padding: "0 1.5rem" }}>
+      <div className="relative max-w-6xl mx-auto px-6">
 
-          {/* ── Badge ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-6 text-[10px] font-extrabold tracking-[0.14em] uppercase border border-[#1F8F63]/20 bg-[#1F8F63]/10 text-[#14664A]"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#1F8F63]" />
-            Careers
-          </motion.div>
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-6 
+            text-[10px] font-extrabold tracking-[0.14em] uppercase 
+            border border-primary-500/20 bg-primary-500/10 text-primary-700"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-primary-500" />
+          Careers
+        </motion.div>
 
-          {/* ── Heading ── */}
-          <motion.h1
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.07 }}
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(1.7rem, 2.8vw, 2.35rem)",
-              fontWeight: 800, lineHeight: 1.12, color: "#111",
-              marginBottom: "0.5rem",
-            }}
-          >
-            Grow with us —<br />
-            <span style={{
-              backgroundImage: "linear-gradient(135deg,#1F8F63,#41AA80)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            }}>
-              do work that matters.
-            </span>
-          </motion.h1>
+        {/* Heading */}
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="font-heading text-[clamp(1.7rem,2.8vw,2.35rem)] font-extrabold leading-[1.12] text-dark-900 mb-2"
+        >
+          Grow with us — <br />
+          <span className="bg-gradient-to-br from-primary-500 to-primary-600 bg-clip-text text-transparent">
+            do work that matters.
+          </span>
+        </motion.h1>
 
-          {/* <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.14 }}
-            style={{
-              fontFamily: "'Lora', serif", fontStyle: "italic",
-              fontSize: "0.9rem", color: "#999", lineHeight: 1.72,
-              maxWidth: 480, marginBottom: "2.5rem",
-            }}
-          >
-            Join a community that values diversity, invests in people, and builds Nigeria's protein future.
-          </motion.p> */}
+        {/* Accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          className="h-[1px] origin-left bg-gradient-to-r from-primary-200 to-transparent mb-12"
+        />
 
-          {/* ── Accent line ── */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.18 }}
-            style={{
-              height: 1, transformOrigin: "left",
-              background: "linear-gradient(to right,#A6DDC8,transparent)",
-              marginBottom: "3rem",
-            }}
-          />
+        {/* Program */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="mb-8"
+        >
+          <span className="font-heading text-[0.68rem] font-bold tracking-widest uppercase text-primary-500">
+            Open Program
+          </span>
+          <h2 className="font-heading text-[clamp(1.2rem,2vw,1.55rem)] font-extrabold text-dark-900 mt-1">
+            2024 Graduate Trainee Program
+          </h2>
+        </motion.div>
 
-          {/* ── Program title ── */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.22 }}
-            style={{ marginBottom: "2rem" }}
-          >
-            <span style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em",
-              textTransform: "uppercase", color: "#1F8F63",
-            }}>
-              Open Program
-            </span>
-            <h2 style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "clamp(1.2rem, 2vw, 1.55rem)", fontWeight: 800,
-              color: "#111", lineHeight: 1.2, marginTop: "0.3rem",
-            }}>
-              2024 Graduate Trainee Program
-            </h2>
-          </motion.div>
-
-          {/* ── Highlight pills ── */}
-          <div className="careers-highlights" style={{ marginBottom: "3rem" }}>
-            {highlights.map((h, i) => {
-              const isH = hov === `pill-${i}`;
-              return (
+        {/* Highlights */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          {highlights.map((h, i) => {
+            const isH = hov === `pill-${i}`;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                onHoverStart={() => setHov(`pill-${i}`)}
+                onHoverEnd={() => setHov(null)}
+                className={`relative overflow-hidden backdrop-blur-md transition-all duration-300 p-4 border
+                  ${isH
+                    ? "border-primary-500/30 bg-primary-50 shadow-soft"
+                    : "border-primary-500/10 bg-white/60"
+                  }`}
+              >
                 <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.28 + i * 0.07 }}
-                  onHoverStart={() => setHov(`pill-${i}`)}
-                  onHoverEnd={() => setHov(null)}
-                  style={{
-                    padding: "1rem 1.2rem",
-                    border: `1px solid ${isH ? "rgba(31,143,99,0.25)" : "rgba(31,143,99,0.1)"}`,
-                    background: isH ? "rgba(240,249,245,1)" : "rgba(255,255,255,0.6)",
-                    backdropFilter: "blur(8px)",
-                    position: "relative", overflow: "hidden",
-                    transition: "all 0.25s ease",
-                    boxShadow: isH ? "0 8px 24px rgba(31,143,99,0.12)" : "none",
-                  }}
-                >
-                  <motion.div
-                    animate={{ scaleX: isH ? 1 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    style={{
-                      position: "absolute", top: 0, left: 0, height: 2, width: "100%",
-                      background: "linear-gradient(to right,#1F8F63,#41AA80)", transformOrigin: "left",
-                    }}
-                  />
-                  <div style={{ fontSize: 18, marginBottom: "0.4rem" }}>{h.icon}</div>
-                  <div style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: "0.8rem", fontWeight: 700, color: isH ? "#1F8F63" : "#1A1A1A",
-                    marginBottom: "0.2rem", transition: "color 0.2s",
-                  }}>{h.label}</div>
-                  <div style={{
-                    fontFamily: "'Lora', serif", fontStyle: "italic",
-                    fontSize: "0.72rem", color: "#999", lineHeight: 1.5,
-                  }}>{h.desc}</div>
-                </motion.div>
-              );
-            })}
-          </div>
+                  animate={{ scaleX: isH ? 1 : 0 }}
+                  className="absolute top-0 left-0 h-[2px] w-full origin-left 
+                    bg-gradient-to-r from-primary-500 to-primary-400"
+                />
 
-          {/* ── Body: Description + Requirements ── */}
-          <div className="careers-body">
+                <div className="text-lg mb-1">{h.icon}</div>
 
-            {/* Left: Description */}
-            <motion.div
-              initial={{ opacity: 0, x: -16 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 }}
-            >
-              <h3 style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", color: "#1F8F63", marginBottom: "1rem",
-              }}>
-                About the Program
-              </h3>
-              <div style={{
-                fontFamily: "'Lora', serif", fontSize: "0.88rem",
-                color: "#555", lineHeight: 1.85,
-              }}>
-                <p style={{ marginBottom: "1rem" }}>
+                <div className={`font-heading text-sm font-bold mb-1 transition-colors
+                  ${isH ? "text-primary-500" : "text-dark-900"}`}>
+                  {h.label}
+                </div>
+
+                <div className="text-xs italic text-dark-400 leading-relaxed">
+                  {h.desc}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Body */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+
+          {/* Left */}
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+          >
+            <h3 className="font-heading text-xs font-bold tracking-widest uppercase text-primary-500 mb-4">
+              About the Program
+            </h3>
+
+            <div className="text-sm text-dark-500 leading-[1.85] space-y-4">
+               <p style={{ marginBottom: "1rem" }}>
                   Our Graduate Trainee Program seeks smart, young university graduates to step into the future with us. We aim to empower people to grow their career, gain insight and do work that matters, supported by a community that values diversity and cares about the individual.
                 </p>
                 <p style={{ marginBottom: "1rem" }}>
@@ -228,87 +152,65 @@ export default function CareersHero() {
                 <p>
                   Our rotation scheme ensures that trainees gather knowledge from all aspects of the business and are stationed where best suited for them. We welcome candidates with an innovative mindset, a passion for excellence, collaboration, and a commitment to outstanding solutions.
                 </p>
-              </div>
+            </div>
 
-              {/* CTA */}
-              <motion.a
-                href="#apply"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: "0.5rem",
-                  marginTop: "2rem", padding: "0.75rem 1.75rem",
-                  background: "linear-gradient(135deg,#1F8F63,#2DA876)",
-                  color: "#fff", textDecoration: "none",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "0.82rem", fontWeight: 700, letterSpacing: "0.04em",
-                  boxShadow: "0 4px 20px rgba(31,143,99,0.3)",
-                  transition: "box-shadow 0.25s ease",
-                }}
-              >
-                Apply Now
-                <span style={{ fontSize: 14 }}>→</span>
-              </motion.a>
-            </motion.div>
-
-            {/* Right: Requirements */}
-            <motion.div
-              initial={{ opacity: 0, x: 16 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.42 }}
-              style={{
-                padding: "2rem",
-                border: "1px solid rgba(31,143,99,0.1)",
-                background: "rgba(255,255,255,0.6)",
-                backdropFilter: "blur(10px)",
-                position: "relative", overflow: "hidden",
-              }}
+            {/* Glass CTA */}
+            <motion.a
+              href="#apply"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="relative inline-flex items-center gap-2 mt-8 px-8 py-3
+                text-white font-heading text-sm font-bold tracking-wide
+                rounded-xl overflow-hidden
+                bg-white/10 backdrop-blur-xl border border-white/20
+                shadow-[0_8px_30px_rgba(31,143,99,0.3)]
+                hover:shadow-[0_10px_40px_rgba(31,143,99,0.45)]
+                transition-all duration-300"
             >
-              {/* Corner bloom */}
-              <div style={{
-                position: "absolute", bottom: -20, right: -20, width: 120, height: 120,
-                borderRadius: "50%", background: "radial-gradient(circle,rgba(31,143,99,0.07),transparent 70%)",
-                pointerEvents: "none",
-              }} />
+              <span className="absolute inset-0 bg-gradient-to-br from-primary-500/80 to-primary-800/80" />
+              <span className="relative z-10 flex items-center gap-2">
+                Apply Now →
+              </span>
+            </motion.a>
+          </motion.div>
 
-              <h3 style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "0.8rem", fontWeight: 700, letterSpacing: "0.1em",
-                textTransform: "uppercase", color: "#1F8F63", marginBottom: "1.25rem",
-              }}>
-                Requirements
-              </h3>
+          {/* Right */}
+          <motion.div
+            initial={{ opacity: 0, x: 16 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            className="relative overflow-hidden p-8 border border-primary-500/10
+              bg-white/60 backdrop-blur-lg"
+          >
+            <div className="absolute -bottom-5 -right-5 w-[120px] h-[120px] rounded-full
+              bg-[radial-gradient(circle,rgba(31,143,99,0.07),transparent_70%)]"
+            />
 
-              <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-                {requirements.map((req, i) => (
-                  <motion.li
-                    key={i}
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={inView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.4, delay: 0.5 + i * 0.05 }}
-                    style={{
-                      display: "flex", alignItems: "flex-start", gap: "0.65rem",
-                      paddingBottom: "0.75rem", marginBottom: "0.75rem",
-                      borderBottom: i < requirements.length - 1 ? "1px solid rgba(31,143,99,0.07)" : "none",
-                    }}
-                  >
-                    <span style={{
-                      flexShrink: 0, marginTop: 4,
-                      width: 6, height: 6, borderRadius: "50%",
-                      background: "linear-gradient(135deg,#1F8F63,#41AA80)",
-                    }} />
-                    <span style={{
-                      fontFamily: "'Lora', serif", fontSize: "0.8rem",
-                      color: "#555", lineHeight: 1.65,
-                    }}>{req}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
+            <h3 className="font-heading text-xs font-bold tracking-widest uppercase text-primary-500 mb-5">
+              Requirements
+            </h3>
 
-          </div>
+            <ul className="space-y-3">
+              {requirements.map((req, i) => (
+                <motion.li
+                  key={i}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  className={`flex items-start gap-2 pb-3
+                    ${i !== requirements.length - 1 && "border-b border-primary-500/10"}`}
+                >
+                  <span className="mt-1 w-[6px] h-[6px] rounded-full 
+                    bg-gradient-to-br from-primary-500 to-primary-400" />
+
+                  <span className="text-sm text-dark-500 leading-relaxed">
+                    {req}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

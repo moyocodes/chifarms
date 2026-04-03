@@ -66,7 +66,7 @@ export default function FAQPage() {
         style={{
         position: "relative",
         overflow: "hidden",
-        padding: "clamp(3rem, 8vw, 6rem) 0",
+        padding: "clamp(1rem, 8vw, 6rem) 0",
         background: "#f8faf9",
       }}
       >
@@ -93,7 +93,7 @@ export default function FAQPage() {
         >
           {/* HEADER */}
           <div style={{ marginBottom: "2.5rem" }}>
-           <motion.div
+           {/* <motion.div
                 initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5 }}
                 style={{
@@ -107,7 +107,7 @@ export default function FAQPage() {
               >
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
                 FAQ
-              </motion.div>
+              </motion.div> */}
 
             <motion.h2
               initial={{ opacity: 0, y: 16 }}

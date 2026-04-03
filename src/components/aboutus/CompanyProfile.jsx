@@ -340,7 +340,7 @@ function CompanyProfile() {
       style={{
         position: "relative",
         overflow: "hidden",
-        padding: "clamp(3rem, 8vw, 6rem) 0",
+        padding: "clamp(1rem, 8vw, 1rem) 0",
         background: "#f8faf9",
       }}
     >
@@ -504,7 +504,7 @@ function CompanyProfile() {
             style={{ marginBottom: "2rem" }}
           >
             {/* "Company Profile" pill */}
-            <motion.div
+            {/* <motion.div
               variants={fadeUp}
               style={{
                 display: "inline-flex",
@@ -542,7 +542,7 @@ function CompanyProfile() {
                   display: "inline-block",
                 }}
               />
-            </motion.div>
+            </motion.div> */}
 
             <motion.h2
               variants={fadeUp}

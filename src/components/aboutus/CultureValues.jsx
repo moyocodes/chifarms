@@ -27,7 +27,7 @@ export default function CultureValues() {
         @media (max-width: 500px) { .why-grid { grid-template-columns: 1fr; } }
       `}</style>
 
-      <section id="culture" className="bg-primary-50/30 pt-10" ref={ref} style={{  padding: "4.5rem 0", position: "relative", overflow: "hidden" }}>
+      <section id="culture" className="bg-primary-50/30 " ref={ref} style={{  padding: "1.5rem 0", position: "relative", overflow: "hidden" }}>
 
         {/* Faint dot grid */}
         <div style={{
@@ -47,7 +47,7 @@ export default function CultureValues() {
           <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
 
             <div>
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5 }}
                 style={{
@@ -61,7 +61,7 @@ export default function CultureValues() {
               >
                 <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
                 Culture & Values
-              </motion.div>
+              </motion.div> */}
 
               <motion.h2
                 initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
