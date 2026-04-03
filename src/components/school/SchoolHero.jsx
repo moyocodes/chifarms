@@ -18,7 +18,7 @@ export default function SchoolHero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-primary-50/30 pb-[4rem] pt-[6rem] md:pt-[10rem]"
+      className="relative overflow-hidden bg-primary-50/30 pb-[4rem] pt-[9rem] md:pt-[10rem]"
       ref={ref}
     >
       {/* Background */}
