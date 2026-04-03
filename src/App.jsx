@@ -19,6 +19,7 @@ import ProductListing from "./components/ProductListing";
 import AboutUs from "./pages/AboutUs";
 import Careers from "./pages/Careers";
 import PoultrySchool from "./pages/PoultrySchool";
+import WhyChi from "./pages/WhyChi";
 
 function App() {
   return (
@@ -53,6 +54,16 @@ function App() {
               <>
                 <Header />
                 <Contact />
+              </>
+            }
+          />
+           <Route
+            path="/why"
+            element={
+              <>
+                <Header />
+                <WhyChi />
+                <Footer />
               </>
             }
           />
