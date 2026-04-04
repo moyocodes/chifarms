@@ -36,7 +36,6 @@ const aboutLinks = [
   { label: "CSR", icon: "🤝", to: "/about/#csr" },
 ];
 
-/* Product dropdown — columns map to /products/:slug/:categoryId */
 const productCols = [
   {
     heading: "Poultry",
@@ -68,9 +67,7 @@ const productCols = [
     heading: "Veterinary",
     icon: "🧬",
     slug: "veterinary",
-    items: [
-      { label: "Veterinary Support", to: "/products/veterinary/support" },
-    ],
+    items: [{ label: "Veterinary Support", to: "/products/veterinary/support" }],
   },
   {
     heading: "Tech Support",
@@ -91,22 +88,13 @@ const productCols = [
 ══════════════════════════════════════════════ */
 function LogoBg() {
   return (
-    <div
-      aria-hidden
-      className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none"
-    >
+    <div aria-hidden className="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none">
       <motion.div
         className="absolute"
         style={{
-          left: -24,
-          top: "50%",
-          width: 180,
-          height: 180,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(ellipse at center, rgba(31,143,99,0.13) 0%, rgba(31,143,99,0.04) 55%, transparent 75%)",
-          transform: "translateY(-50%)",
-          filter: "blur(12px)",
+          left: -24, top: "50%", width: 180, height: 180, borderRadius: "50%",
+          background: "radial-gradient(ellipse at center, rgba(31,143,99,0.13) 0%, rgba(31,143,99,0.04) 55%, transparent 75%)",
+          transform: "translateY(-50%)", filter: "blur(12px)",
         }}
         animate={{ scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -114,29 +102,16 @@ function LogoBg() {
       <motion.div
         className="absolute"
         style={{
-          left: -4,
-          top: "50%",
-          width: 72,
-          height: 72,
-          borderRadius: "50%",
-          border: "1px solid rgba(31,143,99,0.12)",
-          transform: "translateY(-50%)",
+          left: -4, top: "50%", width: 72, height: 72, borderRadius: "50%",
+          border: "1px solid rgba(31,143,99,0.12)", transform: "translateY(-50%)",
         }}
         animate={{ scale: [1, 1.25, 1], opacity: [0.6, 0, 0.6] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
       />
       <img
-        src="/chilogo.svg"
-        alt=""
+        src="/chilogo.svg" alt=""
         className="absolute select-none"
-        style={{
-          right: 10,
-          top: "50%",
-          transform: "translateY(-50%)",
-          height: 52,
-          opacity: 0.04,
-          filter: "grayscale(1)",
-        }}
+        style={{ right: 10, top: "50%", transform: "translateY(-50%)", height: 52, opacity: 0.04, filter: "grayscale(1)" }}
       />
     </div>
   );
@@ -176,18 +151,13 @@ function Accordion({ label, children }) {
     <div>
       <button
         onClick={() => setOpen((o) => !o)}
-        className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl border-none cursor-pointer font-heading text-[15px] font-semibold transition-colors duration-200 ${open ? "bg-primary-50 text-primary" : "bg-transparent text-dark"}`}
+        className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl border-none cursor-pointer font-heading text-[15px] font-semibold transition-colors duration-200 ${
+          open ? "bg-primary-50 text-primary" : "bg-transparent text-dark"
+        }`}
       >
         {label}
-        <motion.span
-          animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.22 }}
-          className="flex"
-        >
-          <ChevronDown
-            size={16}
-            className={open ? "text-primary" : "text-dark-400"}
-          />
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.22 }} className="flex">
+          <ChevronDown size={16} className={open ? "text-primary" : "text-dark-400"} />
         </motion.span>
       </button>
       <AnimatePresence initial={false}>
@@ -221,41 +191,31 @@ function Header() {
   const itemRefs = useRef({});
   const leaveTimer = useRef(null);
 
-  /* Derive active nav item from current path */
   const getActiveId = (pathname) => {
     if (pathname === "/") return "home";
-    const seg = pathname.split("/").filter(Boolean)[0]; // first segment
-    // "products" matches /products, /products/poultry, /products/frozen, etc.
+    const seg = pathname.split("/").filter(Boolean)[0];
     return seg ?? "home";
   };
   const activeId = getActiveId(location.pathname);
   const displayId = hoverId ?? activeId;
 
-  /* scroll shadow */
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  /* close mobile on resize */
   useEffect(() => {
-    const fn = () => {
-      if (window.innerWidth >= 1024) setMobile(false);
-    };
+    const fn = () => { if (window.innerWidth >= 1024) setMobile(false); };
     window.addEventListener("resize", fn);
     return () => window.removeEventListener("resize", fn);
   }, []);
 
-  /* lock body scroll */
   useEffect(() => {
     document.body.style.overflow = mobile ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [mobile]);
 
-  /* close mobile drawer on route change */
   useEffect(() => {
     setMobile(false);
     setDropdown(null);
@@ -290,47 +250,29 @@ function Header() {
             animate={{
               paddingTop: scrolled ? 8 : 12,
               paddingBottom: scrolled ? 8 : 12,
-              boxShadow: scrolled
-                ? "0 12px 48px rgba(0,0,0,0.13)"
-                : "0 4px 20px rgba(0,0,0,0.07)",
+              boxShadow: scrolled ? "0 12px 48px rgba(0,0,0,0.13)" : "0 4px 20px rgba(0,0,0,0.07)",
             }}
             transition={{ duration: 0.3 }}
             className="relative flex items-center justify-between px-6 rounded-2xl border border-secondary-300"
-            style={{
-              background: "rgba(255,255,255,0.97)",
-              backdropFilter: "blur(16px)",
-            }}
+            style={{ background: "rgba(255,255,255,0.97)", backdropFilter: "blur(16px)" }}
           >
             <LogoBg />
 
             {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="relative z-10"
-            >
+            <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="relative z-10">
               <Link to="/" className="flex items-center no-underline">
                 <img src="/chilogo.svg" className="h-12" alt="Chi Farms" />
               </Link>
             </motion.div>
 
             {/* ── DESKTOP NAV ── */}
-            <nav
-              ref={navRef}
-              className="chi-nav items-center gap-1 relative z-10"
-            >
-              <SlidingUnderline
-                itemRefs={itemRefs}
-                activeId={displayId}
-                navRef={navRef}
-              />
+            <nav ref={navRef} className="chi-nav items-center gap-1 relative z-10">
+              <SlidingUnderline itemRefs={itemRefs} activeId={displayId} navRef={navRef} />
 
               {NAV.map(({ label, id, to, drop }) => (
                 <div
                   key={id}
-                  ref={(el) => {
-                    itemRefs.current[id] = el;
-                  }}
+                  ref={(el) => { itemRefs.current[id] = el; }}
                   onMouseEnter={() => onEnter(id, drop)}
                   onMouseLeave={onLeave}
                   className="relative"
@@ -356,7 +298,6 @@ function Header() {
                     )}
                   </Link>
 
-                  {/* hover bg pill */}
                   <AnimatePresence>
                     {hoverId === id && (
                       <motion.div
@@ -370,7 +311,6 @@ function Header() {
                     )}
                   </AnimatePresence>
 
-                  {/* Dropdown */}
                   <AnimatePresence>
                     {dropdown === drop && drop && (
                       <motion.div
@@ -383,14 +323,12 @@ function Header() {
                         className="absolute top-[calc(100%+14px)] bg-white rounded-2xl border border-secondary-300"
                         style={{
                           left: drop === "products" ? "50%" : 0,
-                          transform:
-                            drop === "products" ? "translateX(-50%)" : "none",
+                          transform: drop === "products" ? "translateX(-50%)" : "none",
                           width: drop === "products" ? 580 : 226,
                           boxShadow: "0 24px 64px rgba(0,0,0,0.13)",
                           zIndex: 200,
                         }}
                       >
-                        {/* ── About dropdown ── */}
                         {drop === "about" && (
                           <div className="p-3">
                             {aboutLinks.map((l, i) => (
@@ -414,14 +352,12 @@ function Header() {
                           </div>
                         )}
 
-                        {/* ── Products dropdown ── */}
                         {drop === "products" && (
                           <div className="p-6">
                             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-50 border border-primary-100 font-heading text-[10px] font-bold uppercase tracking-widest text-primary-700 mb-5">
                               <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
                               Our Range
                             </div>
-
                             <div className="grid grid-cols-3 gap-6">
                               {productCols.map((col, ci) => (
                                 <motion.div
@@ -430,28 +366,20 @@ function Header() {
                                   animate={{ opacity: 1, y: 0 }}
                                   transition={{ delay: ci * 0.07 }}
                                 >
-                                  {/* Column heading — links to division landing */}
                                   <Link
                                     to={`/products/${col.slug}`}
                                     className="flex items-center gap-1.5 mb-2.5 no-underline group"
                                     style={{ textDecoration: "none" }}
                                     onClick={() => setDropdown(null)}
                                   >
-                                    <span className="text-[15px]">
-                                      {col.icon}
-                                    </span>
+                                    <span className="text-[15px]">{col.icon}</span>
                                     <span className="font-heading text-[11px] font-bold uppercase tracking-wider text-primary-700 group-hover:text-primary transition-colors">
                                       {col.heading}
                                     </span>
                                   </Link>
-
-                                  {/* Category links → /products/:slug/:categoryId */}
                                   <div className="flex flex-col gap-1.5">
                                     {col.items.map((item, ii) => (
-                                      <motion.div
-                                        key={ii}
-                                        whileHover={{ x: 4 }}
-                                      >
+                                      <motion.div key={ii} whileHover={{ x: 4 }}>
                                         <Link
                                           to={item.to}
                                           className="font-body text-[13px] text-dark-500 no-underline inline-block hover:text-primary transition-colors"
@@ -466,8 +394,6 @@ function Header() {
                                 </motion.div>
                               ))}
                             </div>
-
-                         
                           </div>
                         )}
                       </motion.div>
@@ -477,20 +403,18 @@ function Header() {
               ))}
 
               {/* CTA */}
-             
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center text-accent gap-1.5 px-5 py-2 rounded-xl no-underline font-heading text-[13px] font-bold"
-                  style={{
-                    textDecoration: "none",
-                    color: "#1F8F63",
-                    border: "1.5px solid rgba(31,143,99,0.25)",
-                    background: "rgba(31,143,99,0.06)",
-                  }}
-                >
-                  <Phone size={13} /> Contact Sales
-                </Link>
-             
+              <Link
+                to="/contact"
+                className="inline-flex items-center text-accent gap-1.5 px-5 py-2 rounded-xl no-underline font-heading text-[13px] font-bold"
+                style={{
+                  textDecoration: "none",
+                  color: "#1F8F63",
+                  border: "1.5px solid rgba(31,143,99,0.25)",
+                  background: "rgba(31,143,99,0.06)",
+                }}
+              >
+                <Phone size={13} /> Contact Sales
+              </Link>
             </nav>
 
             {/* Hamburger */}
@@ -546,10 +470,7 @@ function Header() {
             >
               <motion.nav
                 className="flex flex-col gap-0.5"
-                variants={{
-                  show: { transition: { staggerChildren: 0.045 } },
-                  hidden: {},
-                }}
+                variants={{ show: { transition: { staggerChildren: 0.045 } }, hidden: {} }}
                 initial="hidden"
                 animate="show"
               >
@@ -564,15 +485,12 @@ function Header() {
                     key={i}
                     variants={{
                       hidden: { opacity: 0, x: -10 },
-                      show: {
-                        opacity: 1,
-                        x: 0,
-                        transition: { duration: 0.28 },
-                      },
+                      show: { opacity: 1, x: 0, transition: { duration: 0.28 } },
                     }}
                   >
                     <Link
                       to={item.to}
+                      onClick={() => setMobile(false)}
                       className={`block px-3.5 py-3 rounded-xl font-heading text-[15px] font-semibold no-underline ${
                         (item.to === "/" && activeId === "home") ||
                         activeId === item.to.replace("/", "")
@@ -586,12 +504,14 @@ function Header() {
                   </motion.div>
                 ))}
 
+                {/* ── About accordion — closes drawer on link click ── */}
                 <Accordion label="About">
                   <div className="flex flex-col gap-0.5">
                     {aboutLinks.map((l, i) => (
                       <Link
                         key={i}
                         to={l.to}
+                        onClick={() => setMobile(false)}  
                         className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-body text-sm text-dark-500 no-underline"
                         style={{ textDecoration: "none" }}
                       >
@@ -602,12 +522,14 @@ function Header() {
                   </div>
                 </Accordion>
 
+                {/* ── Products accordion — closes drawer on link click ── */}
                 <Accordion label="Products">
                   <div className="flex flex-col gap-4 px-1.5">
                     {productCols.map((col, ci) => (
                       <div key={ci}>
                         <Link
                           to={`/products/${col.slug}`}
+                          onClick={() => setMobile(false)}  
                           className="flex items-center gap-2 mb-1.5 no-underline"
                           style={{ textDecoration: "none" }}
                         >
@@ -621,6 +543,7 @@ function Header() {
                             <Link
                               key={ii}
                               to={item.to}
+                              onClick={() => setMobile(false)}  
                               className="font-body text-[13.5px] text-dark-500 no-underline py-1 block"
                               style={{ textDecoration: "none" }}
                             >
@@ -642,6 +565,7 @@ function Header() {
                 >
                   <Link
                     to="/contact"
+                    onClick={() => setMobile(false)}  
                     className="flex items-center justify-center gap-2 py-3.5 rounded-xl no-underline font-heading font-bold text-sm text-white"
                     style={{
                       background: "linear-gradient(135deg,#1F8F63,#125C42)",
@@ -668,10 +592,7 @@ function Header() {
             transition={{ duration: 0.2 }}
             onClick={() => setMobile(false)}
             className="fixed inset-0 z-[80]"
-            style={{
-              background: "rgba(0,0,0,0.3)",
-              backdropFilter: "blur(2px)",
-            }}
+            style={{ background: "rgba(0,0,0,0.3)", backdropFilter: "blur(2px)" }}
           />
         )}
       </AnimatePresence>

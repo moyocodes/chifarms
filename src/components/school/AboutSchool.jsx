@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Stats from "./Stats";
 import SchoolVision from "./SchoolVision";
+import WhyPoultrySchool from "./WhyPoultrySchool";
 
 const AboutSchool = () => {
     const ref = useRef(null);
@@ -18,6 +19,7 @@ const AboutSchool = () => {
             animal protein value chains.</p>
       <Stats />
       <SchoolVision />
+      <WhyPoultrySchool />
     </div>
   );
 };
