@@ -153,13 +153,13 @@ export default function CSR() {
 
                 {/* TEXT */}
                 {item.title && (
-                  <h3 className="text-sm font-bold text-[#1A1A1A] mb-1 group-hover:text-[#1F8F63] transition">
+                  <h3 className="text-sm font-bold text-dark-900 mb-1 group-hover:text-primary-500 transition">
                     {item.title}
                   </h3>
                 )}
 
                 {/* MULTI PARAGRAPH */}
-                <div className="text-xs text-[#777] leading-relaxed font-serif space-y-2">
+                <div className="text-xs text-dark-400 leading-relaxed font-serif space-y-2">
                   {item.desc.split("\n").map((para, idx) => (
                     <p key={idx}>{para}</p>
                   ))}
@@ -171,7 +171,7 @@ export default function CSR() {
                     opacity: isHovered ? 1 : 0,
                     scaleY: isHovered ? 1 : 0.3,
                   }}
-                  className="absolute left-0 top-6 bottom-6 w-[2px] bg-[#1F8F63] rounded-full origin-center"
+                  className="absolute left-0 top-6 bottom-6 w-[2px] bg-primary-500 rounded-full origin-center"
                 />
               </motion.div>
             );

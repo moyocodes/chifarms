@@ -80,10 +80,6 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
    IMAGE CAROUSEL
 ══════════════════════════════════════════════ */
 const carouselImages = [
-//   {
-//     src: "https://chi-farms.com/wp-content/uploads/2021/07/cropped-IMG_4965-1536x708.jpg",
-//     label: "Our Team",
-//   },
   {
     src: "https://chi-farms.com/wp-content/uploads/2021/04/Owode-closed-houses-external-768x576.jpg",
     label: "Pen House",
@@ -135,18 +131,9 @@ function ImageCarousel() {
   const img = carouselImages[idx];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div className="flex flex-col gap-[10px]">
       {/* Main slide */}
-      <div
-        style={{
-          position: "relative",
-          borderRadius: 16,
-          overflow: "hidden",
-          aspectRatio: "16/11",
-          boxShadow: "0 32px 80px rgba(0,0,0,0.18)",
-          userSelect: "none",
-        }}
-      >
+      <div className="relative rounded-2xl overflow-hidden aspect-[16/11] shadow-[0_32px_80px_rgba(0,0,0,0.18)] select-none">
         <AnimatePresence initial={false} custom={dir}>
           <motion.img
             key={idx}
@@ -157,60 +144,32 @@ function ImageCarousel() {
             exit="exit"
             src={img.src}
             alt={img.label}
-            style={{
-              position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-            }}
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </AnimatePresence>
 
         {/* Vignette */}
         <div
+          className="absolute inset-0 pointer-events-none"
           style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
             background:
               "linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 35%, rgba(0,0,0,0.52) 100%)",
           }}
         />
 
         {/* Progress bar */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 3,
-            background: "rgba(255,255,255,0.1)",
-          }}
-        >
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-white/10">
           <motion.div
             key={idx + "-bar"}
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
             transition={{ duration: 5, ease: "linear" }}
-            style={{ height: "100%", background: "#1F8F63" }}
+            className="h-full bg-primary-500"
           />
         </div>
 
         {/* Bottom bar */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            padding: "2.5rem 1.25rem 1rem",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-          }}
-        >
+        <div className="absolute bottom-0 left-0 right-0 px-5 pt-10 pb-4 flex items-end justify-between">
           <AnimatePresence mode="wait">
             <motion.div
               key={idx + "-label"}
@@ -222,59 +181,21 @@ function ImageCarousel() {
               }}
               exit={{ opacity: 0, x: 8 }}
             >
-              <p
-                style={{
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontSize: 10,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.14em",
-                  color: "rgba(255,255,255,0.5)",
-                  margin: 0,
-                }}
-              >
+              <p className="font-heading text-[10px] uppercase tracking-[0.14em] text-white/50 m-0">
                 {idx + 1} / {carouselImages.length}
               </p>
-              <p
-                style={{
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontWeight: 600,
-                  fontSize: 14,
-                  color: "#fff",
-                  margin: "2px 0 0",
-                }}
-              >
+              <p className="font-heading font-semibold text-[14px] text-white m-0 mt-[2px]">
                 {img.label}
               </p>
             </motion.div>
           </AnimatePresence>
 
-          <div style={{ display: "flex", gap: 8 }}>
+          <div className="flex gap-2">
             {[-1, 1].map((d) => (
               <button
                 key={d}
                 onClick={() => paginate(d)}
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "#fff",
-                  background: "rgba(255,255,255,0.15)",
-                  backdropFilter: "blur(8px)",
-                  border: "1px solid rgba(255,255,255,0.25)",
-                  fontSize: 18,
-                  lineHeight: 1,
-                  cursor: "pointer",
-                  transition: "transform 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.1)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
+                className="w-8 h-8 rounded-full flex items-center justify-center text-white bg-white/15 backdrop-blur-[8px] border border-white/25 text-lg leading-none cursor-pointer transition-transform duration-200 hover:scale-110"
               >
                 {d < 0 ? "‹" : "›"}
               </button>
@@ -284,31 +205,23 @@ function ImageCarousel() {
       </div>
 
       {/* Thumbnail strip */}
-      <div style={{ display: "flex", gap: 8 }}>
+      <div className="flex gap-2">
         {carouselImages.map((im, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
+            className="flex-1 rounded-lg overflow-hidden aspect-[4/3] p-0 bg-transparent cursor-pointer transition-all duration-[350ms] ease-in-out"
             style={{
-              flex: 1,
-              borderRadius: 8,
-              overflow: "hidden",
-              aspectRatio: "4/3",
-              outline:
-                i === idx ? "2px solid #1F8F63" : "2px solid transparent",
+              outline: i === idx ? "2px solid #1F8F63" : "2px solid transparent",
               outlineOffset: 2,
               opacity: i === idx ? 1 : 0.5,
               transform: i === idx ? "scale(1)" : "scale(0.96)",
-              transition: "all 0.35s ease",
-              cursor: "pointer",
-              padding: 0,
-              background: "none",
             }}
           >
             <img
               src={im.src}
               alt={im.label}
-              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              className="w-full h-full object-cover"
             />
           </button>
         ))}
@@ -337,12 +250,7 @@ function CompanyProfile() {
     <section
       id="company-profile"
       ref={ref}
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "clamp(1rem, 8vw, 1rem) 0",
-        background: "#f8faf9",
-      }}
+      className="relative overflow-hidden py-[clamp(1rem,8vw,1rem)] bg-[#f8faf9]"
     >
       {/* Responsive styles injected */}
       <style>{`
@@ -351,8 +259,6 @@ function CompanyProfile() {
           grid-template-columns: 1.05fr 1fr;
           column-gap: clamp(2rem, 4vw, 5rem);
           row-gap: 0;
-      
-     
         }
         .stats-grid {
           display: grid;
@@ -360,7 +266,6 @@ function CompanyProfile() {
         }
         .partners-outer {
           overflow: hidden;
-          /* mask fade edges */
           -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
         }
@@ -371,7 +276,6 @@ function CompanyProfile() {
             column-gap: 0;
             row-gap: 0;
           }
-          /* On mobile, header-right (sub-copy) sits right after header-left */
         }
 
         @media (max-width: 560px) {
@@ -388,7 +292,7 @@ function CompanyProfile() {
         }
       `}</style>
 
-      {/* BG blobs */}
+      {/* BG blob top-left */}
       <motion.div
         style={{
           y: blobY,
@@ -403,40 +307,28 @@ function CompanyProfile() {
         aria-hidden
       >
         <div
+          className="w-full h-full rounded-full blur-[64px]"
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%",
             background:
               "radial-gradient(circle, rgba(31,143,99,0.09) 0%, transparent 65%)",
-            filter: "blur(64px)",
           }}
         />
       </motion.div>
+
+      {/* BG blob right */}
       <div
+        className="absolute top-1/2 -translate-y-1/2 right-0 w-[480px] h-[480px] rounded-full pointer-events-none blur-[80px]"
         style={{
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          right: 0,
-          width: 480,
-          height: 480,
-          borderRadius: "50%",
-          pointerEvents: "none",
           background:
             "radial-gradient(circle, rgba(65,170,128,0.07) 0%, transparent 65%)",
-          filter: "blur(80px)",
         }}
         aria-hidden
       />
 
       {/* Dot grid */}
       <div
+        className="absolute inset-0 pointer-events-none opacity-25"
         style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          opacity: 0.25,
           backgroundImage:
             "radial-gradient(circle, rgba(31,143,99,0.35) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
@@ -450,20 +342,14 @@ function CompanyProfile() {
 
       {/* Decorative SVG arc */}
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          overflow: "hidden",
-          opacity: 0.07,
-        }}
+        className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.07]"
         aria-hidden
       >
         <svg
           viewBox="0 0 1440 700"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ position: "absolute", top: 0, left: 0, width: "100%" }}
+          className="absolute top-0 left-0 w-full"
           preserveAspectRatio="none"
         >
           <path
@@ -481,126 +367,54 @@ function CompanyProfile() {
         </svg>
       </div>
 
-      {/* ── Main container — same maxWidth + padding as navbar/ProductListing ── */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: 1152,
-          margin: "0 auto",
-          padding: "0 1.5rem",
-        }}
-      >
-        {/*
-          ── Unified grid: header row + body row share the same column track,
-             so "OUR STORY"/headline left-edge = carousel left-edge,
-             and sub-copy/right-col left-edge = "From hatchery" card left-edge.
-        ── */}
+      {/* ── Main container ── */}
+      <div className="relative max-w-[1152px] mx-auto px-6">
+
         <div className="about-grid">
-          {/* ── HEADER LEFT: pill + headline ── */}
+
+          {/* ── HEADER LEFT: headline ── */}
           <motion.div
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={stagger}
-            style={{ marginBottom: "2rem" }}
+            className="mb-8"
           >
-            {/* "Company Profile" pill */}
-            {/* <motion.div
-              variants={fadeUp}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "6px 16px",
-                borderRadius: 99,
-                marginBottom: 20,
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: 10,
-                fontWeight: 800,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                background: "rgba(31,143,99,0.08)",
-                border: "1px solid rgba(31,143,99,0.2)",
-                color: "#1F8F63",
-              }}
-            >
-              <span
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: "#1F8F63",
-                  display: "inline-block",
-                }}
-              />
-              Company Profile
-              <span
-                style={{
-                  width: 6,
-                  height: 6,
-                  borderRadius: "50%",
-                  background: "#1F8F63",
-                  display: "inline-block",
-                }}
-              />
-            </motion.div> */}
-
             <motion.h2
               variants={fadeUp}
               custom={1}
-            
-              style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontWeight: 900,
-                lineHeight: 1.05,
-                margin: 0,
-                color: "#0f1f16",
-                fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)",
-              }}
+              className="font-heading font-black leading-[1.05] m-0 text-[#0f1f16] text-[clamp(2.2rem,4.5vw,3.5rem)]"
             >
-              Established since 
+              Established since{" "}
               <br />
               <span
-              className="pb-2"
+                className="pb-2 inline-block"
                 style={{
                   backgroundImage:
                     "linear-gradient(130deg,#1F8F63 0%,#41AA80 60%,#68C89F 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
-                  display: "inline-block",
                 }}
               >
-               1986.
+                1986.
               </span>
             </motion.h2>
           </motion.div>
 
-          {/* ── HEADER RIGHT: sub-copy — left edge = "From hatchery" card left edge ── */}
+          {/* ── HEADER RIGHT: sub-copy ── */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            style={{
-              display: "flex",
-              alignItems: "flex-end",
-              marginBottom: "40px",
-            }}
+            className="flex items-end mb-10"
           >
-            <p
-              style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: "1rem",
-                lineHeight: 1.7,
-                margin: 0,
-                color: "#5a7065",
-              }}
-            >
-                With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.  
+            <p className="font-heading text-base leading-[1.7] m-0 text-[#5a7065]">
+              With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.
             </p>
           </motion.div>
 
-          {/* ── BODY LEFT: Carousel (starts on new row, same left column) ── */}
+          {/* ── BODY LEFT: Carousel ── */}
           <motion.div
-            style={{ position: "relative" }}
+            className="relative"
             initial={{ opacity: 0, x: -36 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{
@@ -620,54 +434,16 @@ function CompanyProfile() {
                 duration: 0.55,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              style={{
-                position: "absolute",
-                bottom: -8,
-                right: -16,
-                borderRadius: 12,
-                padding: "10px 14px",
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                background: "#fff",
-                boxShadow: "0 12px 36px rgba(31,143,99,0.25)",
-              }}
+              className="absolute -bottom-2 -right-4 rounded-xl p-[10px_14px] flex items-center gap-[10px] bg-white shadow-[0_12px_36px_rgba(31,143,99,0.25)]"
             >
-              <div
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: 9,
-                  background: "rgba(31,143,99,0.12)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 18,
-                }}
-              >
+              <div className="w-9 h-9 rounded-[9px] bg-primary-500/[0.12] flex items-center justify-center text-lg">
                 🏅
               </div>
               <div>
-                <p
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans',sans-serif",
-                    fontWeight: 700,
-                    fontSize: 12,
-                    color: "#1F8F63",
-                    margin: 0,
-                    lineHeight: 1.2,
-                  }}
-                >
+                <p className="font-heading font-bold text-xs text-primary-500 m-0 leading-[1.2]">
                   NAFDAC & SON
                 </p>
-                <p
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans',sans-serif",
-                    fontSize: 10,
-                    color: "rgba(31,143,99,0.65)",
-                    margin: "2px 0 0",
-                  }}
-                >
+                <p className="font-heading text-[10px] text-primary-500/65 m-0 mt-[2px]">
                   Certified Operations
                 </p>
               </div>
@@ -675,357 +451,73 @@ function CompanyProfile() {
 
             {/* Dashed ring */}
             <div
-              style={{
-                position: "absolute",
-                top: -20,
-                left: -20,
-                zIndex: -1,
-                width: 208,
-                height: 208,
-                borderRadius: "50%",
-                border: "2px dashed rgba(31,143,99,0.2)",
-              }}
+              className="absolute -top-5 -left-5 -z-10 w-52 h-52 rounded-full border-2 border-dashed border-primary-500/20"
               aria-hidden
             />
           </motion.div>
 
-          {/* RIGHT — Copy */}
+          {/* ── RIGHT: Copy ── */}
           <motion.div
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={stagger}
-            className="pt-5"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
+            className="pt-5 flex flex-col justify-center"
           >
             {/* Pull-quote card */}
             <motion.div
               variants={fadeUp}
               custom={1}
+              className="rounded-2xl p-6 mb-7 relative overflow-hidden shadow-[0_8px_40px_rgba(31,143,99,0.28)]"
               style={{
-                borderRadius: 16,
-                padding: "1.5rem",
-                marginBottom: "1.75rem",
-                position: "relative",
-                overflow: "hidden",
                 background: "linear-gradient(135deg, #1F8F63 0%, #166B4A 100%)",
-                boxShadow: "0 8px 40px rgba(31,143,99,0.28)",
               }}
             >
-              <div
-                style={{
-                  position: "absolute",
-                  top: -32,
-                  right: -32,
-                  width: 128,
-                  height: 128,
-                  borderRadius: "50%",
-                  opacity: 0.2,
-                  background: "radial-gradient(circle,#fff 0%,transparent 70%)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: -24,
-                  left: -24,
-                  width: 96,
-                  height: 96,
-                  borderRadius: "50%",
-                  opacity: 0.1,
-                  background: "radial-gradient(circle,#fff 0%,transparent 70%)",
-                }}
-              />
-              <p
-                style={{
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontWeight: 700,
-                  color: "#fff",
-                  lineHeight: 1.45,
-                  margin: 0,
-                  fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
-                }}
-              >
-                {/* "From hatchery to harvest — we power every link in Nigeria's
-                poultry value chain." */}
+              {/* Decorative circles */}
+              <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full opacity-20 bg-[radial-gradient(circle,#fff_0%,transparent_70%)]" />
+              <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-10 bg-[radial-gradient(circle,#fff_0%,transparent_70%)]" />
 
-                {/* Established since 1986,  */}
-                Chi Farms has progressed strategically in the Agro-livestock and Food industries to becoming a top Nigerian brand for quality products and services. 
-
-                {/* The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria. */}
+              <p className="font-heading font-bold text-white leading-[1.45] m-0 text-[clamp(1rem,1.8vw,1.2rem)]">
+                Chi Farms has progressed strategically in the Agro-livestock and Food industries to becoming a top Nigerian brand for quality products and services.
               </p>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  marginTop: 16,
-                }}
-              >
-                <div
-                  style={{
-                    width: 32,
-                    height: 2,
-                    borderRadius: 99,
-                    background: "rgba(255,255,255,0.35)",
-                  }}
-                />
-                {/* <span
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans',sans-serif",
-                    fontSize: 12,
-                    color: "rgba(255,255,255,0.55)",
-                  }}
-                >
-                  Chi Farms, Est. 2004
-                </span> */}
+              <div className="flex items-center gap-2 mt-4">
+                <div className="w-8 h-[2px] rounded-full bg-white/35" />
               </div>
             </motion.div>
 
             <motion.p
               variants={fadeUp}
               custom={2}
-              style={{
-                fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: "0.97rem",
-                lineHeight: 1.75,
-                marginBottom: "1.5rem",
-                color: "#5a7065",
-              }}
+              className="font-heading text-[0.97rem] leading-[1.75] mb-6 text-[#5a7065]"
             >
-                The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria. 
-              {/* With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.  */}
+              The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria.
             </motion.p>
 
             {/* CTA */}
             <motion.div
               variants={fadeUp}
               custom={3}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "1.5rem",
-              }}
+              className="flex items-center mb-6"
             >
               <a
                 href="products"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#1F8F63",
-                  textDecoration: "none",
-                }}
+                className="inline-flex items-center gap-2 font-heading font-bold text-[13px] tracking-[0.1em] uppercase text-primary-500 no-underline"
               >
                 Explore our products
-                <span
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "rgba(31,143,99,0.1)",
-                    border: "1px solid rgba(31,143,99,0.2)",
-                    fontSize: 16,
-                    transition: "all 0.25s",
-                  }}
-                >
+                <span className="w-7 h-7 rounded-full flex items-center justify-center bg-primary-500/10 border border-primary-500/20 text-base transition-all duration-[250ms]">
                   →
                 </span>
               </a>
             </motion.div>
-
-            {/* Stats grid */}
-            {/* <motion.div
-              ref={statsRef}
-              variants={fadeUp}
-              custom={4}
-              className="stats-grid"
-              style={{
-                borderRadius: 12,
-                overflow: "hidden",
-                border: "1px solid rgba(31,143,99,0.13)",
-                background:
-                  "linear-gradient(135deg,#fff 0%,rgba(210,238,227,0.3) 100%)",
-              }}
-            >
-              {stats.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    textAlign: "center",
-                    padding: "1rem 0.5rem",
-                    position: "relative",
-                    borderRight:
-                      i < stats.length - 1
-                        ? "1px solid rgba(31,143,99,0.09)"
-                        : "none",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      height: 2,
-                      width: 32,
-                      borderRadius: "0 0 4px 4px",
-                      background: "linear-gradient(90deg,#1F8F63,#41AA80)",
-                      opacity: 0.55,
-                    }}
-                  />
-                  <p
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans',sans-serif",
-                      fontWeight: 900,
-                      fontSize: "1.4rem",
-                      margin: 0,
-                      lineHeight: 1,
-                      backgroundImage:
-                        "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    <AnimatedCounter
-                      target={s.raw}
-                      suffix={s.suffix}
-                      compact={s.compact}
-                      inView={statsInView}
-                    />
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans',sans-serif",
-                      fontSize: 10,
-                      marginTop: 4,
-                      color: "#7a9a8a",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div> */}
           </motion.div>
         </div>
-
-        {/* ── Partners marquee ── */}
-        {/* <div
-          className="partners-outer pt-10"
-          // className="pt-10"
-          style={{ marginBottom: "2.5rem" }}
-        >
-          <motion.div
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 24, ease: "linear", repeat: Infinity }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 40,
-              width: "max-content",
-            }}
-          >
-            {[...Array(2)]
-              .flatMap(() => [
-                {
-                  name: "NAFDAC",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/download-1-150x150.png",
-                },
-                {
-                  name: "SON Nigeria",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/zoetis-150x150.png",
-                },
-                {
-                  name: "ABZ Pharma",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/aviagen-1-150x150.png",
-                },
-                {
-                  name: "AgroFeed Co.",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/hendrix-genetics-1-150x150.jpg",
-                },
-                {
-                  name: "PoultryCare",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
-                },
-                {
-                  name: "VetLine NG",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912419023-150x150.jpg",
-                },
-                {
-                  name: "FarmTech Ltd",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
-                },
-                {
-                  name: "NigerAgro",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
-                },
-                {
-                  name: "AgroTech Solutions",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912776218-150x150.jpg",
-                },
-              ])
-              .map((p, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 40,
-                    flexShrink: 0,
-                  }}
-                >
-                  <img
-                    src={p.logo}
-                    alt={p.name}
-                    style={{
-                      height: 80,
-                      width: 80,
-                      objectFit: "contain",
-                      opacity: 0.65,
-                      transition: "opacity 0.3s",
-                      flexShrink: 0,
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.opacity = "0.65")
-                    }
-                  />
-                  <span
-                    style={{
-                      width: 4,
-                      height: 4,
-                      borderRadius: "50%",
-                      background: "#1F8F63",
-                      opacity: 0.3,
-                      flexShrink: 0,
-                    }}
-                  />
-                </div>
-              ))}
-          </motion.div>
-        </div> */}
 
         {/* Bottom accent line */}
         <motion.div
           initial={{ scaleX: 0, opacity: 0 }}
           animate={inView ? { scaleX: 1, opacity: 1 } : {}}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.9 }}
+          className="h-px origin-left"
           style={{
-            height: 1,
-            transformOrigin: "left",
             background: "linear-gradient(90deg,#1F8F63,#41AA80,transparent)",
           }}
         />

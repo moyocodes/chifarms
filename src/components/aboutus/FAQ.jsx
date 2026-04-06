@@ -36,101 +36,54 @@ export default function FAQPage() {
   const [active, setActive] = useState(null);
   const [hov, setHov] = useState(null);
 
-  const toggle = (i) => {
-    setActive(active === i ? null : i);
-  };
+  const toggle = (i) => setActive(active === i ? null : i);
 
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital@1&display=swap');
-
         .faq-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
         }
-
         @media (max-width: 768px) {
-          .faq-grid {
-            grid-template-columns: 1fr;
-          }
+          .faq-grid { grid-template-columns: 1fr; }
         }
       `}</style>
 
-     
-
       <section
-      id="faqs"
+        id="faqs"
         ref={ref}
-        // className="bg-primary-50/30"
-        style={{
-        position: "relative",
-        overflow: "hidden",
-        padding: "clamp(1rem, 8vw, 6rem) 0",
-        background: "#f8faf9",
-      }}
+        className="relative overflow-hidden bg-[#f8faf9] py-[clamp(1rem,8vw,6rem)]"
       >
         {/* Background dots */}
         <div
+          className="absolute inset-0 pointer-events-none opacity-[0.22]"
           style={{
-            position: "absolute",
-            inset: 0,
-            pointerEvents: "none",
-            opacity: 0.22,
-            backgroundImage:
-              "radial-gradient(circle, rgba(31,143,99,0.25) 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.25) 1px, transparent 1px)",
             backgroundSize: "32px 32px",
           }}
         />
 
-        <div
-         style={{
-          position: "relative",
-          maxWidth: 1152,
-          margin: "0 auto",
-          padding: "0 1.5rem",
-        }}
-        >
-          {/* HEADER */}
-          <div style={{ marginBottom: "2.5rem" }}>
-           {/* <motion.div
-                initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 6,
-                  padding: "4px 12px", borderRadius: 99, marginBottom: 12,
-                  background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.16)",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "0.6rem", fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase", color: "#14664A",
-                }}
-              >
-                <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
-                FAQ
-              </motion.div> */}
+        <div className="relative max-w-[1152px] mx-auto px-6">
 
+          {/* HEADER */}
+          <div className="mb-10">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.07 }}
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: "clamp(1.7rem, 2.8vw, 2.35rem)",
-                fontWeight: 800,
-                lineHeight: 1.12,
-                color: "#111",
-              }}
+              className="font-heading font-extrabold leading-[1.12] text-[#111] text-[clamp(1.7rem,2.8vw,2.35rem)]"
             >
               Got Questions?<br />
               <span
                 style={{
-                  backgroundImage:
-                    "linear-gradient(135deg,#1F8F63,#41AA80)",
+                  backgroundImage: "linear-gradient(135deg,#1F8F63,#41AA80)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
               >
-                We’ve Got Answers
+                We've Got Answers
               </span>
             </motion.h2>
           </div>
@@ -140,23 +93,12 @@ export default function FAQPage() {
             initial={{ scaleX: 0 }}
             animate={inView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.7 }}
-            style={{
-              height: 1,
-              transformOrigin: "left",
-              background:
-                "linear-gradient(to right,#A6DDC8,transparent)",
-              marginBottom: 0,
-            }}
+            className="h-px origin-left mb-0"
+            style={{ background: "linear-gradient(to right,#A6DDC8,transparent)" }}
           />
 
           {/* FAQ GRID */}
-          <div
-            className="faq-grid"
-            style={{
-              border: "1px solid rgba(31,143,99,0.09)",
-              borderTop: "none",
-            }}
-          >
+          <div className="faq-grid border border-primary-500/[0.09] border-t-0">
             {faqs.map((faq, i) => {
               const isOpen = active === i;
               const isHov = hov === i;
@@ -169,72 +111,32 @@ export default function FAQPage() {
                   key={i}
                   initial={{ opacity: 0, y: 12 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 + i * 0.06,
-                  }}
+                  transition={{ duration: 0.5, delay: 0.1 + i * 0.06 }}
                   onHoverStart={() => setHov(i)}
                   onHoverEnd={() => setHov(null)}
                   onClick={() => toggle(i)}
+                  className="p-6 cursor-pointer relative"
                   style={{
-                    padding: "1.5rem",
-                    cursor: "pointer",
-                    background: isHov
-                      ? "rgba(240,249,245,1)"
-                      : "transparent",
-                    borderRight:
-                      col === 0
-                        ? "1px solid rgba(31,143,99,0.09)"
-                        : "none",
-                    borderBottom:
-                      row < totalRows - 1
-                        ? "1px solid rgba(31,143,99,0.09)"
-                        : "none",
-                    position: "relative",
+                    background: isHov ? "rgba(240,249,245,1)" : "transparent",
+                    borderRight: col === 0 ? "1px solid rgba(31,143,99,0.09)" : "none",
+                    borderBottom: row < totalRows - 1 ? "1px solid rgba(31,143,99,0.09)" : "none",
                   }}
                 >
                   {/* Left accent */}
                   <motion.div
-                    animate={{
-                      opacity: isHov ? 1 : 0,
-                      scaleY: isHov ? 1 : 0.3,
-                    }}
-                    style={{
-                      position: "absolute",
-                      left: 0,
-                      top: "20%",
-                      bottom: "20%",
-                      width: 2.5,
-                      background: "#1F8F63",
-                      borderRadius: 99,
-                    }}
+                    animate={{ opacity: isHov ? 1 : 0, scaleY: isHov ? 1 : 0.3 }}
+                    className="absolute left-0 top-[20%] bottom-[20%] w-[2.5px] bg-primary-500 rounded-full origin-center"
                   />
 
                   {/* Question */}
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div className="flex justify-between items-center">
                     <h3
-                      style={{
-                        fontFamily:
-                          "'Plus Jakarta Sans', sans-serif",
-                        fontSize: "0.9rem",
-                        fontWeight: 700,
-                        color: isOpen
-                          ? "#1F8F63"
-                          : "#1A1A1A",
-                      }}
+                      className="font-heading text-[0.9rem] font-bold transition-colors duration-200"
+                      style={{ color: isOpen ? "#1F8F63" : "#1A1A1A" }}
                     >
                       {faq.question}
                     </h3>
-
-                    <motion.div
-                      animate={{ rotate: isOpen ? 180 : 0 }}
-                    >
+                    <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
                       <ChevronDown size={18} />
                     </motion.div>
                   </div>
@@ -244,19 +146,10 @@ export default function FAQPage() {
                     {isOpen && (
                       <motion.p
                         initial={{ opacity: 0, height: 0 }}
-                        animate={{
-                          opacity: 1,
-                          height: "auto",
-                        }}
+                        animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        style={{
-                          marginTop: "0.6rem",
-                          fontFamily: "'Lora', serif",
-                          fontSize: "0.78rem",
-                          color: "#777",
-                          lineHeight: 1.6,
-                        }}
+                        className="mt-[0.6rem] font-['Lora',serif] text-[0.78rem] text-[#777] leading-[1.6]"
                       >
                         {faq.answer}
                       </motion.p>
@@ -266,9 +159,9 @@ export default function FAQPage() {
               );
             })}
           </div>
+
         </div>
       </section>
-
     </>
   );
 }

@@ -52,40 +52,13 @@ export default function SchoolHero() {
             </span>
           </motion.h2>
         </div>
-         
-
-         {/* ── HEADER RIGHT: sub-copy — left edge = "From hatchery" card left edge ── */}
-                  {/* <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={inView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-end",
-                      marginBottom: "40px",
-                    }}
-                  >
-                    <p
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans',sans-serif",
-                        fontSize: "1rem",
-                        lineHeight: 1.7,
-                        margin: 0,
-                        color: "#5a7065",
-                      }}
-                    >
-                        Chi Farms Training Centre aims to create, share and provide knowledge and experience to customers and clients. We execute capacity building and skill acquisition initiatives to strengthen the skills of people in the poultry industry.
-
-As a resource centre, we collaborate with other institution initiatives and engagements in both the public and private sectors, to empower people across the animal protein value chains.
-                    </p>
-                  </motion.div> */}
 
        </div>
 
        
 
         {/* TABS */}
-<div className="flex flex-wrap gap-6 mb-8 border-b border-[#1F8F63]/20">
+<div className="flex flex-wrap gap-6 mb-8 border-b border-primary-500/20">
   {tabs.map((tab) => {
     const isActive = activeTab === tab.id;
 
@@ -129,7 +102,7 @@ As a resource centre, we collaborate with other institution initiatives and enga
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.35 }}
-              className="text-[#555] text-sm leading-relaxed font-serif"
+              className="text-dark-500 text-sm leading-relaxed font-serif"
             >
               {activeTab === "about" && (
                <AboutSchool />
@@ -151,7 +124,7 @@ As a resource centre, we collaborate with other institution initiatives and enga
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="h-[1px] mt-10 origin-left bg-gradient-to-r from-[#A6DDC8] to-transparent"
+          className="h-[1px] mt-10 origin-left bg-gradient-to-r from-primary-200 to-transparent"
         />
       </div>
     </section>

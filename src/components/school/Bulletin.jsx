@@ -13,15 +13,15 @@ const bulletins = [
 
 const Bulletin = () => (
   <div className="space-y-4">
-    <p className="text-sm text-[#555] font-medium">Technical Service Bulletins</p>
+    <p className="text-sm text-dark-500 font-medium">Technical Service Bulletins</p>
     <ul className="grid sm:grid-cols-2 gap-2">
       {bulletins.map((item, index) => (
         <li
           key={index}
-          className="flex items-start gap-3 text-sm text-[#444] bg-white/70 border border-[#1F8F63]/10 rounded-lg px-3 py-3 hover:bg-[#1F8F63]/5 transition cursor-pointer"
+          className="flex items-start gap-3 text-sm text-dark-900 bg-white/70 border border-primary-500/10 rounded-lg px-3 py-3 hover:bg-primary-500/5 transition cursor-pointer"
         >
-          <div className="flex items-center justify-center min-w-[26px] h-[26px] rounded-md bg-[#1F8F63]/10 flex-shrink-0">
-            <FileText size={15} className="text-[#1F8F63]" strokeWidth={2.2} />
+          <div className="flex items-center justify-center min-w-[26px] h-[26px] rounded-md bg-primary-500/10 flex-shrink-0">
+            <FileText size={15} className="text-primary-500" strokeWidth={2.2} />
           </div>
           <p className="leading-snug m-0">{item}</p>
         </li>
