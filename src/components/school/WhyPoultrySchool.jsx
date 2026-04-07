@@ -25,162 +25,115 @@ export default function WhyPoultrySchool() {
   const [hov, setHov] = useState(null);
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Lora:ital@1&display=swap');
-        .why-school-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-        }
-        @media (max-width: 820px) { .why-school-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 500px) { .why-school-grid { grid-template-columns: 1fr; } }
-      `}</style>
+    <section
+      ref={ref}
+      className="bg-primary-50/30 py-[4.5rem] relative overflow-hidden"
+    >
+      {/* Dot grid */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(circle,rgba(31,143,99,0.25)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
-      <section
-        className="bg-primary-50/30 pt-10"
-        ref={ref}
-        style={{ padding: "4.5rem 0", position: "relative", overflow: "hidden" }}
-      >
-        {/* Faint dot grid */}
-        <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none", opacity: 0.22,
-          backgroundImage: "radial-gradient(circle, rgba(31,143,99,0.25) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }} />
+      <div className="max-w-[1060px] mx-auto px-6 relative">
 
-        <div style={{ maxWidth: 1060, margin: "0 auto", padding: "0 1.5rem", position: "relative" }}>
-
-          {/* ── Header ── */}
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5 }}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 6,
-                  padding: "4px 12px", borderRadius: 99, marginBottom: 12,
-                  background: "rgba(31,143,99,0.08)", border: "1px solid rgba(31,143,99,0.16)",
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "0.6rem", fontWeight: 700,
-                  letterSpacing: "0.14em", textTransform: "uppercase", color: "#14664A",
-                }}
-              >
-                <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#1F8F63", display: "inline-block" }} />
-                Why Chi Poultry School
-              </motion.div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 16 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.07 }}
-                style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "clamp(1.7rem, 2.8vw, 2.35rem)",
-                  fontWeight: 800, lineHeight: 1.12,
-                  color: "#111", margin: 0,
-                }}
-              >
-                Why Chi Farms<br />
-                <span style={{ backgroundImage: "linear-gradient(135deg,#1F8F63,#41AA80)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  training centre?
-                </span>
-              </motion.h2>
-            </div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.14 }}
-              style={{
-                fontFamily: "'Lora', serif", fontStyle: "italic",
-                fontSize: "0.84rem", color: "#999",
-                lineHeight: 1.72, maxWidth: 280,
-              }}
+        {/* Header */}
+        <div className="flex items-end justify-between gap-6 flex-wrap mb-10">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full mb-3 bg-primary-500/10 border border-primary-500/20 text-primary-700 text-[10px] font-bold tracking-[0.14em] uppercase font-heading"
             >
-              Equipping farmers with the knowledge, tools and mindset to thrive in a modern industry.
-            </motion.p>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary-500 inline-block" />
+              Why Chi Poultry School
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.07 }}
+              className="font-heading font-extrabold text-dark-900 leading-tight text-[clamp(1.7rem,2.8vw,2.35rem)]"
+            >
+              Why Chi Farms <br />
+              <span className="bg-gradient-to-br from-primary-500 to-primary-400 bg-clip-text text-transparent">
+                training centre?
+              </span>
+            </motion.h2>
           </div>
 
-          {/* ── Thin accent line ── */}
-          <motion.div
-            initial={{ scaleX: 0 }} animate={inView ? { scaleX: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.18 }}
-            style={{ height: 1, transformOrigin: "left", background: "linear-gradient(to right,#A6DDC8,transparent)", marginBottom: 0 }}
-          />
-
-          {/* ── Reasons grid ── */}
-          <div
-            className="why-school-grid"
-            style={{ border: "1px solid rgba(31,143,99,0.09)", borderTop: "none" }}
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.55, delay: 0.14 }}
+            className="text-sm text-dark-400 italic leading-relaxed max-w-[280px]"
           >
-            {reasons.map((r, i) => {
-              const isHov = hov === i;
-              const col = i % 3;
-              const row = Math.floor(i / 3);
-              const totalRows = Math.ceil(reasons.length / 3);
-
-              return (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: 0.12 + i * 0.06 }}
-                  onHoverStart={() => setHov(i)}
-                  onHoverEnd={() => setHov(null)}
-                  style={{
-                    padding: "1.5rem 1.6rem",
-                    background: isHov ? "rgba(240,249,245,1)" : "transparent",
-                    borderRight: col < 2 ? "1px solid rgba(31,143,99,0.09)" : "none",
-                    borderBottom: row < totalRows - 1 ? "1px solid rgba(31,143,99,0.09)" : "none",
-                    position: "relative",
-                    transition: "background 0.2s ease",
-                    cursor: "default",
-                  }}
-                >
-                  {/* Left accent bar on hover */}
-                  <motion.div
-                    animate={{ opacity: isHov ? 1 : 0, scaleY: isHov ? 1 : 0.3 }}
-                    transition={{ duration: 0.2 }}
-                    style={{
-                      position: "absolute", left: 0, top: "20%", bottom: "20%", width: 2.5,
-                      borderRadius: 99, background: "#1F8F63", transformOrigin: "center",
-                    }}
-                  />
-
-                  {/* Number badge */}
-                  <div style={{
-                    display: "inline-flex", alignItems: "center", justifyContent: "center",
-                    width: 36, height: 36, borderRadius: 10, marginBottom: "0.75rem",
-                    background: isHov ? "rgba(31,143,99,0.12)" : "rgba(31,143,99,0.07)",
-                    border: "1px solid rgba(31,143,99,0.12)",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: 15, fontWeight: 900,
-                    color: "#1F8F63",
-                    transition: "background 0.2s",
-                  }}>
-                    {i + 1}
-                  </div>
-
-                  {/* Title */}
-                  <h3 style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: "0.87rem", fontWeight: 700,
-                    color: isHov ? "#1F8F63" : "#1A1A1A",
-                    lineHeight: 1.25, marginBottom: "0.45rem",
-                    transition: "color 0.2s",
-                  }}>{r.title}</h3>
-
-                  {/* Desc */}
-                  <p style={{
-                    fontFamily: "'Lora', serif",
-                    fontSize: "0.78rem", color: "#888",
-                    lineHeight: 1.68, margin: 0,
-                  }}>{r.desc}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-
+            Equipping farmers with the knowledge, tools and mindset to thrive in a modern industry.
+          </motion.p>
         </div>
-      </section>
-    </>
+
+        {/* Accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 0.7, delay: 0.18 }}
+          className="h-px origin-left mb-0 bg-gradient-to-r from-primary-200 to-transparent"
+        />
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border border-primary-500/10 border-t-0">
+          {reasons.map((r, i) => {
+            const isHov = hov === i;
+            const col = i % 3;
+            const row = Math.floor(i / 3);
+            const totalRows = Math.ceil(reasons.length / 3);
+
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.12 + i * 0.06 }}
+                onHoverStart={() => setHov(i)}
+                onHoverEnd={() => setHov(null)}
+                className="p-6 relative transition-colors duration-200 cursor-default"
+                style={{
+                  borderRight: col < 2 ? "1px solid rgba(31,143,99,0.09)" : "none",
+                  borderBottom: row < totalRows - 1 ? "1px solid rgba(31,143,99,0.09)" : "none",
+                }}
+              >
+                {/* Hover bg */}
+                <div className={`absolute inset-0 transition ${isHov ? "bg-primary-50" : ""}`} />
+
+                {/* Accent bar */}
+                <motion.div
+                  animate={{ opacity: isHov ? 1 : 0, scaleY: isHov ? 1 : 0.3 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute left-0 top-[20%] bottom-[20%] w-[2.5px] rounded-full bg-primary-500 origin-center"
+                />
+
+                {/* Badge */}
+                <div className={`relative z-10 w-9 h-9 flex items-center justify-center rounded-xl mb-3 border border-primary-500/20 font-heading font-black text-primary-500 transition ${
+                  isHov ? "bg-primary-500/10" : "bg-primary-500/5"
+                }`}>
+                  {i + 1}
+                </div>
+
+                {/* Title */}
+                <h3 className={`relative z-10 text-sm font-bold mb-1.5 leading-tight font-heading transition ${
+                  isHov ? "text-primary-500" : "text-dark-900"
+                }`}>
+                  {r.title}
+                </h3>
+
+                {/* Desc */}
+                <p className="relative z-10 text-xs text-dark-400 leading-relaxed m-0">
+                  {r.desc}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+      </div>
+    </section>
   );
 }
