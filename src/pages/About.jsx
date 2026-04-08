@@ -547,7 +547,6 @@ function About() {
             <motion.h2
               variants={fadeUp}
               custom={1}
-            
               style={{
                 fontFamily: "'Plus Jakarta Sans',sans-serif",
                 fontWeight: 900,
@@ -560,7 +559,7 @@ function About() {
               Rooted in nature,
               <br />
               <span
-              className="pb-2"
+                className="pb-2"
                 style={{
                   backgroundImage:
                     "linear-gradient(130deg,#1F8F63 0%,#41AA80 60%,#68C89F 100%)",
@@ -968,10 +967,10 @@ function About() {
                   name: "FarmTech Ltd",
                   logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
                 },
-                {
-                  name: "NigerAgro",
-                  logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
-                },
+                // {
+                //   name: "NigerAgro",
+                //   logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
+                // },
                 {
                   name: "AgroTech Solutions",
                   logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912776218-150x150.jpg",
