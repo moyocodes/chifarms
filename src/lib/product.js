@@ -16,7 +16,7 @@ export const DIVISIONS = [
     accentBorder: "rgba(31,143,99,0.18)",
     dark: "#061A0D",
     stat: { value: "500K+", label: "eggs / cycle" },
-    pills: ["Breeder Chicks", "Day Old Chicks"],
+    pills: ["Breeder Chicks", "Commercial Day Old Chicks"],
     // Full category tabs shown on /poultry page
     categories: [
       {
@@ -57,7 +57,7 @@ export const DIVISIONS = [
       },
       {
         id: "doc",
-        label: "Day Old Chicks",
+        label: "Commercial Day Old Chicks",
         icon: "🐣",
         summary: "Commercial broiler and pullet DOCs — three proven breeds.",
 
@@ -86,18 +86,7 @@ export const DIVISIONS = [
               "High persistency",
             ],
           },
-          {
-            name: "Amberlink Commercial Layers",
-            image: "/images/pullet.jpeg",
-            badge: "Layer",
-            desc: "A robust, heat-tolerant layer strain well-suited to the Nigerian climate, prized for feed efficiency and adaptability.",
-            specs: [
-              "Heat-tolerant",
-              "Strong shell",
-              "Low feed consumption",
-              "All systems",
-            ],
-          },
+         
         ],
       },
     ],
@@ -111,13 +100,13 @@ export const DIVISIONS = [
     group: "Processing",
     title: "Frozen Meat Products",
     sub: "Chicken · Beef · Sausages · Fries · Pizza",
-    desc: "NAFDAC-certified processing delivering premium frozen protein — whole birds, cuts, sausages, Belgian fries and pizza toppings distributed nationwide.",
+    desc: "NAFDAC-certified processing delivering premium frozen protein — whole birds, cuts, sausages, Belgian fries and Customised Products distributed nationwide.",
     accent: "#187553",
     accentLight: "rgba(24,117,83,0.08)",
     accentBorder: "rgba(24,117,83,0.18)",
     dark: "#04140B",
     stat: { value: "10K+", label: "birds / day" },
-    pills: ["Chicken", "Beef", "French Fries", "Pizza Toppings"],
+    pills: ["Chicken", "Beef", "Customised Products"],
     categories: [
       {
         id: "chicken",
@@ -127,19 +116,6 @@ export const DIVISIONS = [
           "Frozen dressed chicken and premium cuts — whole birds, wings, fillets and more.",
 
         items: [
-          {
-            name: "Frozen Dressed Chicken",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/Picture24.png",
-            badge: "Whole Bird",
-            desc: "Whole eviscerated birds, blast-frozen and vacuum-sealed. Available in 1.2–1.8kg weight bands.",
-            specs: [
-              "1.2–1.8kg bands",
-              "NAFDAC certified",
-              "Vacuum sealed",
-              "Blast frozen",
-            ],
-          },
           {
             name: "Chicken Wings",
             image:
@@ -151,18 +127,6 @@ export const DIVISIONS = [
               "Retail & foodservice",
               "Consistent sizing",
               "No added water",
-            ],
-          },
-          {
-            name: "Premium Chicken Sausage",
-            image: "https://chi-farms.com/wp-content/uploads/2021/05/new-2.jpg",
-            badge: "Processed",
-            desc: "Seasoned chicken sausages made from 100% whole-muscle chicken. Available smoked and unsmoked.",
-            specs: [
-              "100% chicken",
-              "Smoked & unsmoked",
-              "Retail & catering",
-              "No fillers",
             ],
           },
           {
@@ -189,19 +153,6 @@ export const DIVISIONS = [
               "Consistent sizing",
               "Clean cut",
               "High meat yield",
-            ],
-          },
-          {
-            name: "Smoked Frozen Chicken",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/Picture15.png",
-            badge: "Smoked",
-            desc: "Whole birds and portions slow-smoked then blast-frozen. Ready to reheat and serve.",
-            specs: [
-              "Slow smoked",
-              "Blast-frozen",
-              "Whole & portions",
-              "Premium retail",
             ],
           },
           {
@@ -241,6 +192,44 @@ export const DIVISIONS = [
               "Retail & foodservice",
               "Consistent sizing",
               "High meat yield",
+            ],
+          },
+          {
+            name: "Frozen Dressed Chicken",
+            image:
+              "https://chi-farms.com/wp-content/uploads/2021/05/Picture24.png",
+            badge: "Whole Bird",
+            desc: "Whole eviscerated birds, blast-frozen and vacuum-sealed. Available in 1.2–1.8kg weight bands.",
+            specs: [
+              "1.2–1.8kg bands",
+              "NAFDAC certified",
+              "Vacuum sealed",
+              "Blast frozen",
+            ],
+          },
+          {
+            name: "Smoked Frozen Chicken",
+            image:
+              "https://chi-farms.com/wp-content/uploads/2021/05/Picture15.png",
+            badge: "Smoked",
+            desc: "Whole birds and portions slow-smoked then blast-frozen. Ready to reheat and serve.",
+            specs: [
+              "Slow smoked",
+              "Blast-frozen",
+              "Whole & portions",
+              "Premium retail",
+            ],
+          },
+          {
+            name: "Premium Chicken Sausage",
+            image: "https://chi-farms.com/wp-content/uploads/2021/05/new-2.jpg",
+            badge: "Processed",
+            desc: "Seasoned chicken sausages made from 100% whole-muscle chicken. Available smoked and unsmoked.",
+            specs: [
+              "100% chicken",
+              "Smoked & unsmoked",
+              "Retail & catering",
+              "No fillers",
             ],
           },
         ],
@@ -359,66 +348,10 @@ export const DIVISIONS = [
           },
         ],
       },
-      {
-        id: "fries",
-        label: "French Fries",
-        icon: "🍟",
-        summary:
-          "Lutosa frozen fries in four professional cuts — straight, crinkle, shoestring.",
 
-        items: [
-          {
-            name: "Straight Cut Fries",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/1010_2.5-2-1-768x1024.jpg",
-            badge: "Classic",
-            desc: "The universal QSR standard. Pre-fried, frozen, ready in under 4 minutes.",
-            specs: [
-              "Pre-fried frozen",
-              "4 min cook",
-              "Golden crisp",
-              "2.5kg pack",
-            ],
-          },
-          {
-            name: "Crinkle Cut Fries",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/lutosa-crinklecutfries02.jpg-1-768x1024.png",
-            badge: "Specialty",
-            desc: "Ridged fries with extra crunch and sauce retention. Popular with casual dining.",
-            specs: [
-              "Extra crunch",
-              "Sauce retention",
-              "Casual dining",
-              "Uniform sizing",
-            ],
-          },
-          {
-            name: "Shoestring Fries",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/farm-frites-shoestring-fries-2kg-2-768x1024.jpg",
-            badge: "Thin Cut",
-            desc: "Ultra-thin fries for upscale burger restaurants and hotel all-day dining.",
-            specs: ["Ultra-thin", "Fast cook", "Hotel grade", "Premium pack"],
-          },
-          {
-            name: "Food Services Pack",
-            image:
-              "https://chi-farms.com/wp-content/uploads/2021/05/1010_1k-2-768x1024.jpg",
-            badge: "Bulk",
-            desc: "Large-format packs for high-volume kitchens, catering companies and canteen operators.",
-            specs: [
-              "High volume",
-              "Catering grade",
-              "Cost efficient",
-              "Multiple cuts",
-            ],
-          },
-        ],
-      },
       {
         id: "pizza",
-        label: "Pizza Toppings",
+        label: "Customised Products",
         icon: "🍕",
         summary:
           "Pepperoni and blended beef & chicken toppings for QSR kitchens.",
@@ -447,6 +380,45 @@ export const DIVISIONS = [
               "Nigerian seasoning",
               "Custom portions",
               "IQF frozen",
+            ],
+          },
+          {
+            name: "Meat Balls",
+            image:
+              "https://www.laurafuentes.com/wp-content/uploads/2025/07/Chicken-Meatballs_in-post_2.jpg",
+            badge: "Blended",
+            desc: "Juicy, pre-cooked meat balls seasoned for QSR kitchens — ready to top or serve as a standalone protein.",
+            specs: [
+              "Pre-cooked",
+              "Uniform sizing",
+              "Custom seasoning",
+              "IQF frozen",
+            ],
+          },
+          {
+            name: "Manihoft Shredded Chicken",
+            image:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQxeNAK7myj9iIJ7NvSjc-fMT7lvUaOocwdg&s",
+            badge: "Shredded",
+            desc: "Tender shredded chicken with Manihoft seasoning, pre-cooked and portioned for fast, consistent QSR assembly.",
+            specs: [
+              "Pre-cooked",
+              "Shredded format",
+              "Manihoft seasoned",
+              "IQF frozen",
+            ],
+          },
+          {
+            name: "Nasi Dish",
+            image:
+              "https://muchbutter.com/wp-content/uploads/2025/09/Nasi-liwet11-768x1024.jpg",
+            badge: "Rice Dish",
+            desc: "Flavourful Nasi-style rice dish, pre-portioned and ready to reheat — ideal for QSR combo meal offerings.",
+            specs: [
+              "Pre-portioned",
+              "Reheat ready",
+              "Consistent flavour",
+              "Frozen format",
             ],
           },
         ],
@@ -505,22 +477,21 @@ export const DIVISIONS = [
             ],
           },
           {
-            name: "Catfish Fillet",
-            image:
-              "/images/catfillet.jpeg",
-            badge: "Processed",
-            desc: "Skinless boneless catfish fillets, individually frozen. In demand from hotels, restaurants and health-conscious retail.",
+            name: "Premium Floating Catfish Feed",
+            image: "/feed.png",
+            badge: "Fish Feed",
+            desc: "High-protein floating pellets formulated for fast growth, strong immunity, and efficient feed conversion in catfish farming.",
             specs: [
-              "Skinless boneless",
-              "IQF frozen",
-              "Hotel grade",
-              "High protein",
+              "28–40% crude protein",
+              "Floating pellets",
+              "Multiple pellet sizes (2mm–9mm)",
+              "High digestibility",
             ],
           },
+
           {
             name: "Pure Line & Hybrid Juveniles",
-            image:
-              "/images/hybridcatfish.jpg",
+            image: "/images/hybridcatfish.jpg",
             badge: "Juveniles",
             desc: "Genetically superior fingerlings for farm stocking — 30–40% faster growth than conventional strains.",
             specs: [
@@ -535,94 +506,96 @@ export const DIVISIONS = [
     ],
   },
 
-{
-  slug: "veterinary",
-  href: "/products/veterinary",
-  number: "04",
-  icon: "🧬",
-  group: "Veterinary",
-  title: "Veterinary & Bio-security",
-  sub: "Vaccines · Vet Services · Lab Diagnostics · Biosecurity",
-  desc: "Chi Farms' Veterinary Unit specialises in comprehensive poultry health management, offering tailored support to maximise flock performance, strengthen immunity and prevent disease outbreaks.",
-  accent: "#14664A",
-  accentLight: "rgba(20,102,74,0.08)",
-  accentBorder: "rgba(20,102,74,0.18)",
-  dark: "#030E07",
-  stat: { value: "A+", label: "biosecurity rating" },
-  pills: ["Vaccines", "Vet Services", "Lab Diagnostics", "Biosecurity"],
-  categories: [
-    {
-      id: "veterinary",
-      label: "Veterinary Services",
-      icon: "🩺",
-      summary:
-        "Complete poultry health support — vaccination programs, farm visits and laboratory diagnostics.",
-      items: [
-        {
-          name: "Vaccines",
-          image: "https://chi-farms2.desvit.com.ua/wp-content/uploads/2025/11/Veterinary-Services.jpg",
-          badge: "Prevention",
-          desc: "Structured vaccination programs for broilers and layers covering hatchery and field schedules to ensure optimal immunity and flock protection.",
-          specs: [
-            "Broiler & Layer programs",
-            "Hatchery vaccination",
-            "Field vaccination schedules",
-            "Cold chain management",
-            "Disease prevention protocols"
-          ]
-        },
-        {
-          name: "Vet Services",
-          image: "/images/vett.jpg",
-          badge: "Field Support",
-          desc: "On-field veterinary visits and emergency response services focused on disease diagnosis, flock performance audits and farmer advisory support.",
-          specs: [
-            "Scheduled farm visits",
-            "Emergency response",
-            "Disease diagnosis",
-            "Flock performance audits",
-            "Farmer advisory"
-          ]
-        },
-        {
-          name: "Lab Services",
-          image: "/images/lab.jpg",
-          badge: "Diagnostics",
-          desc: "Advanced laboratory diagnostics including serology, bacteriology, post-mortem examination, and feed/water analysis with fast turnaround time.",
-          specs: [
-            "Serology testing",
-            "Post-mortem analysis",
-            "Bacteriology",
-            "Feed & water testing",
-            "24–48hr results"
-          ]
-        }
-      ]
-    },
-    {
-      id: "biosecurity",
-      label: "Bio-Security",
-      icon: "🛡️",
-      summary:
-        "Farm-level biosecurity planning and implementation to reduce disease risks and protect flock investments.",
-      items: [
-        {
-          name: "Biosecurity Planning",
-          image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b",
-          badge: "Prevention",
-          desc: "Design and implementation of strict farm biosecurity protocols to minimise contamination and disease transmission.",
-          specs: [
-            "Farm access control",
-            "Disinfection protocols",
-            "Visitor management systems",
-            "Sanitation programs",
-            "Risk assessment audits"
-          ]
-        }
-      ]
-    }
-  ]
-},
+  {
+    slug: "veterinary",
+    href: "/products/veterinary",
+    number: "04",
+    icon: "🧬",
+    group: "Veterinary",
+    title: "Veterinary & Bio-security",
+    sub: "Vaccines · Vet Services · Lab Diagnostics · Biosecurity",
+    desc: "Chi Farms' Veterinary Unit specialises in comprehensive poultry health management, offering tailored support to maximise flock performance, strengthen immunity and prevent disease outbreaks.",
+    accent: "#14664A",
+    accentLight: "rgba(20,102,74,0.08)",
+    accentBorder: "rgba(20,102,74,0.18)",
+    dark: "#030E07",
+    stat: { value: "A+", label: "biosecurity rating" },
+    pills: ["Vaccines", "Vet Services", "Lab Diagnostics", "Biosecurity"],
+    categories: [
+      {
+        id: "veterinary",
+        label: "Veterinary Services",
+        icon: "🩺",
+        summary:
+          "Complete poultry health support — vaccination programs, farm visits and laboratory diagnostics.",
+        items: [
+          {
+            name: "Vaccines",
+            image:
+              "https://chi-farms2.desvit.com.ua/wp-content/uploads/2025/11/Veterinary-Services.jpg",
+            badge: "Prevention",
+            desc: "Structured vaccination programs for broilers and layers covering hatchery and field schedules to ensure optimal immunity and flock protection.",
+            specs: [
+              "Broiler & Layer programs",
+              "Hatchery vaccination",
+              "Field vaccination schedules",
+              "Cold chain management",
+              "Disease prevention protocols",
+            ],
+          },
+          {
+            name: "Vet Services",
+            image: "/images/vett.jpg",
+            badge: "Field Support",
+            desc: "On-field veterinary visits and emergency response services focused on disease diagnosis, flock performance audits and farmer advisory support.",
+            specs: [
+              "Scheduled farm visits",
+              "Emergency response",
+              "Disease diagnosis",
+              "Flock performance audits",
+              "Farmer advisory",
+            ],
+          },
+          {
+            name: "Lab Services",
+            image: "/images/lab.jpg",
+            badge: "Diagnostics",
+            desc: "Advanced laboratory diagnostics including serology, bacteriology, post-mortem examination, and feed/water analysis with fast turnaround time.",
+            specs: [
+              "Serology testing",
+              "Post-mortem analysis",
+              "Bacteriology",
+              "Feed & water testing",
+              "24–48hr results",
+            ],
+          },
+        ],
+      },
+      {
+        id: "biosecurity",
+        label: "Bio-Security",
+        icon: "🛡️",
+        summary:
+          "Farm-level biosecurity planning and implementation to reduce disease risks and protect flock investments.",
+        items: [
+          {
+            name: "Biosecurity Planning",
+            image:
+              "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b",
+            badge: "Prevention",
+            desc: "Design and implementation of strict farm biosecurity protocols to minimise contamination and disease transmission.",
+            specs: [
+              "Farm access control",
+              "Disinfection protocols",
+              "Visitor management systems",
+              "Sanitation programs",
+              "Risk assessment audits",
+            ],
+          },
+        ],
+      },
+    ],
+  },
   {
     slug: "support",
     href: "/products/support",
@@ -646,7 +619,7 @@ export const DIVISIONS = [
         summary:
           "Technical advisory, diagnostics and structured training for livestock producers.",
 
-       items: [
+        items: [
           {
             name: "Customer Training",
             image:
@@ -709,7 +682,7 @@ export const DIVISIONS = [
     categories: [
       {
         id: "equipment",
-        label: "Farm Equipment",
+        label: "Poultry Equipment",
         icon: "⚙️",
         summary:
           "Housing systems, poultry machinery and feeding equipment from global manufacturers.",
@@ -717,8 +690,7 @@ export const DIVISIONS = [
         items: [
           {
             name: "Poultry Housing Systems",
-            image:
-              "/images/equipment.jpg",
+            image: "/images/equipment.jpg",
             badge: "Housing",
             desc: "Complete housing systems — ventilation, heating, cooling and automated lighting for optimal flock performance.",
             specs: [
@@ -728,7 +700,6 @@ export const DIVISIONS = [
               "Turn-key install",
             ],
           },
-       
         ],
       },
     ],

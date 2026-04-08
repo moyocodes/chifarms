@@ -695,7 +695,7 @@ function About() {
             initial="hidden"
             animate={inView ? "show" : "hidden"}
             variants={stagger}
-            className="pt-5"
+            className="pt-3"
             style={{
               display: "flex",
               flexDirection: "column",
@@ -745,7 +745,7 @@ function About() {
                   fontFamily: "'Plus Jakarta Sans',sans-serif",
                   fontWeight: 700,
                   color: "#fff",
-                  lineHeight: 1.45,
+                  lineHeight: 2.05,
                   margin: 0,
                   fontSize: "clamp(1rem, 1.8vw, 1.2rem)",
                 }}
@@ -786,9 +786,9 @@ function About() {
               custom={2}
               style={{
                 fontFamily: "'Plus Jakarta Sans',sans-serif",
-                fontSize: "0.97rem",
+                fontSize: "1.17rem",
                 lineHeight: 1.75,
-                marginBottom: "1.5rem",
+                marginBottom: "1.2rem",
                 color: "#5a7065",
               }}
             >
@@ -799,125 +799,8 @@ function About() {
               infrastructure.
             </motion.p>
 
-            {/* CTA */}
-            <motion.div
-              variants={fadeUp}
-              custom={3}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "1.5rem",
-              }}
-            >
-              <a
-                href="products"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: "'Plus Jakarta Sans',sans-serif",
-                  fontWeight: 700,
-                  fontSize: 13,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  color: "#1F8F63",
-                  textDecoration: "none",
-                }}
-              >
-                Explore our products
-                <span
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    background: "rgba(31,143,99,0.1)",
-                    border: "1px solid rgba(31,143,99,0.2)",
-                    fontSize: 16,
-                    transition: "all 0.25s",
-                  }}
-                >
-                  →
-                </span>
-              </a>
-            </motion.div>
 
-            {/* Stats grid */}
-            <motion.div
-              ref={statsRef}
-              variants={fadeUp}
-              custom={4}
-              className="stats-grid"
-              style={{
-                borderRadius: 12,
-                overflow: "hidden",
-                border: "1px solid rgba(31,143,99,0.13)",
-                background:
-                  "linear-gradient(135deg,#fff 0%,rgba(210,238,227,0.3) 100%)",
-              }}
-            >
-              {stats.map((s, i) => (
-                <div
-                  key={i}
-                  style={{
-                    textAlign: "center",
-                    padding: "1rem 0.5rem",
-                    position: "relative",
-                    borderRight:
-                      i < stats.length - 1
-                        ? "1px solid rgba(31,143,99,0.09)"
-                        : "none",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      height: 2,
-                      width: 32,
-                      borderRadius: "0 0 4px 4px",
-                      background: "linear-gradient(90deg,#1F8F63,#41AA80)",
-                      opacity: 0.55,
-                    }}
-                  />
-                  <p
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans',sans-serif",
-                      fontWeight: 900,
-                      fontSize: "1.4rem",
-                      margin: 0,
-                      lineHeight: 1,
-                      backgroundImage:
-                        "linear-gradient(135deg,#1F8F63 0%,#41AA80 100%)",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }}
-                  >
-                    <AnimatedCounter
-                      target={s.raw}
-                      suffix={s.suffix}
-                      compact={s.compact}
-                      inView={statsInView}
-                    />
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'Plus Jakarta Sans',sans-serif",
-                      fontSize: 10,
-                      marginTop: 4,
-                      color: "#7a9a8a",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </motion.div>
+          
           </motion.div>
         </div>
 
@@ -967,10 +850,10 @@ function About() {
                   name: "FarmTech Ltd",
                   logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
                 },
-                // {
-                //   name: "NigerAgro",
-                //   logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
-                // },
+                {
+                  name: "Big Dutchman",
+                  logo: "/dutchman.png",
+                },
                 {
                   name: "AgroTech Solutions",
                   logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912776218-150x150.jpg",

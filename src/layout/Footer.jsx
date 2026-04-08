@@ -243,7 +243,7 @@ export default function Footer() {
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontSize: "0.72rem",
                         fontWeight: 400,
-                        color: "rgba(121,204,172,0.45)",
+                          color: "white",
                         lineHeight: 1.55,
                         margin: 0,
                       }}
@@ -286,7 +286,7 @@ export default function Footer() {
                 style={{
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontSize: "0.7rem",
-                  color: "rgba(121,204,172,0.28)",
+                  color: "white",
                   margin: 0,
                 }}
               >
@@ -298,6 +298,7 @@ export default function Footer() {
               style={{
                 display: "flex",
                 gap: "1.3rem",
+                
                 alignItems: "center",
                 flexWrap: "wrap",
               }}
@@ -312,7 +313,7 @@ export default function Footer() {
                       fontFamily: "'Plus Jakarta Sans', sans-serif",
                       fontSize: "0.78rem",
                       fontWeight: 500,
-                      color: "rgba(121,204,172,0.28)",
+                         color: "white",
                       textDecoration: "none",
                       transition: "color 0.18s ease",
                       display: "flex",
