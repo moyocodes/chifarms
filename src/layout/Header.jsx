@@ -53,7 +53,7 @@ const productCols = [
     items: [
       { label: "Chicken", to: "/products/frozen/chicken" },
       { label: "Beef Products", to: "/products/frozen/beef" },
-      { label: "French Fries", to: "/products/frozen/fries" },
+
       { label: "Pizza Toppings", to: "/products/frozen/pizza" },
     ],
   },
