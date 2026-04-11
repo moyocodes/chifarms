@@ -26,13 +26,10 @@ const partners = [
     name: "VetLine NG",
     logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912419023-150x150.jpg",
   },
+ 
   {
-    name: "FarmTech Ltd",
-    logo: "https://chi-farms.com/wp-content/uploads/2021/04/phosphea-1-150x150.jpg",
-  },
-  {
-    name: "NigerAgro",
-    logo: "https://chi-farms.com/wp-content/uploads/2021/04/1618912450162-150x150.jpg",
+    name: "Big Dutchman",
+    logo: "/dutchman.png",
   },
   {
     name: "AgroTech Solutions",
@@ -109,13 +106,13 @@ function HeroSection() {
                 alt={partner.name}
                 className="h-20 object-contain mb-4 
                            grayscale group-hover:grayscale-0 
-                           opacity-70 group-hover:opacity-100 
+                           opacity-100 group-hover:opacity-70 
                            transition duration-300"
               />
 
-              <p className="text-sm font-semibold text-dark-400 text-center group-hover:text-dark-900 transition">
+              {/* <p className="text-sm font-semibold text-dark-400 text-center group-hover:text-dark-900 transition">
                 {partner.name}
-              </p>
+              </p> */}
             </motion.div>
           ))}
         </div>
