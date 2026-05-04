@@ -1,0 +1,358 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
+import { getDivision, DIVISIONS } from "@/lib/product";
+
+import HeroBanner from "./HeroBanner";
+import CategoryCard from "./CategoryCard";
+import ProductCard from "./ProductCard";
+import DetailPanel from "./DetailPanel";
+import ContactSidebar from "./ContactSidebar";
+import { F } from "@/lib/constants";
+import FooterCTA from "./FooterCTA";
+
+export default function ProductListing() {
+  const { slug, categoryId } = useParams();
+  const d = getDivision(slug);
+  const [selected, setSelected] = useState(null);
+  const [selectedCat, setSelectedCat] = useState(null);
+
+  const activeCat = categoryId
+    ? (d?.categories?.find((c) => c.id === categoryId) ?? null)
+    : null;
+
+  useEffect(() => {
+    setSelected(null);
+    setSelectedCat(null);
+  }, [slug, categoryId]);
+
+  if (!d) return null;
+
+  return (
+    <>
+      <style>{`
+        .pl-grid  { display: grid; gap: 1rem;   grid-template-columns: repeat(4,1fr); align-items: stretch; }
+        .cat-grid { display: grid; gap: 1.2rem; grid-template-columns: repeat(3,1fr); align-items: start; }
+        .landing-layout { display: grid; grid-template-columns: 1fr 260px; gap: 2rem; align-items: start; }
+        @media (max-width:1100px) { .pl-grid { grid-template-columns: repeat(3,1fr); } }
+        @media (max-width:900px)  { .landing-layout { grid-template-columns: 1fr; } }
+        @media (max-width:760px)  { .pl-grid { grid-template-columns: repeat(2,1fr); } .cat-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width:480px)  { .pl-grid { grid-template-columns: 1fr; }          .cat-grid { grid-template-columns: 1fr; } }
+        .sib-link:hover { background: rgba(0,0,0,0.08) !important; color: #444 !important; }
+        .div-tab:hover { color: #444 !important; }
+        .div-tabs::-webkit-scrollbar { display: none; }
+        .div-tabs { scrollbar-width: none; }
+      `}</style>
+
+      <HeroBanner d={d} activeCat={activeCat} logoSrc="/chilogo.svg" />
+
+      <section
+        style={{
+          backgroundColor: "#F5F7F5",
+          position: "relative",
+          overflow: "hidden",
+          padding: "1.5rem 0 5rem",
+        }}
+      >
+        {/* Dot grid bg */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            pointerEvents: "none",
+            opacity: 0.22,
+            backgroundImage:
+              "radial-gradient(circle, rgba(31,143,99,0.2) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+
+        <div
+          style={{
+            maxWidth: 1152,
+            margin: "0 auto",
+            padding: "0 1.5rem",
+            position: "relative",
+          }}
+        >
+          {/* ── Division Tab Bar ── */}
+          <div
+            className="div-tabs"
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              overflowX: "auto",
+              borderBottom: "1.5px solid rgba(0,0,0,0.08)",
+              marginBottom: "2rem",
+            }}
+          >
+            {DIVISIONS.map((div) => {
+              const isActive = div.slug === slug;
+              return (
+                <Link
+                  key={div.slug}
+                  to={`/products/${div.slug}`}
+                  style={{ textDecoration: "none", position: "relative", flexShrink: 0 }}
+                >
+                  <div
+                    className="div-tab"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 7,
+                      padding: "10px 20px 13px",
+                      fontFamily: F.sans,
+                      fontSize: "0.82rem",
+                      fontWeight: isActive ? 800 : 500,
+                      color: isActive ? div.accent : "#bbb",
+                      whiteSpace: "nowrap",
+                      cursor: "pointer",
+                      transition: "color 0.18s",
+                    }}
+                  >
+                    <span style={{ fontSize: 16 }}>{div.icon}</span>
+                    {div.title}
+                  </div>
+
+                  {/* Active underline */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="divisionUnderline"
+                      style={{
+                        position: "absolute",
+                        bottom: -1,
+                        left: 0,
+                        right: 0,
+                        height: 2.5,
+                        borderRadius: 99,
+                        background: div.accent,
+                      }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+
+          <AnimatePresence mode="wait">
+            {/* ── DIVISION LANDING: all categories ── */}
+            {!categoryId && (
+              <motion.div
+                key="landing"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                
+
+                <div className="landing-layout">
+                  <div>
+                    <div className="cat-grid">
+                      {d.categories.map((cat, i) => (
+                        <CategoryCard
+                          key={cat.id}
+                          cat={cat}
+                          d={d}
+                          index={i}
+                          slug={slug}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <ContactSidebar d={d} />
+                </div>
+              </motion.div>
+            )}
+
+            {/* ── CATEGORY DETAIL: products in this category ── */}
+            {categoryId && activeCat && (
+              <motion.div
+                key={categoryId}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              >
+                {/* Top nav bar */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    flexWrap: "wrap",
+                    gap: 10,
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  <Link
+                    to={`/products/${slug}`}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 5,
+                      fontFamily: F.sans,
+                      fontSize: "0.68rem",
+                      fontWeight: 700,
+                      color: d.accent,
+                      textDecoration: "none",
+                      padding: "5px 13px",
+                      borderRadius: 99,
+                      background: d.accentLight,
+                      border: `1px solid ${d.accentBorder}`,
+                    }}
+                  >
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M19 12H5M12 5l-7 7 7 7"
+                      />
+                    </svg>
+                    All {d.title} Categories
+                  </Link>
+
+                  {/* Sibling category pills */}
+                  {d.categories.length > 1 && (
+                    <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                      {d.categories
+                        .filter((c) => c.id !== categoryId)
+                        .map((cat) => (
+                          <Link
+                            key={cat.id}
+                            to={`/products/${slug}/${cat.id}`}
+                            className="sib-link"
+                            style={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              gap: 4,
+                              padding: "5px 12px",
+                              borderRadius: 99,
+                              background: "rgba(0,0,0,0.04)",
+                              border: "1px solid rgba(0,0,0,0.08)",
+                              fontFamily: F.sans,
+                              fontSize: "0.78rem",
+                              fontWeight: 600,
+                              color: "#888",
+                              textDecoration: "none",
+                              transition: "all 0.2s",
+                            }}
+                          >
+                            <span style={{ fontSize: 13 }}>{cat.icon}</span>
+                            {cat.label}
+                          </Link>
+                        ))}
+                    </div>
+                  )}
+                </div>
+
+           
+            
+
+
+                <div className="landing-layout">
+                  <div>
+                    {activeCat.items?.length > 0 ? (
+                      <div className="cat-grid">
+                        {activeCat.items.map((item, i) => (
+                          <ProductCard
+                            key={item.name}
+                            item={item}
+                            cat={activeCat}
+                            d={d}
+                            index={i}
+                            onSelect={(itm) => {
+                              setSelected(itm);
+                              setSelectedCat(activeCat);
+                            }}
+                          />
+                        ))}
+                      </div>
+                    ) : activeCat.services?.length > 0 ? (
+                      <div
+                        style={{
+                          background: "#fff",
+                          borderRadius: 16,
+                          border: `1.5px solid ${d.accentBorder}`,
+                          padding: "2rem 2.5rem",
+                        }}
+                      >
+                        <p
+                          style={{
+                            fontFamily: F.serif,
+                            fontSize: "0.84rem",
+                            color: "#666",
+                            lineHeight: 1.8,
+                            margin: "0 0 1.5rem",
+                          }}
+                        >
+                          {activeCat.desc}
+                        </p>
+                        <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+                          {activeCat.services.map((svc, i) => (
+                            <li
+                              key={i}
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: 10,
+                                padding: "10px 14px",
+                                borderRadius: 10,
+                                background: d.accentLight,
+                                border: `1px solid ${d.accentBorder}`,
+                              }}
+                            >
+                              <span
+                                style={{
+                                  width: 6,
+                                  height: 6,
+                                  borderRadius: "50%",
+                                  background: d.accent,
+                                  flexShrink: 0,
+                                  marginTop: 6,
+                                }}
+                              />
+                              <span
+                                style={{
+                                  fontFamily: F.sans,
+                                  fontSize: "0.82rem",
+                                  color: "#333",
+                                  lineHeight: 1.6,
+                                }}
+                              >
+                                {svc}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+                  </div>
+                  <ContactSidebar d={d} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
+          <FooterCTA/>
+
+      <DetailPanel
+        item={selected}
+        cat={selectedCat}
+        div={d}
+        onClose={() => setSelected(null)}
+      />
+    </>
+  );
+}
