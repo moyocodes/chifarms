@@ -394,7 +394,7 @@ export const DIVISIONS = [
           {
             name: "Nasi Dish",
             image:
-              "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777933969/meat_pbrzir.jpg",
+              "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777933971/nasi_iicxbu.jpg",
             badge: "Rice Dish",
             desc: "Flavourful Nasi-style rice dish, pre-portioned and ready to reheat — ideal for QSR combo meal offerings.",
             specs: [
