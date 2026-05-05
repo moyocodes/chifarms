@@ -14,7 +14,7 @@ const DIVISION_IMAGES = {
   veterinary:
     "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777933935/bio_awrgiy.jpg",
   support:
-    "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936342/WhatsApp_Image_2026-05-05_at_00.09.24_6_xuvgk2.jpg",
+    "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936342/WhatsApp_Image_2026-05-05_at_00.09.26_hbmau5.jpg",
   equipment:
     "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777934100/equipment_llojy1.jpg",
 };
