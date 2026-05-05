@@ -76,25 +76,36 @@ function AnimatedCounter({ target, suffix = "", compact = false, inView }) {
   );
 }
 
-/* ══════════════════════════════════════════════
-   IMAGE CAROUSEL
-══════════════════════════════════════════════ */
 const carouselImages = [
   {
-    src: "https://chi-farms.com/wp-content/uploads/2021/04/Owode-closed-houses-external-768x576.jpg",
-    label: "Pen House",
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936353/WhatsApp_Image_2026-05-05_at_00.09.23_1_jwfjnx.jpg",
+    label: "Our Admin",
   },
+
   {
-    src: "https://chi-farms.com/wp-content/uploads/2021/04/Owode-Cluster-IV.jpg",
-    label: "Owode Farm",
-  },
-  {
-    src: "https://chi-farms.com/wp-content/uploads/2021/04/Sanusi-Farm-v1.jpg",
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936348/WhatsApp_Image_2026-05-05_at_00.09.24_3_noz5f2.jpg",
     label: "GPS Farm",
   },
   {
-    src: "https://chi-farms.com/wp-content/uploads/2021/10/WhatsAppImage-2021-09-27-at-14.09.53.jpeg",
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777933948/pond_u5dhww.jpg",
     label: "Catfish Farm",
+  },
+  {
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936351/WhatsApp_Image_2026-05-05_at_00.09.23_2_h6c9td.jpg",
+    label: "Ajanla Farm",
+  },
+  {
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936346/WhatsApp_Image_2026-05-05_at_00.09.24_lboqc5.jpg",
+    label: "Ajanla Farm",
+  },
+
+  {
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936350/WhatsApp_Image_2026-05-05_at_00.09.23_iamldr.jpg",
+    label: "",
+  },
+  {
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777936341/WhatsApp_Image_2026-05-05_at_00.09.25_hwthxe.jpg",
+    label: "Sanusi Farm",
   },
 ];
 
@@ -212,7 +223,8 @@ function ImageCarousel() {
             onClick={() => goTo(i)}
             className="flex-1 rounded-lg overflow-hidden aspect-[4/3] p-0 bg-transparent cursor-pointer transition-all duration-[350ms] ease-in-out"
             style={{
-              outline: i === idx ? "2px solid #1F8F63" : "2px solid transparent",
+              outline:
+                i === idx ? "2px solid #1F8F63" : "2px solid transparent",
               outlineOffset: 2,
               opacity: i === idx ? 1 : 0.5,
               transform: i === idx ? "scale(1)" : "scale(0.96)",
@@ -369,9 +381,7 @@ function CompanyProfile() {
 
       {/* ── Main container ── */}
       <div className="relative max-w-[1152px] mx-auto px-6">
-
         <div className="about-grid">
-
           {/* ── HEADER LEFT: headline ── */}
           <motion.div
             initial="hidden"
@@ -384,8 +394,7 @@ function CompanyProfile() {
               custom={1}
               className="font-heading font-black leading-[1.05] m-0 text-[#0f1f16] text-[clamp(2.2rem,4.5vw,3.5rem)]"
             >
-              Established since{" "}
-              <br />
+              Established since <br />
               <span
                 className="pb-2 inline-block"
                 style={{
@@ -408,7 +417,14 @@ function CompanyProfile() {
             className="flex items-end mb-10"
           >
             <p className="font-heading text-base leading-[1.7] m-0 text-[#5a7065]">
-              With a broad and diversified products and services portfolio, chi farms impact directly the food industry with superior poultry and aquaculture genetics, frozen foods, precision laboratory, and technical support services across the value chains, ensuring that producers of animal protein from farm to the table are supported with top quality housing, machines and equipment supplies, with robust customer service, including training and capacity development in our poultry school.
+              With a broad and diversified products and services portfolio, chi
+              farms impact directly the food industry with superior poultry and
+              aquaculture genetics, frozen foods, precision laboratory, and
+              technical support services across the value chains, ensuring that
+              producers of animal protein from farm to the table are supported
+              with top quality housing, machines and equipment supplies, with
+              robust customer service, including training and capacity
+              development in our poultry school.
             </p>
           </motion.div>
 
@@ -477,7 +493,9 @@ function CompanyProfile() {
               <div className="absolute -bottom-6 -left-6 w-24 h-24 rounded-full opacity-10 bg-[radial-gradient(circle,#fff_0%,transparent_70%)]" />
 
               <p className="font-heading font-bold text-white leading-[1.45] m-0 text-[clamp(1rem,1.8vw,1.2rem)]">
-                Chi Farms has progressed strategically in the Agro-livestock and Food industries to becoming a top Nigerian brand for quality products and services.
+                Chi Farms has progressed strategically in the Agro-livestock and
+                Food industries to becoming a top Nigerian brand for quality
+                products and services.
               </p>
               <div className="flex items-center gap-2 mt-4">
                 <div className="w-8 h-[2px] rounded-full bg-white/35" />
@@ -489,7 +507,12 @@ function CompanyProfile() {
               custom={2}
               className="font-heading text-[0.97rem] leading-[1.75] mb-6 text-[#5a7065]"
             >
-              The main farm is located at Ajanla Village, KM 20, off Ibadan - Lagos Expressway, Ibadan, while the meat processing plant is located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our cold store and frozen foods distribution centre are located at our corporate head office, Cormart House, Plot A Block 2, Ilupeju Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria.
+              The main farm is located at Ajanla Village, KM 20, off Ibadan -
+              Lagos Expressway, Ibadan, while the meat processing plant is
+              located at KM 51, off Ibadan - Lagos Expressway, Ogun State. Our
+              cold store and frozen foods distribution centre are located at our
+              corporate head office, Cormart House, Plot A Block 2, Ilupeju
+              Industrial Estate, Apapa - Oworonshoki Expressway, Lagos, Nigeria.
             </motion.p>
 
             {/* CTA */}

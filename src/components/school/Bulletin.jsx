@@ -11,7 +11,7 @@ const recentVisitImages = [
     alt: "German Delegation to Chi Farms Training School",
   },
   {
-    src: "/image.png",
+    src: "https://res.cloudinary.com/drxxei318/image/upload/q_auto/f_auto/v1777939523/WhatsApp_Image_2026-04-29_at_16.50.58_1_xxoh9a.jpg",
     alt: "Recent visit to Chi Farms Training School",
   },
   {
